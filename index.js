@@ -1,1 +1,3 @@
-exports.search = require('./src/search')
+"use strict";
+
+exports.search = require('./src/search');

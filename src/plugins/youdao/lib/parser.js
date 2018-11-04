@@ -33,9 +33,9 @@ function parser(html) {
   });
 
   const $containor = $('#phrsListTab');
-  const $suggestContainor = $('#results-contents');
+  // const $suggestContainor = $('#results-contents');
 
-  const output = {}
+  const output = {};
 
   output.phonetics = _parsePhonetics($containor);
   output.trans = _parseTrans($containor);

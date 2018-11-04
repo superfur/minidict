@@ -2,7 +2,7 @@ const fetch = require('./lib/fetch');
 const parser = require('./lib/parser');
 const { start, success, fail } = require('../../template/loader');
 
-const main = async str => {
+const main = async (str) => {
   start();
   if (!str) Promise.reject(new Error('请输入要查询的文字'));
 
