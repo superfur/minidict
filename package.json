@@ -1,0 +1,28 @@
+{
+  "name": "minidict",
+  "version": "1.0.0",
+  "description": "一个简单的node字典",
+  "main": "index.js",
+  "bin": {
+    "dict": "./bin/index.js"
+  },
+  "keywords": [
+    "minidict",
+    "dictionary",
+    "youdao",
+    "terminal",
+    "console",
+    "linux"
+  ],
+  "author": {
+    "name": "Septem",
+    "email": "superfur9@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "commander": "^2.15.1",
+    "debug": "^3.1.0",
+    "node-fetch": "^2.1.2"
+  }
+}
