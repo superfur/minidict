@@ -6,6 +6,10 @@
   "bin": {
     "dict": "./bin/index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/superfur/minidict.git"
+  },
   "keywords": [
     "minidict",
     "dictionary",
