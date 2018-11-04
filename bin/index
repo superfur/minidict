@@ -1,0 +1,40 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const program = require('commander');
+const pkg = require('../package.json');
+const {
+  translate
+} = require('../lib/index');
+
+program
+  .usage('<words...>')
+  .description('一个简单的命令行字典工具 https://github.com/superfur/minidict')
+  .option('-y, --youdao', '使用有道查询')
+  .option('-g, --google', '使用谷歌查询')
+  .option('-b, --bing', '使用必应查询')
+  .version(pkg.version, '-v, --version', '当前版本')
+  .action((...args) => {
+    const words = args.slice(0, -1);
+    const { youdao = false, google = false, bing = false } = program;
+    const option = { youdao, google, bing }
+    translate(words, option);
+  });
+
+program.parse(process.argv);
+
+function showHelp() {
+  // 没有输入任何参数
+  if (process.argv.length === 2) {
+    return true;
+  }
+
+  let args = process.argv.slice(2);
+  return args.every(item => item.startsWith('-'));
+}
+
+if (showHelp()) {
+  program.help();
+}
+

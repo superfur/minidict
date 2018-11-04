@@ -1,1 +1,0 @@
-exports.search = require('./src/search')
