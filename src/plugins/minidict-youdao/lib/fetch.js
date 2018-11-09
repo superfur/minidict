@@ -23,7 +23,7 @@ const headers = new fetch.Headers({
 
 function main(url) {
 
-  let fetchOptions = {
+  const fetchOptions = {
     headers,
     timeout: 5000,
   };

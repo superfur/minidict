@@ -1,3 +1,4 @@
 "use strict";
 
-exports.search = require('./src/search');
+exports.translate = require('./src/translate');
+exports.version = require('./src/version');
