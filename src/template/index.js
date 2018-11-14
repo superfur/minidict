@@ -56,19 +56,19 @@ function template(data) {
   // 输出翻译信息
   data.forEach(item => {
     const circle = unicons.cli('circle');
-    // const pluginName = chalk.blue.bold(item.pluginName);
-    // const url = chalk.black.underline(item.url);
+    const pluginName = chalk.blue.bold(item.pluginName);
+    const url = chalk.black.underline(item.url);
 
     const hasPhonetics = item.phonetics && item.phonetics.length;
     const hasTranslates = item.trans && item.trans.length;
-    const hasExamples = item.examples && item.examples.length
+    const hasExamples = item.examples && item.examples.length;
 
     /**
      * 标题
      */
     if (hasPhonetics || hasTranslates || hasExamples) {
-      // result.push(`  ${circle} ${pluginName}   ${url}`);
-      result.push(`  ${circle} `);
+      result.push(`  ${circle} ${pluginName}   ${url}`);
+      // result.push(`  ${circle} `);
       result.push('');
       count++;
     }
@@ -134,6 +134,14 @@ function template(data) {
       result.push('');
     }
   });
+
+  if (!count) {
+    result = [
+      '',
+      chalk.red(`  ${unicons.cli('cross')} 没有查询到任何结果!`),
+      ''
+    ];
+  }
 
   return result.join('\n');
 }

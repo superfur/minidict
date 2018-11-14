@@ -1,6 +1,6 @@
 {
   "name": "minidict",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "一个简单的node字典",
   "main": "index.js",
   "bin": {

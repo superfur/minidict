@@ -33,10 +33,18 @@ function parser(html) {
   });
 
   const $containor = $('#phrsListTab');
-  // const $suggestContainor = $('#results-contents');
-
   const output = {};
 
+  /**
+   * containor 为空，可能是：
+   *    1.中英混合单词
+   *    2.错误页
+   */
+  if ((!$containor || !$containor.length)) {
+    return output;
+  }
+
+  output.pluginName = 'youdao';
   output.phonetics = _parsePhonetics($containor);
   output.trans = _parseTrans($containor);
 
