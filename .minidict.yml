@@ -2,7 +2,7 @@
 enable:
   # - google
   - youdao
-  # - bing
+  - bing
 
 # 彩色输出
 colorful: true

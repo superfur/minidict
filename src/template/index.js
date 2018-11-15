@@ -57,7 +57,7 @@ function template(data) {
   data.forEach(item => {
     const circle = unicons.cli('circle');
     const pluginName = chalk.blue.bold(item.pluginName);
-    const url = chalk.black.underline(item.url);
+    const url = chalk.cyan.underline(item.url);
 
     const hasPhonetics = item.phonetics && item.phonetics.length;
     const hasTranslates = item.trans && item.trans.length;
@@ -68,7 +68,6 @@ function template(data) {
      */
     if (hasPhonetics || hasTranslates || hasExamples) {
       result.push(`  ${circle} ${pluginName}   ${url}`);
-      // result.push(`  ${circle} `);
       result.push('');
       count++;
     }

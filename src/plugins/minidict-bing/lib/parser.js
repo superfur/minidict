@@ -32,7 +32,7 @@ function parser(html) {
     decodeEntities: false
   });
 
-  const $containor = $('#phrsListTab');
+  const $containor = $('.qdef');
   const output = {};
 
   /**
@@ -44,6 +44,7 @@ function parser(html) {
     return output;
   }
 
+  output.pluginName = 'bing';
   output.phonetics = _parsePhonetics($containor);
   output.trans = _parseTrans($containor);
 
@@ -57,7 +58,7 @@ function parser(html) {
 function _parsePhonetics(node) {
   const phonetics = [];
 
-  node.find('.phonetic').each((index, item) => {
+  node.find('.hd_prUS, .hd_pr').each((index, item) => {
     const content = $(item).text();
     phonetics.push(content);
   });
