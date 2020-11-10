@@ -1,51 +1,51 @@
 {
-  "name": "minidict",
-  "version": "2.0.0",
-  "description": "A simple and mini dictionary",
-  "main": "./lib/index.js",
-  "bin": {
-    "dict": "./bin/index"
-  },
-  "scripts": {
-    "build": "tsc -p tsconfig.json"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/superfur/minidict.git"
-  },
-  "keywords": [
-    "minidict",
-    "dict",
-    "mini",
-    "dictionary",
-    "youdao",
-    "terminal",
-    "console",
-    "linux"
-  ],
-  "author": {
-    "name": "Septem",
-    "email": "superfur9@gmail.com"
-  },
-  "license": "MIT",
-  "dependencies": {
-    "chalk": "^2.4.1",
-    "cheerio": "^1.0.0-rc.2",
-    "cli-width": "^2.2.0",
-    "commander": "^2.15.1",
-    "debug": "^4.1.0",
-    "fs-extra": "^7.0.1",
-    "js-yaml": "^3.12.0",
-    "moment": "^2.22.2",
-    "node-fetch": "^2.1.2",
-    "ora": "^3.0.0",
-    "pad": "^3.2.0",
-    "string-break": "^1.0.4",
-    "unicons": "^0.0.3"
-  },
-  "devDependencies": {
-    "@types/cheerio": "^0.22.13",
-    "ts-node": "^8.3.0",
-    "typescript": "^3.5.3"
-  }
+    "name": "minidict",
+    "version": "2.0.1",
+    "description": "A simple and mini dictionary",
+    "main": "./lib/index.js",
+    "bin": {
+        "dict": "./bin/index"
+    },
+    "scripts": {
+        "build": "tsc -p tsconfig.json"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/superfur/minidict.git"
+    },
+    "keywords": [
+        "minidict",
+        "dict",
+        "mini",
+        "dictionary",
+        "youdao",
+        "terminal",
+        "console",
+        "linux"
+    ],
+    "author": {
+        "name": "Septem",
+        "email": "superfur9@gmail.com"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "chalk": "^2.4.1",
+        "cheerio": "^1.0.0-rc.2",
+        "cli-width": "^2.2.0",
+        "commander": "^2.15.1",
+        "debug": "^4.1.0",
+        "fs-extra": "^7.0.1",
+        "js-yaml": "^3.12.0",
+        "moment": "^2.22.2",
+        "node-fetch": "^2.1.2",
+        "ora": "^3.0.0",
+        "pad": "^3.2.0",
+        "string-break": "^1.0.4",
+        "unicons": "^0.0.3"
+    },
+    "devDependencies": {
+        "@types/cheerio": "^0.22.13",
+        "ts-node": "^8.3.0",
+        "typescript": "^3.5.3"
+    }
 }

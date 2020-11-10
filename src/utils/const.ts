@@ -1,5 +1,5 @@
 export interface DictionaryType {
-  youdao: boolean;
-  bing: boolean;
-  google: boolean;
+    youdao: boolean;
+    bing: boolean;
+    google: boolean;
 }

@@ -1,169 +1,525 @@
 {
   "program": {
     "fileInfos": {
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es6.d.ts": {
-        "version": "c180f01a2aaac7d733001fa1db20f881dc83cf33096b674a1546ca26762e69da",
-        "signature": "c180f01a2aaac7d733001fa1db20f881dc83cf33096b674a1546ca26762e69da"
+      "../node_modules/typescript/lib/lib.es6.d.ts": {
+        "version": "721cec59c3fef87aaf480047d821fb758b3ec9482c4129a54631e6e25e432a31",
+        "signature": "721cec59c3fef87aaf480047d821fb758b3ec9482c4129a54631e6e25e432a31",
+        "affectsGlobalScope": false
       },
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es5.d.ts": {
-        "version": "1f753cee573dea40df8a9dc873fef5566957b19ad513874f6643d8dfb14842d0",
-        "signature": "1f753cee573dea40df8a9dc873fef5566957b19ad513874f6643d8dfb14842d0"
+      "../node_modules/typescript/lib/lib.es5.d.ts": {
+        "version": "70ae6416528e68c2ee7b62892200d2ca631759943d4429f8b779b947ff1e124d",
+        "signature": "70ae6416528e68c2ee7b62892200d2ca631759943d4429f8b779b947ff1e124d",
+        "affectsGlobalScope": true
       },
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.d.ts": {
-        "version": "7994d44005046d1413ea31d046577cdda33b8b2470f30281fd9c8b3c99fe2d96",
-        "signature": "7994d44005046d1413ea31d046577cdda33b8b2470f30281fd9c8b3c99fe2d96"
+      "../node_modules/typescript/lib/lib.es2015.d.ts": {
+        "version": "dc47c4fa66b9b9890cf076304de2a9c5201e94b740cffdf09f87296d877d71f6",
+        "signature": "dc47c4fa66b9b9890cf076304de2a9c5201e94b740cffdf09f87296d877d71f6",
+        "affectsGlobalScope": false
       },
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.dom.d.ts": {
-        "version": "973df4e41aea3780ce77073777d37dd5896f684124f4c42409f3a832133837a4",
-        "signature": "973df4e41aea3780ce77073777d37dd5896f684124f4c42409f3a832133837a4"
+      "../node_modules/typescript/lib/lib.es2016.d.ts": {
+        "version": "7a387c58583dfca701b6c85e0adaf43fb17d590fb16d5b2dc0a2fbd89f35c467",
+        "signature": "7a387c58583dfca701b6c85e0adaf43fb17d590fb16d5b2dc0a2fbd89f35c467",
+        "affectsGlobalScope": false
       },
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.dom.iterable.d.ts": {
-        "version": "eb843da29336c7d5840bb439b24cf68a4a1652fd01c6e4e66ec74d8b136e944a",
-        "signature": "eb843da29336c7d5840bb439b24cf68a4a1652fd01c6e4e66ec74d8b136e944a"
+      "../node_modules/typescript/lib/lib.es2017.d.ts": {
+        "version": "8a12173c586e95f4433e0c6dc446bc88346be73ffe9ca6eec7aa63c8f3dca7f9",
+        "signature": "8a12173c586e95f4433e0c6dc446bc88346be73ffe9ca6eec7aa63c8f3dca7f9",
+        "affectsGlobalScope": false
       },
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.webworker.importscripts.d.ts": {
-        "version": "fe4e59403e34c7ff747abe4ff6abbc7718229556d7c1a5b93473fb53156c913b",
-        "signature": "fe4e59403e34c7ff747abe4ff6abbc7718229556d7c1a5b93473fb53156c913b"
+      "../node_modules/typescript/lib/lib.es2018.d.ts": {
+        "version": "5f4e733ced4e129482ae2186aae29fde948ab7182844c3a5a51dd346182c7b06",
+        "signature": "5f4e733ced4e129482ae2186aae29fde948ab7182844c3a5a51dd346182c7b06",
+        "affectsGlobalScope": false
       },
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.scripthost.d.ts": {
-        "version": "b9faa17292f17d2ad75e34fac77dd63a6403af1dba02d39cd0cbb9ffdf3de8b9",
-        "signature": "b9faa17292f17d2ad75e34fac77dd63a6403af1dba02d39cd0cbb9ffdf3de8b9"
+      "../node_modules/typescript/lib/lib.dom.d.ts": {
+        "version": "9affb0a2ddc57df5b8174c0af96c288d697a262e5bc9ca1f544c999dc64a91e6",
+        "signature": "9affb0a2ddc57df5b8174c0af96c288d697a262e5bc9ca1f544c999dc64a91e6",
+        "affectsGlobalScope": true
       },
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.core.d.ts": {
-        "version": "2a0390a665763bcc90f0670e43c587928d8fefe2a94a11209c1e22cba7b09f52",
-        "signature": "2a0390a665763bcc90f0670e43c587928d8fefe2a94a11209c1e22cba7b09f52"
+      "../node_modules/typescript/lib/lib.dom.iterable.d.ts": {
+        "version": "fb0c09b697dc42afa84d1587e3c994a2f554d2a45635e4f0618768d16a86b69a",
+        "signature": "fb0c09b697dc42afa84d1587e3c994a2f554d2a45635e4f0618768d16a86b69a",
+        "affectsGlobalScope": true
       },
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.collection.d.ts": {
-        "version": "dd94d8ef48c562389eb58af8df3a3a34d11367f7c818192aa5f16470d469e3f0",
-        "signature": "dd94d8ef48c562389eb58af8df3a3a34d11367f7c818192aa5f16470d469e3f0"
+      "../node_modules/typescript/lib/lib.webworker.importscripts.d.ts": {
+        "version": "7fac8cb5fc820bc2a59ae11ef1c5b38d3832c6d0dfaec5acdb5569137d09a481",
+        "signature": "7fac8cb5fc820bc2a59ae11ef1c5b38d3832c6d0dfaec5acdb5569137d09a481",
+        "affectsGlobalScope": true
       },
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.generator.d.ts": {
-        "version": "828413486bdcaa342558e8e4570b1b287b776cb61b4b70b0214bd10c5d9a94c3",
-        "signature": "828413486bdcaa342558e8e4570b1b287b776cb61b4b70b0214bd10c5d9a94c3"
+      "../node_modules/typescript/lib/lib.scripthost.d.ts": {
+        "version": "097a57355ded99c68e6df1b738990448e0bf170e606707df5a7c0481ff2427cd",
+        "signature": "097a57355ded99c68e6df1b738990448e0bf170e606707df5a7c0481ff2427cd",
+        "affectsGlobalScope": true
       },
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.iterable.d.ts": {
-        "version": "6c9f73334f8bf47aea685ca5b46a8f7e992a223e96fbceb030f26a4d2324ba21",
-        "signature": "6c9f73334f8bf47aea685ca5b46a8f7e992a223e96fbceb030f26a4d2324ba21"
+      "../node_modules/typescript/lib/lib.es2015.core.d.ts": {
+        "version": "63e0cc12d0f77394094bd19e84464f9840af0071e5b9358ced30511efef1d8d2",
+        "signature": "63e0cc12d0f77394094bd19e84464f9840af0071e5b9358ced30511efef1d8d2",
+        "affectsGlobalScope": true
       },
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.promise.d.ts": {
-        "version": "e6b8ff2798f8ebd7a1c7afd8671f2cb67ee1901c422f5964d74b0b34c6574ea2",
-        "signature": "e6b8ff2798f8ebd7a1c7afd8671f2cb67ee1901c422f5964d74b0b34c6574ea2"
+      "../node_modules/typescript/lib/lib.es2015.collection.d.ts": {
+        "version": "43fb1d932e4966a39a41b464a12a81899d9ae5f2c829063f5571b6b87e6d2f9c",
+        "signature": "43fb1d932e4966a39a41b464a12a81899d9ae5f2c829063f5571b6b87e6d2f9c",
+        "affectsGlobalScope": true
       },
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.proxy.d.ts": {
-        "version": "5e72f949a89717db444e3bd9433468890068bb21a5638d8ab15a1359e05e54fe",
-        "signature": "5e72f949a89717db444e3bd9433468890068bb21a5638d8ab15a1359e05e54fe"
+      "../node_modules/typescript/lib/lib.es2015.generator.d.ts": {
+        "version": "cdccba9a388c2ee3fd6ad4018c640a471a6c060e96f1232062223063b0a5ac6a",
+        "signature": "cdccba9a388c2ee3fd6ad4018c640a471a6c060e96f1232062223063b0a5ac6a",
+        "affectsGlobalScope": true
       },
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.reflect.d.ts": {
-        "version": "f5b242136ae9bfb1cc99a5971cccc44e99947ae6b5ef6fd8aa54b5ade553b976",
-        "signature": "f5b242136ae9bfb1cc99a5971cccc44e99947ae6b5ef6fd8aa54b5ade553b976"
+      "../node_modules/typescript/lib/lib.es2015.iterable.d.ts": {
+        "version": "42f5e41e5893da663dbf0394268f54f1da4b43dc0ddd2ea4bf471fe5361d6faf",
+        "signature": "42f5e41e5893da663dbf0394268f54f1da4b43dc0ddd2ea4bf471fe5361d6faf",
+        "affectsGlobalScope": true
       },
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.symbol.d.ts": {
-        "version": "9ae2860252d6b5f16e2026d8a2c2069db7b2a3295e98b6031d01337b96437230",
-        "signature": "9ae2860252d6b5f16e2026d8a2c2069db7b2a3295e98b6031d01337b96437230"
+      "../node_modules/typescript/lib/lib.es2015.promise.d.ts": {
+        "version": "0b7a905675e6cb4211c128f0a3aa47d414b275180a299a9aad5d3ec298abbfc4",
+        "signature": "0b7a905675e6cb4211c128f0a3aa47d414b275180a299a9aad5d3ec298abbfc4",
+        "affectsGlobalScope": true
       },
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts": {
-        "version": "3e0a459888f32b42138d5a39f706ff2d55d500ab1031e0988b5568b0f67c2303",
-        "signature": "3e0a459888f32b42138d5a39f706ff2d55d500ab1031e0988b5568b0f67c2303"
+      "../node_modules/typescript/lib/lib.es2015.proxy.d.ts": {
+        "version": "dfff68b3c34338f6b307a25d4566de15eed7973b0dc5d69f9fde2bcac1c25315",
+        "signature": "dfff68b3c34338f6b307a25d4566de15eed7973b0dc5d69f9fde2bcac1c25315",
+        "affectsGlobalScope": true
       },
-      "/users/yjf/documents/myproject/minidict/node_modules/moment/moment.d.ts": {
-        "version": "f2b43a96a09d31d1be3aab9a84311b407b72b8e3705af970f2e8f9173aacb470",
-        "signature": "f2b43a96a09d31d1be3aab9a84311b407b72b8e3705af970f2e8f9173aacb470"
+      "../node_modules/typescript/lib/lib.es2015.reflect.d.ts": {
+        "version": "cb609802a8698aa28b9c56331d4b53f590ca3c1c3a255350304ae3d06017779d",
+        "signature": "cb609802a8698aa28b9c56331d4b53f590ca3c1c3a255350304ae3d06017779d",
+        "affectsGlobalScope": true
       },
-      "/users/yjf/documents/myproject/minidict/src/utils/debug.ts": {
+      "../node_modules/typescript/lib/lib.es2015.symbol.d.ts": {
+        "version": "3013574108c36fd3aaca79764002b3717da09725a36a6fc02eac386593110f93",
+        "signature": "3013574108c36fd3aaca79764002b3717da09725a36a6fc02eac386593110f93",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts": {
+        "version": "4670208dd7da9d6c774ab1b75c1527a810388c7989c4905de6aaea8561cb9dce",
+        "signature": "4670208dd7da9d6c774ab1b75c1527a810388c7989c4905de6aaea8561cb9dce",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/typescript/lib/lib.es2016.array.include.d.ts": {
+        "version": "3be5a1453daa63e031d266bf342f3943603873d890ab8b9ada95e22389389006",
+        "signature": "3be5a1453daa63e031d266bf342f3943603873d890ab8b9ada95e22389389006",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/typescript/lib/lib.es2017.object.d.ts": {
+        "version": "17bb1fc99591b00515502d264fa55dc8370c45c5298f4a5c2083557dccba5a2a",
+        "signature": "17bb1fc99591b00515502d264fa55dc8370c45c5298f4a5c2083557dccba5a2a",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/typescript/lib/lib.es2017.sharedmemory.d.ts": {
+        "version": "d0db416bccdb33975548baf09a42ee8c47eace1aac7907351a000f1e568e7232",
+        "signature": "d0db416bccdb33975548baf09a42ee8c47eace1aac7907351a000f1e568e7232",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/typescript/lib/lib.es2017.string.d.ts": {
+        "version": "6a6b173e739a6a99629a8594bfb294cc7329bfb7b227f12e1f7c11bc163b8577",
+        "signature": "6a6b173e739a6a99629a8594bfb294cc7329bfb7b227f12e1f7c11bc163b8577",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/typescript/lib/lib.es2017.intl.d.ts": {
+        "version": "12a310447c5d23c7d0d5ca2af606e3bd08afda69100166730ab92c62999ebb9d",
+        "signature": "12a310447c5d23c7d0d5ca2af606e3bd08afda69100166730ab92c62999ebb9d",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/typescript/lib/lib.es2017.typedarrays.d.ts": {
+        "version": "b0124885ef82641903d232172577f2ceb5d3e60aed4da1153bab4221e1f6dd4e",
+        "signature": "b0124885ef82641903d232172577f2ceb5d3e60aed4da1153bab4221e1f6dd4e",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/typescript/lib/lib.es2018.asyncgenerator.d.ts": {
+        "version": "0eb85d6c590b0d577919a79e0084fa1744c1beba6fd0d4e951432fa1ede5510a",
+        "signature": "0eb85d6c590b0d577919a79e0084fa1744c1beba6fd0d4e951432fa1ede5510a",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/typescript/lib/lib.es2018.asynciterable.d.ts": {
+        "version": "a40c4d82bf13fcded295ac29f354eb7d40249613c15e07b53f2fc75e45e16359",
+        "signature": "a40c4d82bf13fcded295ac29f354eb7d40249613c15e07b53f2fc75e45e16359",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/typescript/lib/lib.es2018.intl.d.ts": {
+        "version": "df9c8a72ca8b0ed62f5470b41208a0587f0f73f0a7db28e5a1272cf92537518e",
+        "signature": "df9c8a72ca8b0ed62f5470b41208a0587f0f73f0a7db28e5a1272cf92537518e",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/typescript/lib/lib.es2018.promise.d.ts": {
+        "version": "bb2d3fb05a1d2ffbca947cc7cbc95d23e1d053d6595391bd325deb265a18d36c",
+        "signature": "bb2d3fb05a1d2ffbca947cc7cbc95d23e1d053d6595391bd325deb265a18d36c",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/typescript/lib/lib.es2018.regexp.d.ts": {
+        "version": "c80df75850fea5caa2afe43b9949338ce4e2de086f91713e9af1a06f973872b8",
+        "signature": "c80df75850fea5caa2afe43b9949338ce4e2de086f91713e9af1a06f973872b8",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/typescript/lib/lib.es2020.bigint.d.ts": {
+        "version": "4f435f794b7853c55e2ae7cff6206025802aa79232d2867544178f2ca8ff5eaa",
+        "signature": "4f435f794b7853c55e2ae7cff6206025802aa79232d2867544178f2ca8ff5eaa",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/typescript/lib/lib.esnext.intl.d.ts": {
+        "version": "89bf2b7a601b73ea4311eda9c41f86a58994fec1bee3b87c4a14d68d9adcdcbd",
+        "signature": "89bf2b7a601b73ea4311eda9c41f86a58994fec1bee3b87c4a14d68d9adcdcbd",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/moment/ts3.1-typings/moment.d.ts": {
+        "version": "f97edc4d3b4dd0b32766e9633086497565c37657fb591cc84a35864db4bc2fc5",
+        "signature": "f97edc4d3b4dd0b32766e9633086497565c37657fb591cc84a35864db4bc2fc5",
+        "affectsGlobalScope": false
+      },
+      "../src/utils/debug.ts": {
         "version": "28b346a0a2c35e83bf2e63f43fce6b8b2cf5b22e1291d7d208e2027b1fa70b1c",
-        "signature": "46a0b34e1264c4d25ca6646ff0e6cfaa7275ea1ae5a6bc23d4dfd84edf2f2b2e"
+        "signature": "46a0b34e1264c4d25ca6646ff0e6cfaa7275ea1ae5a6bc23d4dfd84edf2f2b2e",
+        "affectsGlobalScope": false
       },
-      "/users/yjf/documents/myproject/minidict/src/utils/config.ts": {
-        "version": "bf4288cb6976ce446974b73ff833b2732c2da9a78c6c77c0c1b33433cea22daf",
-        "signature": "70330b19cb50d7ddec1dc1285e4517f5410f0d56a9690c442c16d7017576e334"
+      "../src/utils/config.ts": {
+        "version": "2a5465e9045ff0659991ad30edb51149e108fada9884f8b9ef8a3b49cee149a6",
+        "signature": "70330b19cb50d7ddec1dc1285e4517f5410f0d56a9690c442c16d7017576e334",
+        "affectsGlobalScope": false
       },
-      "/users/yjf/documents/myproject/minidict/src/utils/plugins.ts": {
+      "../src/utils/plugins.ts": {
         "version": "9913f1ceff5d75cdafad61abc4bf6b063e831d90a3b0c70b49ce1168e31f8242",
-        "signature": "46a0b34e1264c4d25ca6646ff0e6cfaa7275ea1ae5a6bc23d4dfd84edf2f2b2e"
+        "signature": "46a0b34e1264c4d25ca6646ff0e6cfaa7275ea1ae5a6bc23d4dfd84edf2f2b2e",
+        "affectsGlobalScope": false
       },
-      "/users/yjf/documents/myproject/minidict/src/service/index.ts": {
-        "version": "86fdf26e3414551d7a4a522b91ef4d9026aa8740677c0501956a1aa68d91e749",
-        "signature": "b2890f0e7ff9e3afab1e53afa5113a55fc55a15b6b95d1c038d91615e8d481c9"
+      "../src/service/index.ts": {
+        "version": "2c01dc3ccbb8e5d3f94dbfd083a0875ea978dbefa23c381d1129765ba882922a",
+        "signature": "b2890f0e7ff9e3afab1e53afa5113a55fc55a15b6b95d1c038d91615e8d481c9",
+        "affectsGlobalScope": false
       },
-      "/users/yjf/documents/myproject/minidict/node_modules/chalk/types/index.d.ts": {
+      "../node_modules/chalk/types/index.d.ts": {
         "version": "091f417275a51ab3c47b949723e9e8a193012157ecc64a96e2d7b1505e82f395",
-        "signature": "091f417275a51ab3c47b949723e9e8a193012157ecc64a96e2d7b1505e82f395"
+        "signature": "091f417275a51ab3c47b949723e9e8a193012157ecc64a96e2d7b1505e82f395",
+        "affectsGlobalScope": false
       },
-      "/users/yjf/documents/myproject/minidict/node_modules/pad/dist/pad.d.ts": {
+      "../node_modules/pad/dist/pad.d.ts": {
         "version": "c226e88579493bdbad68b1dcb33b26fb15820c67b7786f27ff41c59df773c634",
-        "signature": "c226e88579493bdbad68b1dcb33b26fb15820c67b7786f27ff41c59df773c634"
+        "signature": "c226e88579493bdbad68b1dcb33b26fb15820c67b7786f27ff41c59df773c634",
+        "affectsGlobalScope": false
       },
-      "/users/yjf/documents/myproject/minidict/src/template/index.ts": {
-        "version": "aebca505622f724392d24dce9f6d6b6e09cf147a161dddc113d65c69a963a22f",
-        "signature": "53149ff65d469fe08e266d2b357913c3ea1bdc75825f38ee52932b6e5dc08434"
+      "../src/template/index.ts": {
+        "version": "e834c7c684a8d83cabcfd93cf53b2bdecbf6067d042c7205fc7d130cc61dd83e",
+        "signature": "53149ff65d469fe08e266d2b357913c3ea1bdc75825f38ee52932b6e5dc08434",
+        "affectsGlobalScope": false
       },
-      "/users/yjf/documents/myproject/minidict/src/template/loader.ts": {
-        "version": "2c539d4cdd9edf96f88785d434f625392efd8363e2f2b12806eee0d35194b7d0",
-        "signature": "b65e55a6c4a1ae32fb5bfe7d7876660f5d019f75fa4c6b915a7e8ea108c1fd6f"
+      "../node_modules/@types/node/globals.d.ts": {
+        "version": "1332704d6761c94b85753fc3cadc36109f53e5d92fad137ac3de18083febedf3",
+        "signature": "1332704d6761c94b85753fc3cadc36109f53e5d92fad137ac3de18083febedf3",
+        "affectsGlobalScope": true
       },
-      "/users/yjf/documents/myproject/minidict/src/utils/const.ts": {
-        "version": "85e60fe46ef592a3d70e1a979c53f7171d927e4893d480f2e074a6ae73812f68",
-        "signature": "a81da6ed4047fc89a76ce2cc90d71be4db5735dcea82c9f1b49acc5bca2547a2"
+      "../node_modules/@types/node/async_hooks.d.ts": {
+        "version": "c438b413e94ff76dfa20ae005f33a1c84f2480d1d66e0fd687501020d0de9b50",
+        "signature": "c438b413e94ff76dfa20ae005f33a1c84f2480d1d66e0fd687501020d0de9b50",
+        "affectsGlobalScope": false
       },
-      "/users/yjf/documents/myproject/minidict/src/translate.ts": {
-        "version": "1ea29bf0e591c5af61abdb9f40a8c93760cb7771bf6bc23366fb32158e92866d",
-        "signature": "9b3e7b9a0cb9e2f5b522e2b549e37f22e11ab7de3effc2957709949ebd651fa9"
+      "../node_modules/@types/node/buffer.d.ts": {
+        "version": "bc6a78961535181265845bf9b9e8a147ffd0ca275097ceb670a9b92afa825152",
+        "signature": "bc6a78961535181265845bf9b9e8a147ffd0ca275097ceb670a9b92afa825152",
+        "affectsGlobalScope": false
       },
-      "/users/yjf/documents/myproject/minidict/src/version.ts": {
-        "version": "b2a46f58504ee088fea2c181d7534bf14ea56a363b7d9b7784218675bea988bf",
-        "signature": "5be76350ca7592c760cf244a4a29b21a4badfb34040e2ffb3a266f4a260e2ff5"
+      "../node_modules/@types/node/child_process.d.ts": {
+        "version": "987249e7b75023387c5fd9dc2f959ee777cb8989b7900f5a9eb4a67d290f2cba",
+        "signature": "987249e7b75023387c5fd9dc2f959ee777cb8989b7900f5a9eb4a67d290f2cba",
+        "affectsGlobalScope": false
       },
-      "/users/yjf/documents/myproject/minidict/src/index.ts": {
+      "../node_modules/@types/node/cluster.d.ts": {
+        "version": "123ec69e4b3a686eb49afd94ebe3292a5c84a867ecbcb6bb84bdd720a12af803",
+        "signature": "123ec69e4b3a686eb49afd94ebe3292a5c84a867ecbcb6bb84bdd720a12af803",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/console.d.ts": {
+        "version": "eb5197aade83cb0e360ac407289c53a8009e8fdae7939892a0240d30444496b6",
+        "signature": "eb5197aade83cb0e360ac407289c53a8009e8fdae7939892a0240d30444496b6",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/@types/node/constants.d.ts": {
+        "version": "90c85ddbb8de82cd19198bda062065fc51b7407c0f206f2e399e65a52e979720",
+        "signature": "90c85ddbb8de82cd19198bda062065fc51b7407c0f206f2e399e65a52e979720",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/crypto.d.ts": {
+        "version": "c5ecc351d5eaa36dc682b4c398b57a9d37c108857b71a09464a06e0185831ac2",
+        "signature": "c5ecc351d5eaa36dc682b4c398b57a9d37c108857b71a09464a06e0185831ac2",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/dgram.d.ts": {
+        "version": "7e050b767ed10c7ffbc01f314defbf420bf0b5d54ce666e1c87507c035dfc191",
+        "signature": "7e050b767ed10c7ffbc01f314defbf420bf0b5d54ce666e1c87507c035dfc191",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/dns.d.ts": {
+        "version": "7db7569fbb3e2b01ba8751c761cdd3f0debd104170d5665b7dc20a11630df3a9",
+        "signature": "7db7569fbb3e2b01ba8751c761cdd3f0debd104170d5665b7dc20a11630df3a9",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/domain.d.ts": {
+        "version": "cde4d7f6274468180fa39847b183aec22626e8212ff885d535c53f4cd7c225fd",
+        "signature": "cde4d7f6274468180fa39847b183aec22626e8212ff885d535c53f4cd7c225fd",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/@types/node/events.d.ts": {
+        "version": "365e8358843a23944be84b810b1f774ea0223adfccc085f30fd7f4c13dc8a09f",
+        "signature": "365e8358843a23944be84b810b1f774ea0223adfccc085f30fd7f4c13dc8a09f",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/@types/node/fs.d.ts": {
+        "version": "f87f95c015900102a5c0edcdebb17596de1382510e6cc17ab79f375d3505bb12",
+        "signature": "f87f95c015900102a5c0edcdebb17596de1382510e6cc17ab79f375d3505bb12",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/fs/promises.d.ts": {
+        "version": "05b5679a897598ebe556ee93415b3af1f456e674ea82e4d7afcd716bfe43aa98",
+        "signature": "05b5679a897598ebe556ee93415b3af1f456e674ea82e4d7afcd716bfe43aa98",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/http.d.ts": {
+        "version": "35fe02b2c10616cc7ac3db9c15778df7ed9c99276889efdd9be31f342841cfcd",
+        "signature": "35fe02b2c10616cc7ac3db9c15778df7ed9c99276889efdd9be31f342841cfcd",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/http2.d.ts": {
+        "version": "1c3fe66943f587685aa4a42f664f794655da1767401d2f85910177dac78aa45d",
+        "signature": "1c3fe66943f587685aa4a42f664f794655da1767401d2f85910177dac78aa45d",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/https.d.ts": {
+        "version": "c969bf4c7cdfe4d5dd28aa09432f99d09ad1d8d8b839959646579521d0467d1a",
+        "signature": "c969bf4c7cdfe4d5dd28aa09432f99d09ad1d8d8b839959646579521d0467d1a",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/inspector.d.ts": {
+        "version": "6c3857edaeeaaf43812f527830ebeece9266b6e8eb5271ab6d2f0008306c9947",
+        "signature": "6c3857edaeeaaf43812f527830ebeece9266b6e8eb5271ab6d2f0008306c9947",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/module.d.ts": {
+        "version": "bc6a77e750f4d34584e46b1405b771fb69a224197dd6bafe5b0392a29a70b665",
+        "signature": "bc6a77e750f4d34584e46b1405b771fb69a224197dd6bafe5b0392a29a70b665",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/net.d.ts": {
+        "version": "8de97668870cfb20fc9d355d2ef379e897bdd8a98c889c7d8a6de40ee408ad52",
+        "signature": "8de97668870cfb20fc9d355d2ef379e897bdd8a98c889c7d8a6de40ee408ad52",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/os.d.ts": {
+        "version": "ed4ae81196cccc10f297d228bca8d02e31058e6d723a3c5bc4be5fb3c61c6a34",
+        "signature": "ed4ae81196cccc10f297d228bca8d02e31058e6d723a3c5bc4be5fb3c61c6a34",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/path.d.ts": {
+        "version": "84044697c8b3e08ef24e4b32cfe6440143d07e469a5e34bda0635276d32d9f35",
+        "signature": "84044697c8b3e08ef24e4b32cfe6440143d07e469a5e34bda0635276d32d9f35",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/perf_hooks.d.ts": {
+        "version": "4982d94cb6427263c8839d8d6324a8bbe129e931deb61a7380f8fad17ba2cfc0",
+        "signature": "4982d94cb6427263c8839d8d6324a8bbe129e931deb61a7380f8fad17ba2cfc0",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/process.d.ts": {
+        "version": "e64979f6084c279bf8cd58dbc9203567f68f1ed19a8ad91351f078f03323ddf6",
+        "signature": "e64979f6084c279bf8cd58dbc9203567f68f1ed19a8ad91351f078f03323ddf6",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/@types/node/punycode.d.ts": {
+        "version": "3f6a1fd73c9dc3bd7f4b79bc075297ca6527904df69b0f2c2c94e4c4c7d9a32c",
+        "signature": "3f6a1fd73c9dc3bd7f4b79bc075297ca6527904df69b0f2c2c94e4c4c7d9a32c",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/querystring.d.ts": {
+        "version": "884560fda6c3868f925f022adc3a1289fe6507bbb45adb10fa1bbcc73a941bb0",
+        "signature": "884560fda6c3868f925f022adc3a1289fe6507bbb45adb10fa1bbcc73a941bb0",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/readline.d.ts": {
+        "version": "6b2bb67b0942bcfce93e1d6fad5f70afd54940a2b13df7f311201fba54b2cbe9",
+        "signature": "6b2bb67b0942bcfce93e1d6fad5f70afd54940a2b13df7f311201fba54b2cbe9",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/repl.d.ts": {
+        "version": "acbed967a379b3e9f73237ba9473f8b337eeea14b7dc64d445430b5d695751da",
+        "signature": "acbed967a379b3e9f73237ba9473f8b337eeea14b7dc64d445430b5d695751da",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/stream.d.ts": {
+        "version": "272a46cc8f494677af587d17939e61e7db2b1925633e4da0c186ba17f6732521",
+        "signature": "272a46cc8f494677af587d17939e61e7db2b1925633e4da0c186ba17f6732521",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/string_decoder.d.ts": {
+        "version": "d67e08745494b000da9410c1ae2fdc9965fc6d593fe0f381a47491f75417d457",
+        "signature": "d67e08745494b000da9410c1ae2fdc9965fc6d593fe0f381a47491f75417d457",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/timers.d.ts": {
+        "version": "b40652bf8ce4a18133b31349086523b219724dca8df3448c1a0742528e7ad5b9",
+        "signature": "b40652bf8ce4a18133b31349086523b219724dca8df3448c1a0742528e7ad5b9",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/tls.d.ts": {
+        "version": "a0545ca910ec6b318b8e1d63813c980c3be44824cf217b6477a56fbe9c7927d5",
+        "signature": "a0545ca910ec6b318b8e1d63813c980c3be44824cf217b6477a56fbe9c7927d5",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/trace_events.d.ts": {
+        "version": "a77fdb357c78b70142b2fdbbfb72958d69e8f765fd2a3c69946c1018e89d4638",
+        "signature": "a77fdb357c78b70142b2fdbbfb72958d69e8f765fd2a3c69946c1018e89d4638",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/tty.d.ts": {
+        "version": "3c2ac350c3baa61fd2b1925844109e098f4376d0768a4643abc82754fd752748",
+        "signature": "3c2ac350c3baa61fd2b1925844109e098f4376d0768a4643abc82754fd752748",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/url.d.ts": {
+        "version": "80ffc1786a5dab91b4aa59a72720f02f25df8b7c76b593e04d5e381aec284ccb",
+        "signature": "80ffc1786a5dab91b4aa59a72720f02f25df8b7c76b593e04d5e381aec284ccb",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/util.d.ts": {
+        "version": "5ef157fbb39494a581bd24f21b60488fe248d452c479738b5e41b48720ea69b8",
+        "signature": "5ef157fbb39494a581bd24f21b60488fe248d452c479738b5e41b48720ea69b8",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/v8.d.ts": {
+        "version": "289be113bad7ee27ee7fa5b1e373c964c9789a5e9ed7db5ddcb631371120b953",
+        "signature": "289be113bad7ee27ee7fa5b1e373c964c9789a5e9ed7db5ddcb631371120b953",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/vm.d.ts": {
+        "version": "baf0b82ffc5d2616f44a6fb1f81e8d798545bebf0c30f5d8b003a1dba1acfb3f",
+        "signature": "baf0b82ffc5d2616f44a6fb1f81e8d798545bebf0c30f5d8b003a1dba1acfb3f",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/worker_threads.d.ts": {
+        "version": "c6a5b34f1e725019445754f1e733585f113e0dced75f137bd3c4af5853d3f6ab",
+        "signature": "c6a5b34f1e725019445754f1e733585f113e0dced75f137bd3c4af5853d3f6ab",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/zlib.d.ts": {
+        "version": "15fbe50526244954eb2f933546bca6cdcf0db16c9428d099b3b386c1db5799ab",
+        "signature": "15fbe50526244954eb2f933546bca6cdcf0db16c9428d099b3b386c1db5799ab",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/ts3.4/base.d.ts": {
+        "version": "d44028ae0127eb3e9fcfa5f55a8b81d64775ce15aca1020fe25c511bbb055834",
+        "signature": "d44028ae0127eb3e9fcfa5f55a8b81d64775ce15aca1020fe25c511bbb055834",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/globals.global.d.ts": {
+        "version": "2708349d5a11a5c2e5f3a0765259ebe7ee00cdcc8161cb9990cb4910328442a1",
+        "signature": "2708349d5a11a5c2e5f3a0765259ebe7ee00cdcc8161cb9990cb4910328442a1",
+        "affectsGlobalScope": true
+      },
+      "../node_modules/@types/node/wasi.d.ts": {
+        "version": "4e0a4d84b15692ea8669fe4f3d05a4f204567906b1347da7a58b75f45bae48d3",
+        "signature": "4e0a4d84b15692ea8669fe4f3d05a4f204567906b1347da7a58b75f45bae48d3",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/ts3.6/base.d.ts": {
+        "version": "ad1ae5ae98eceb9af99061e83e867b9897d267aebc8f3b938c9424deabadf4bb",
+        "signature": "ad1ae5ae98eceb9af99061e83e867b9897d267aebc8f3b938c9424deabadf4bb",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/assert.d.ts": {
+        "version": "ce71d002806f66f9b2ee0d440ade1af5231c40902f85d2e45517c5ddd7744fab",
+        "signature": "ce71d002806f66f9b2ee0d440ade1af5231c40902f85d2e45517c5ddd7744fab",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/base.d.ts": {
+        "version": "e61a21e9418f279bc480394a94d1581b2dee73747adcbdef999b6737e34d721b",
+        "signature": "e61a21e9418f279bc480394a94d1581b2dee73747adcbdef999b6737e34d721b",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/@types/node/index.d.ts": {
+        "version": "5825520e2099309182c6e2a2b3061b060d42a098c58f67d1754880a7e2cce99a",
+        "signature": "5825520e2099309182c6e2a2b3061b060d42a098c58f67d1754880a7e2cce99a",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/cli-spinners/index.d.ts": {
+        "version": "16687804859a9abc3d1783fe4cb0cd27e65eeba8e2bea772c109e8992a458d71",
+        "signature": "16687804859a9abc3d1783fe4cb0cd27e65eeba8e2bea772c109e8992a458d71",
+        "affectsGlobalScope": false
+      },
+      "../node_modules/ora/index.d.ts": {
+        "version": "ae2a07a6cf97809e15b7179f3b8fb5ee54293b403f27b9049d5188c805cc7e5e",
+        "signature": "ae2a07a6cf97809e15b7179f3b8fb5ee54293b403f27b9049d5188c805cc7e5e",
+        "affectsGlobalScope": false
+      },
+      "../src/template/loader.ts": {
+        "version": "218f3f8889bab80d37f0fb8b0ef4addbc94f554e210c270f7b1b60f92a002fb5",
+        "signature": "b65e55a6c4a1ae32fb5bfe7d7876660f5d019f75fa4c6b915a7e8ea108c1fd6f",
+        "affectsGlobalScope": false
+      },
+      "../src/utils/const.ts": {
+        "version": "34a521b2a750dbdf631e801e38ae763451865994a6237fb5a83017084932fc69",
+        "signature": "a81da6ed4047fc89a76ce2cc90d71be4db5735dcea82c9f1b49acc5bca2547a2",
+        "affectsGlobalScope": false
+      },
+      "../src/translate.ts": {
+        "version": "eb3d68d5637cdaedff2bac7f2eeb503c6c0055cc22216786a6ba08fd6fe75448",
+        "signature": "9b3e7b9a0cb9e2f5b522e2b549e37f22e11ab7de3effc2957709949ebd651fa9",
+        "affectsGlobalScope": false
+      },
+      "../src/version.ts": {
+        "version": "3e4b4700795b5cb8eb294778e54802c8a3ab570ccef59ddbee339c959f79852d",
+        "signature": "5be76350ca7592c760cf244a4a29b21a4badfb34040e2ffb3a266f4a260e2ff5",
+        "affectsGlobalScope": false
+      },
+      "../src/index.ts": {
         "version": "73be89ca04907d43f617da14f74da4d2dde97989baacc55247e89f705d806c8c",
-        "signature": "73be89ca04907d43f617da14f74da4d2dde97989baacc55247e89f705d806c8c"
+        "signature": "73be89ca04907d43f617da14f74da4d2dde97989baacc55247e89f705d806c8c",
+        "affectsGlobalScope": false
       },
-      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/lib/fetch.ts": {
-        "version": "ffb99ca7b4c9d43f909b4052608d144c27d129831bed492af3d461be8a437338",
-        "signature": "8c18b064af98ddba6c1c4534cb7a9a0e6a3a06e4d44522fc3cdc7bd58e7cc769"
+      "../src/plugins/minidict-bing/lib/fetch.ts": {
+        "version": "aaf36dff914566ece9a6b29bb73f61500de95b0fb353cb598db43c1c72761b0b",
+        "signature": "8c18b064af98ddba6c1c4534cb7a9a0e6a3a06e4d44522fc3cdc7bd58e7cc769",
+        "affectsGlobalScope": false
       },
-      "/users/yjf/documents/myproject/minidict/node_modules/@types/node/inspector.d.ts": {
-        "version": "6215001ad565ae40d8a73f08b9ac6108058e497f122b2466ef9910be219980fa",
-        "signature": "6215001ad565ae40d8a73f08b9ac6108058e497f122b2466ef9910be219980fa"
+      "../node_modules/@types/cheerio/index.d.ts": {
+        "version": "4bb076d48d0dc20d1970b7df2b1e1545a12b1ac6f1fc628f0cc297f311aeb04f",
+        "signature": "4bb076d48d0dc20d1970b7df2b1e1545a12b1ac6f1fc628f0cc297f311aeb04f",
+        "affectsGlobalScope": true
       },
-      "/users/yjf/documents/myproject/minidict/node_modules/@types/node/index.d.ts": {
-        "version": "2ef40f0426e1832abef0854d49ee57697238cbefe52af85e25e865d86a93345f",
-        "signature": "2ef40f0426e1832abef0854d49ee57697238cbefe52af85e25e865d86a93345f"
+      "../src/plugins/output/index.ts": {
+        "version": "f0f459003e02a75c9ac889efd71724842fd14c005fa3a03ba204e2e749d9ae70",
+        "signature": "15e94589fc2d655e1bf9fe8015d0de473aaaaf929a567b75aa946e1ee0bb247e",
+        "affectsGlobalScope": false
       },
-      "/users/yjf/documents/myproject/minidict/node_modules/@types/cheerio/index.d.ts": {
-        "version": "5b92b2f6901b4e84e6196ac4d8574ecba2ccd956f7bdf80800f384e7b4e15d38",
-        "signature": "5b92b2f6901b4e84e6196ac4d8574ecba2ccd956f7bdf80800f384e7b4e15d38"
+      "../src/plugins/minidict-bing/lib/parser.ts": {
+        "version": "1504109c6a0219015df5b967ef03dac1600e78e5b69395122c17a39fce8d6a26",
+        "signature": "6c4e5191c0a82699e9f5ca2d77d8713c7ae05d0b38a6c31eb890f7a376c6652c",
+        "affectsGlobalScope": false
       },
-      "/users/yjf/documents/myproject/minidict/src/plugins/output/index.ts": {
-        "version": "dfe11499944b45dc4ca72132b1628362f34c76dff192e0082ae903bd26a2d7e3",
-        "signature": "15e94589fc2d655e1bf9fe8015d0de473aaaaf929a567b75aa946e1ee0bb247e"
+      "../src/plugins/minidict-bing/index.ts": {
+        "version": "19574b745dcfb5e43442a709018ae821fe564ff3c9a8dc206ff23a7cb3bc1f19",
+        "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "affectsGlobalScope": false
       },
-      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/lib/parser.ts": {
-        "version": "515597f10cf37d130b96946211a29d8cf91bc1c921505ee5ebf7883a6ac65688",
-        "signature": "6c4e5191c0a82699e9f5ca2d77d8713c7ae05d0b38a6c31eb890f7a376c6652c"
-      },
-      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/index.ts": {
-        "version": "342f06eab3185a69bfaa73757d39d5cd6101a8b7b8f14903a959c02ba739943f",
-        "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
-      },
-      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/lib/debug.ts": {
+      "../src/plugins/minidict-bing/lib/debug.ts": {
         "version": "06c1c375fd396576fb5c8a07108873b346d303071620980d435b2e0f0b8c2245",
-        "signature": "46a0b34e1264c4d25ca6646ff0e6cfaa7275ea1ae5a6bc23d4dfd84edf2f2b2e"
+        "signature": "46a0b34e1264c4d25ca6646ff0e6cfaa7275ea1ae5a6bc23d4dfd84edf2f2b2e",
+        "affectsGlobalScope": false
       },
-      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/lib/fetch.ts": {
-        "version": "2dc6901bbf6be3c6651958596f6279bcc28af1ad670f9917beec52d04a43706c",
-        "signature": "759b17595cf4eb2c46ad69984e723ba4c896014913e262abcae34c2df34a6834"
+      "../src/plugins/minidict-youdao/lib/fetch.ts": {
+        "version": "2d4c71acca804538101078ee91a5b5d97a533130ba68d6f05e4f7251b00312b8",
+        "signature": "759b17595cf4eb2c46ad69984e723ba4c896014913e262abcae34c2df34a6834",
+        "affectsGlobalScope": false
       },
-      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/lib/parser.ts": {
-        "version": "6643747a077866add8447449b3ea1f061b35fc9a41e0402dc00ab53833b4a863",
-        "signature": "6c4e5191c0a82699e9f5ca2d77d8713c7ae05d0b38a6c31eb890f7a376c6652c"
+      "../src/plugins/minidict-youdao/lib/parser.ts": {
+        "version": "6820ac1779305105da677689b746564e1af5e5f7f145db339bc75cb6c16ecd6a",
+        "signature": "6c4e5191c0a82699e9f5ca2d77d8713c7ae05d0b38a6c31eb890f7a376c6652c",
+        "affectsGlobalScope": false
       },
-      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/index.ts": {
-        "version": "2f05c30a1348d3b149035d606af38f7ea726aa4040e43f5a08474231711d4f57",
-        "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+      "../src/plugins/minidict-youdao/index.ts": {
+        "version": "d7c7cd72004c44655a15bbe9c9887fc84fee6b88c78027ad57852c738996d456",
+        "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "affectsGlobalScope": false
       },
-      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/lib/debug.ts": {
+      "../src/plugins/minidict-youdao/lib/debug.ts": {
         "version": "a22c450449d6328081814c3e5fbbd870ae42a46f12993b6ad90e80cf54492e62",
-        "signature": "46a0b34e1264c4d25ca6646ff0e6cfaa7275ea1ae5a6bc23d4dfd84edf2f2b2e"
+        "signature": "46a0b34e1264c4d25ca6646ff0e6cfaa7275ea1ae5a6bc23d4dfd84edf2f2b2e",
+        "affectsGlobalScope": false
       }
     },
     "options": {
@@ -174,209 +530,531 @@
       "experimentalDecorators": true,
       "target": 2,
       "sourceMap": true,
-      "outDir": "/Users/yjf/Documents/MyProject/minidict/lib",
-      "baseUrl": "/Users/yjf/Documents/MyProject/minidict/",
+      "outDir": "./",
+      "baseUrl": "..",
       "incremental": true,
-      "project": "tsconfig.json",
-      "configFilePath": "/Users/yjf/Documents/MyProject/minidict/tsconfig.json"
+      "project": "../tsconfig.json",
+      "configFilePath": "../tsconfig.json"
     },
     "referencedMap": {
-      "/users/yjf/documents/myproject/minidict/src/utils/config.ts": [
-        "/users/yjf/documents/myproject/minidict/src/utils/debug.ts",
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/index.d.ts"
+      "../node_modules/@types/cheerio/index.d.ts": [
+        "../node_modules/@types/node/index.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/src/utils/plugins.ts": [
-        "/users/yjf/documents/myproject/minidict/src/utils/config.ts"
+      "../node_modules/@types/node/base.d.ts": [
+        "../node_modules/@types/node/assert.d.ts",
+        "../node_modules/@types/node/ts3.6/base.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/src/service/index.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/index.d.ts",
-        "/users/yjf/documents/myproject/minidict/src/utils/plugins.ts"
+      "../node_modules/@types/node/child_process.d.ts": [
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/net.d.ts",
+        "../node_modules/@types/node/stream.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/src/template/index.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/chalk/types/index.d.ts",
-        "/users/yjf/documents/myproject/minidict/node_modules/pad/dist/pad.d.ts",
-        "/users/yjf/documents/myproject/minidict/src/utils/config.ts"
+      "../node_modules/@types/node/cluster.d.ts": [
+        "../node_modules/@types/node/child_process.d.ts",
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/net.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/src/translate.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/moment/moment.d.ts",
-        "/users/yjf/documents/myproject/minidict/src/service/index.ts",
-        "/users/yjf/documents/myproject/minidict/src/template/index.ts",
-        "/users/yjf/documents/myproject/minidict/src/template/loader.ts",
-        "/users/yjf/documents/myproject/minidict/src/utils/const.ts"
+      "../node_modules/@types/node/console.d.ts": [
+        "../node_modules/@types/node/util.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/src/index.ts": [
-        "/users/yjf/documents/myproject/minidict/src/translate.ts",
-        "/users/yjf/documents/myproject/minidict/src/version.ts"
+      "../node_modules/@types/node/constants.d.ts": [
+        "../node_modules/@types/node/crypto.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/os.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/node_modules/@types/node/inspector.d.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/index.d.ts"
+      "../node_modules/@types/node/crypto.d.ts": [
+        "../node_modules/@types/node/stream.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/node_modules/@types/node/index.d.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/index.d.ts",
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/inspector.d.ts"
+      "../node_modules/@types/node/dgram.d.ts": [
+        "../node_modules/@types/node/dns.d.ts",
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/net.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/node_modules/@types/cheerio/index.d.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/index.d.ts"
+      "../node_modules/@types/node/domain.d.ts": [
+        "../node_modules/@types/node/events.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/lib/parser.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/cheerio/index.d.ts",
-        "/users/yjf/documents/myproject/minidict/src/plugins/output/index.ts"
+      "../node_modules/@types/node/fs.d.ts": [
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/fs/promises.d.ts",
+        "../node_modules/@types/node/stream.d.ts",
+        "../node_modules/@types/node/url.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/index.ts": [
-        "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/lib/fetch.ts",
-        "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/lib/parser.ts",
-        "/users/yjf/documents/myproject/minidict/src/plugins/output/index.ts"
+      "../node_modules/@types/node/fs/promises.d.ts": [
+        "../node_modules/@types/node/fs.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/lib/parser.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/cheerio/index.d.ts",
-        "/users/yjf/documents/myproject/minidict/src/plugins/output/index.ts"
+      "../node_modules/@types/node/http.d.ts": [
+        "../node_modules/@types/node/net.d.ts",
+        "../node_modules/@types/node/stream.d.ts",
+        "../node_modules/@types/node/url.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/index.ts": [
-        "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/lib/fetch.ts",
-        "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/lib/parser.ts",
-        "/users/yjf/documents/myproject/minidict/src/plugins/output/index.ts"
+      "../node_modules/@types/node/http2.d.ts": [
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/http.d.ts",
+        "../node_modules/@types/node/net.d.ts",
+        "../node_modules/@types/node/stream.d.ts",
+        "../node_modules/@types/node/tls.d.ts",
+        "../node_modules/@types/node/url.d.ts"
+      ],
+      "../node_modules/@types/node/https.d.ts": [
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/http.d.ts",
+        "../node_modules/@types/node/tls.d.ts",
+        "../node_modules/@types/node/url.d.ts"
+      ],
+      "../node_modules/@types/node/index.d.ts": [
+        "../node_modules/@types/node/base.d.ts"
+      ],
+      "../node_modules/@types/node/inspector.d.ts": [
+        "../node_modules/@types/node/events.d.ts"
+      ],
+      "../node_modules/@types/node/module.d.ts": [
+        "../node_modules/@types/node/url.d.ts"
+      ],
+      "../node_modules/@types/node/net.d.ts": [
+        "../node_modules/@types/node/dns.d.ts",
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/stream.d.ts"
+      ],
+      "../node_modules/@types/node/perf_hooks.d.ts": [
+        "../node_modules/@types/node/async_hooks.d.ts"
+      ],
+      "../node_modules/@types/node/process.d.ts": [
+        "../node_modules/@types/node/tty.d.ts"
+      ],
+      "../node_modules/@types/node/readline.d.ts": [
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/stream.d.ts"
+      ],
+      "../node_modules/@types/node/repl.d.ts": [
+        "../node_modules/@types/node/readline.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/vm.d.ts"
+      ],
+      "../node_modules/@types/node/stream.d.ts": [
+        "../node_modules/@types/node/events.d.ts"
+      ],
+      "../node_modules/@types/node/tls.d.ts": [
+        "../node_modules/@types/node/crypto.d.ts",
+        "../node_modules/@types/node/dns.d.ts",
+        "../node_modules/@types/node/net.d.ts",
+        "../node_modules/@types/node/stream.d.ts"
+      ],
+      "../node_modules/@types/node/ts3.4/base.d.ts": [
+        "../node_modules/@types/node/async_hooks.d.ts",
+        "../node_modules/@types/node/buffer.d.ts",
+        "../node_modules/@types/node/child_process.d.ts",
+        "../node_modules/@types/node/cluster.d.ts",
+        "../node_modules/@types/node/console.d.ts",
+        "../node_modules/@types/node/constants.d.ts",
+        "../node_modules/@types/node/crypto.d.ts",
+        "../node_modules/@types/node/dgram.d.ts",
+        "../node_modules/@types/node/dns.d.ts",
+        "../node_modules/@types/node/domain.d.ts",
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/fs/promises.d.ts",
+        "../node_modules/@types/node/globals.d.ts",
+        "../node_modules/@types/node/http.d.ts",
+        "../node_modules/@types/node/http2.d.ts",
+        "../node_modules/@types/node/https.d.ts",
+        "../node_modules/@types/node/inspector.d.ts",
+        "../node_modules/@types/node/module.d.ts",
+        "../node_modules/@types/node/net.d.ts",
+        "../node_modules/@types/node/os.d.ts",
+        "../node_modules/@types/node/path.d.ts",
+        "../node_modules/@types/node/perf_hooks.d.ts",
+        "../node_modules/@types/node/process.d.ts",
+        "../node_modules/@types/node/punycode.d.ts",
+        "../node_modules/@types/node/querystring.d.ts",
+        "../node_modules/@types/node/readline.d.ts",
+        "../node_modules/@types/node/repl.d.ts",
+        "../node_modules/@types/node/stream.d.ts",
+        "../node_modules/@types/node/string_decoder.d.ts",
+        "../node_modules/@types/node/timers.d.ts",
+        "../node_modules/@types/node/tls.d.ts",
+        "../node_modules/@types/node/trace_events.d.ts",
+        "../node_modules/@types/node/tty.d.ts",
+        "../node_modules/@types/node/url.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/v8.d.ts",
+        "../node_modules/@types/node/vm.d.ts",
+        "../node_modules/@types/node/worker_threads.d.ts",
+        "../node_modules/@types/node/zlib.d.ts"
+      ],
+      "../node_modules/@types/node/ts3.6/base.d.ts": [
+        "../node_modules/@types/node/globals.global.d.ts",
+        "../node_modules/@types/node/ts3.4/base.d.ts",
+        "../node_modules/@types/node/wasi.d.ts"
+      ],
+      "../node_modules/@types/node/tty.d.ts": [
+        "../node_modules/@types/node/net.d.ts"
+      ],
+      "../node_modules/@types/node/url.d.ts": [
+        "../node_modules/@types/node/querystring.d.ts"
+      ],
+      "../node_modules/@types/node/v8.d.ts": [
+        "../node_modules/@types/node/stream.d.ts"
+      ],
+      "../node_modules/@types/node/worker_threads.d.ts": [
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/fs/promises.d.ts",
+        "../node_modules/@types/node/stream.d.ts",
+        "../node_modules/@types/node/url.d.ts",
+        "../node_modules/@types/node/vm.d.ts"
+      ],
+      "../node_modules/@types/node/zlib.d.ts": [
+        "../node_modules/@types/node/stream.d.ts"
+      ],
+      "../node_modules/ora/index.d.ts": [
+        "../node_modules/@types/node/index.d.ts",
+        "../node_modules/cli-spinners/index.d.ts"
+      ],
+      "../src/index.ts": [
+        "../src/translate.ts",
+        "../src/version.ts"
+      ],
+      "../src/plugins/minidict-bing/index.ts": [
+        "../src/plugins/minidict-bing/lib/fetch.ts",
+        "../src/plugins/minidict-bing/lib/parser.ts",
+        "../src/plugins/output/index.ts"
+      ],
+      "../src/plugins/minidict-bing/lib/parser.ts": [
+        "../node_modules/@types/cheerio/index.d.ts",
+        "../src/plugins/output/index.ts"
+      ],
+      "../src/plugins/minidict-youdao/index.ts": [
+        "../src/plugins/minidict-youdao/lib/fetch.ts",
+        "../src/plugins/minidict-youdao/lib/parser.ts",
+        "../src/plugins/output/index.ts"
+      ],
+      "../src/plugins/minidict-youdao/lib/parser.ts": [
+        "../node_modules/@types/cheerio/index.d.ts",
+        "../src/plugins/output/index.ts"
+      ],
+      "../src/service/index.ts": [
+        "../node_modules/@types/node/path.d.ts",
+        "../src/utils/plugins.ts"
+      ],
+      "../src/template/index.ts": [
+        "../node_modules/chalk/types/index.d.ts",
+        "../node_modules/pad/dist/pad.d.ts",
+        "../src/utils/config.ts"
+      ],
+      "../src/template/loader.ts": [
+        "../node_modules/ora/index.d.ts"
+      ],
+      "../src/translate.ts": [
+        "../node_modules/moment/ts3.1-typings/moment.d.ts",
+        "../src/service/index.ts",
+        "../src/template/index.ts",
+        "../src/template/loader.ts",
+        "../src/utils/const.ts"
+      ],
+      "../src/utils/config.ts": [
+        "../node_modules/@types/node/path.d.ts",
+        "../src/utils/debug.ts"
+      ],
+      "../src/utils/plugins.ts": [
+        "../src/utils/config.ts"
       ]
     },
     "exportedModulesMap": {
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es6.d.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      "../node_modules/@types/cheerio/index.d.ts": [
+        "../node_modules/@types/node/index.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es5.d.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      "../node_modules/@types/node/base.d.ts": [
+        "../node_modules/@types/node/assert.d.ts",
+        "../node_modules/@types/node/ts3.6/base.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.d.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      "../node_modules/@types/node/child_process.d.ts": [
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/net.d.ts",
+        "../node_modules/@types/node/stream.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.dom.d.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      "../node_modules/@types/node/cluster.d.ts": [
+        "../node_modules/@types/node/child_process.d.ts",
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/net.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.dom.iterable.d.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      "../node_modules/@types/node/console.d.ts": [
+        "../node_modules/@types/node/util.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.webworker.importscripts.d.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      "../node_modules/@types/node/constants.d.ts": [
+        "../node_modules/@types/node/crypto.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/os.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.scripthost.d.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      "../node_modules/@types/node/crypto.d.ts": [
+        "../node_modules/@types/node/stream.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.core.d.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      "../node_modules/@types/node/dgram.d.ts": [
+        "../node_modules/@types/node/dns.d.ts",
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/net.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.collection.d.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      "../node_modules/@types/node/domain.d.ts": [
+        "../node_modules/@types/node/events.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.generator.d.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      "../node_modules/@types/node/fs.d.ts": [
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/fs/promises.d.ts",
+        "../node_modules/@types/node/stream.d.ts",
+        "../node_modules/@types/node/url.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.iterable.d.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      "../node_modules/@types/node/fs/promises.d.ts": [
+        "../node_modules/@types/node/fs.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.promise.d.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      "../node_modules/@types/node/http.d.ts": [
+        "../node_modules/@types/node/net.d.ts",
+        "../node_modules/@types/node/stream.d.ts",
+        "../node_modules/@types/node/url.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.proxy.d.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      "../node_modules/@types/node/http2.d.ts": [
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/http.d.ts",
+        "../node_modules/@types/node/net.d.ts",
+        "../node_modules/@types/node/stream.d.ts",
+        "../node_modules/@types/node/tls.d.ts",
+        "../node_modules/@types/node/url.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.reflect.d.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      "../node_modules/@types/node/https.d.ts": [
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/http.d.ts",
+        "../node_modules/@types/node/tls.d.ts",
+        "../node_modules/@types/node/url.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.symbol.d.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      "../node_modules/@types/node/index.d.ts": [
+        "../node_modules/@types/node/base.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      "../node_modules/@types/node/inspector.d.ts": [
+        "../node_modules/@types/node/events.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/node_modules/moment/moment.d.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      "../node_modules/@types/node/module.d.ts": [
+        "../node_modules/@types/node/url.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/node_modules/chalk/types/index.d.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      "../node_modules/@types/node/net.d.ts": [
+        "../node_modules/@types/node/dns.d.ts",
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/stream.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/src/translate.ts": [
-        "/users/yjf/documents/myproject/minidict/src/utils/const.ts"
+      "../node_modules/@types/node/perf_hooks.d.ts": [
+        "../node_modules/@types/node/async_hooks.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/src/index.ts": [
-        "/users/yjf/documents/myproject/minidict/src/translate.ts",
-        "/users/yjf/documents/myproject/minidict/src/version.ts"
+      "../node_modules/@types/node/process.d.ts": [
+        "../node_modules/@types/node/tty.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/node_modules/@types/node/inspector.d.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/index.d.ts"
+      "../node_modules/@types/node/readline.d.ts": [
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/stream.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/node_modules/@types/node/index.d.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/index.d.ts",
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/inspector.d.ts"
+      "../node_modules/@types/node/repl.d.ts": [
+        "../node_modules/@types/node/readline.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/vm.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/node_modules/@types/cheerio/index.d.ts": [
-        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/index.d.ts"
+      "../node_modules/@types/node/stream.d.ts": [
+        "../node_modules/@types/node/events.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/lib/parser.ts": [
-        "/users/yjf/documents/myproject/minidict/src/plugins/output/index.ts"
+      "../node_modules/@types/node/tls.d.ts": [
+        "../node_modules/@types/node/crypto.d.ts",
+        "../node_modules/@types/node/dns.d.ts",
+        "../node_modules/@types/node/net.d.ts",
+        "../node_modules/@types/node/stream.d.ts"
       ],
-      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/lib/parser.ts": [
-        "/users/yjf/documents/myproject/minidict/src/plugins/output/index.ts"
+      "../node_modules/@types/node/ts3.4/base.d.ts": [
+        "../node_modules/@types/node/async_hooks.d.ts",
+        "../node_modules/@types/node/buffer.d.ts",
+        "../node_modules/@types/node/child_process.d.ts",
+        "../node_modules/@types/node/cluster.d.ts",
+        "../node_modules/@types/node/console.d.ts",
+        "../node_modules/@types/node/constants.d.ts",
+        "../node_modules/@types/node/crypto.d.ts",
+        "../node_modules/@types/node/dgram.d.ts",
+        "../node_modules/@types/node/dns.d.ts",
+        "../node_modules/@types/node/domain.d.ts",
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/fs/promises.d.ts",
+        "../node_modules/@types/node/globals.d.ts",
+        "../node_modules/@types/node/http.d.ts",
+        "../node_modules/@types/node/http2.d.ts",
+        "../node_modules/@types/node/https.d.ts",
+        "../node_modules/@types/node/inspector.d.ts",
+        "../node_modules/@types/node/module.d.ts",
+        "../node_modules/@types/node/net.d.ts",
+        "../node_modules/@types/node/os.d.ts",
+        "../node_modules/@types/node/path.d.ts",
+        "../node_modules/@types/node/perf_hooks.d.ts",
+        "../node_modules/@types/node/process.d.ts",
+        "../node_modules/@types/node/punycode.d.ts",
+        "../node_modules/@types/node/querystring.d.ts",
+        "../node_modules/@types/node/readline.d.ts",
+        "../node_modules/@types/node/repl.d.ts",
+        "../node_modules/@types/node/stream.d.ts",
+        "../node_modules/@types/node/string_decoder.d.ts",
+        "../node_modules/@types/node/timers.d.ts",
+        "../node_modules/@types/node/tls.d.ts",
+        "../node_modules/@types/node/trace_events.d.ts",
+        "../node_modules/@types/node/tty.d.ts",
+        "../node_modules/@types/node/url.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/v8.d.ts",
+        "../node_modules/@types/node/vm.d.ts",
+        "../node_modules/@types/node/worker_threads.d.ts",
+        "../node_modules/@types/node/zlib.d.ts"
+      ],
+      "../node_modules/@types/node/ts3.6/base.d.ts": [
+        "../node_modules/@types/node/globals.global.d.ts",
+        "../node_modules/@types/node/ts3.4/base.d.ts",
+        "../node_modules/@types/node/wasi.d.ts"
+      ],
+      "../node_modules/@types/node/tty.d.ts": [
+        "../node_modules/@types/node/net.d.ts"
+      ],
+      "../node_modules/@types/node/url.d.ts": [
+        "../node_modules/@types/node/querystring.d.ts"
+      ],
+      "../node_modules/@types/node/v8.d.ts": [
+        "../node_modules/@types/node/stream.d.ts"
+      ],
+      "../node_modules/@types/node/worker_threads.d.ts": [
+        "../node_modules/@types/node/events.d.ts",
+        "../node_modules/@types/node/fs/promises.d.ts",
+        "../node_modules/@types/node/stream.d.ts",
+        "../node_modules/@types/node/url.d.ts",
+        "../node_modules/@types/node/vm.d.ts"
+      ],
+      "../node_modules/@types/node/zlib.d.ts": [
+        "../node_modules/@types/node/stream.d.ts"
+      ],
+      "../node_modules/ora/index.d.ts": [
+        "../node_modules/@types/node/index.d.ts",
+        "../node_modules/cli-spinners/index.d.ts"
+      ],
+      "../src/index.ts": [
+        "../src/translate.ts",
+        "../src/version.ts"
+      ],
+      "../src/plugins/minidict-bing/lib/parser.ts": [
+        "../src/plugins/output/index.ts"
+      ],
+      "../src/plugins/minidict-youdao/lib/parser.ts": [
+        "../src/plugins/output/index.ts"
+      ],
+      "../src/translate.ts": [
+        "../src/utils/const.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es6.d.ts",
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es5.d.ts",
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.d.ts",
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.dom.d.ts",
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.dom.iterable.d.ts",
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.webworker.importscripts.d.ts",
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.scripthost.d.ts",
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.core.d.ts",
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.collection.d.ts",
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.generator.d.ts",
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.iterable.d.ts",
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.promise.d.ts",
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.proxy.d.ts",
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.reflect.d.ts",
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.symbol.d.ts",
-      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
-      "/users/yjf/documents/myproject/minidict/node_modules/moment/moment.d.ts",
-      "/users/yjf/documents/myproject/minidict/src/utils/debug.ts",
-      "/users/yjf/documents/myproject/minidict/src/utils/config.ts",
-      "/users/yjf/documents/myproject/minidict/src/utils/plugins.ts",
-      "/users/yjf/documents/myproject/minidict/node_modules/chalk/types/index.d.ts",
-      "/users/yjf/documents/myproject/minidict/node_modules/pad/dist/pad.d.ts",
-      "/users/yjf/documents/myproject/minidict/src/template/index.ts",
-      "/users/yjf/documents/myproject/minidict/src/template/loader.ts",
-      "/users/yjf/documents/myproject/minidict/src/utils/const.ts",
-      "/users/yjf/documents/myproject/minidict/src/translate.ts",
-      "/users/yjf/documents/myproject/minidict/src/version.ts",
-      "/users/yjf/documents/myproject/minidict/src/index.ts",
-      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/lib/fetch.ts",
-      "/users/yjf/documents/myproject/minidict/node_modules/@types/node/inspector.d.ts",
-      "/users/yjf/documents/myproject/minidict/node_modules/@types/node/index.d.ts",
-      "/users/yjf/documents/myproject/minidict/node_modules/@types/cheerio/index.d.ts",
-      "/users/yjf/documents/myproject/minidict/src/plugins/output/index.ts",
-      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/lib/parser.ts",
-      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/index.ts",
-      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/lib/debug.ts",
-      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/lib/fetch.ts",
-      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/lib/parser.ts",
-      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/index.ts",
-      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/lib/debug.ts",
-      "/users/yjf/documents/myproject/minidict/src/service/index.ts"
+      "../node_modules/@types/cheerio/index.d.ts",
+      "../node_modules/@types/node/assert.d.ts",
+      "../node_modules/@types/node/async_hooks.d.ts",
+      "../node_modules/@types/node/base.d.ts",
+      "../node_modules/@types/node/buffer.d.ts",
+      "../node_modules/@types/node/child_process.d.ts",
+      "../node_modules/@types/node/cluster.d.ts",
+      "../node_modules/@types/node/console.d.ts",
+      "../node_modules/@types/node/constants.d.ts",
+      "../node_modules/@types/node/crypto.d.ts",
+      "../node_modules/@types/node/dgram.d.ts",
+      "../node_modules/@types/node/dns.d.ts",
+      "../node_modules/@types/node/domain.d.ts",
+      "../node_modules/@types/node/events.d.ts",
+      "../node_modules/@types/node/fs.d.ts",
+      "../node_modules/@types/node/fs/promises.d.ts",
+      "../node_modules/@types/node/globals.d.ts",
+      "../node_modules/@types/node/globals.global.d.ts",
+      "../node_modules/@types/node/http.d.ts",
+      "../node_modules/@types/node/http2.d.ts",
+      "../node_modules/@types/node/https.d.ts",
+      "../node_modules/@types/node/index.d.ts",
+      "../node_modules/@types/node/inspector.d.ts",
+      "../node_modules/@types/node/module.d.ts",
+      "../node_modules/@types/node/net.d.ts",
+      "../node_modules/@types/node/os.d.ts",
+      "../node_modules/@types/node/path.d.ts",
+      "../node_modules/@types/node/perf_hooks.d.ts",
+      "../node_modules/@types/node/process.d.ts",
+      "../node_modules/@types/node/punycode.d.ts",
+      "../node_modules/@types/node/querystring.d.ts",
+      "../node_modules/@types/node/readline.d.ts",
+      "../node_modules/@types/node/repl.d.ts",
+      "../node_modules/@types/node/stream.d.ts",
+      "../node_modules/@types/node/string_decoder.d.ts",
+      "../node_modules/@types/node/timers.d.ts",
+      "../node_modules/@types/node/tls.d.ts",
+      "../node_modules/@types/node/trace_events.d.ts",
+      "../node_modules/@types/node/ts3.4/base.d.ts",
+      "../node_modules/@types/node/ts3.6/base.d.ts",
+      "../node_modules/@types/node/tty.d.ts",
+      "../node_modules/@types/node/url.d.ts",
+      "../node_modules/@types/node/util.d.ts",
+      "../node_modules/@types/node/v8.d.ts",
+      "../node_modules/@types/node/vm.d.ts",
+      "../node_modules/@types/node/wasi.d.ts",
+      "../node_modules/@types/node/worker_threads.d.ts",
+      "../node_modules/@types/node/zlib.d.ts",
+      "../node_modules/chalk/types/index.d.ts",
+      "../node_modules/cli-spinners/index.d.ts",
+      "../node_modules/moment/ts3.1-typings/moment.d.ts",
+      "../node_modules/ora/index.d.ts",
+      "../node_modules/pad/dist/pad.d.ts",
+      "../node_modules/typescript/lib/lib.dom.d.ts",
+      "../node_modules/typescript/lib/lib.dom.iterable.d.ts",
+      "../node_modules/typescript/lib/lib.es2015.collection.d.ts",
+      "../node_modules/typescript/lib/lib.es2015.core.d.ts",
+      "../node_modules/typescript/lib/lib.es2015.d.ts",
+      "../node_modules/typescript/lib/lib.es2015.generator.d.ts",
+      "../node_modules/typescript/lib/lib.es2015.iterable.d.ts",
+      "../node_modules/typescript/lib/lib.es2015.promise.d.ts",
+      "../node_modules/typescript/lib/lib.es2015.proxy.d.ts",
+      "../node_modules/typescript/lib/lib.es2015.reflect.d.ts",
+      "../node_modules/typescript/lib/lib.es2015.symbol.d.ts",
+      "../node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
+      "../node_modules/typescript/lib/lib.es2016.array.include.d.ts",
+      "../node_modules/typescript/lib/lib.es2016.d.ts",
+      "../node_modules/typescript/lib/lib.es2017.d.ts",
+      "../node_modules/typescript/lib/lib.es2017.intl.d.ts",
+      "../node_modules/typescript/lib/lib.es2017.object.d.ts",
+      "../node_modules/typescript/lib/lib.es2017.sharedmemory.d.ts",
+      "../node_modules/typescript/lib/lib.es2017.string.d.ts",
+      "../node_modules/typescript/lib/lib.es2017.typedarrays.d.ts",
+      "../node_modules/typescript/lib/lib.es2018.asyncgenerator.d.ts",
+      "../node_modules/typescript/lib/lib.es2018.asynciterable.d.ts",
+      "../node_modules/typescript/lib/lib.es2018.d.ts",
+      "../node_modules/typescript/lib/lib.es2018.intl.d.ts",
+      "../node_modules/typescript/lib/lib.es2018.promise.d.ts",
+      "../node_modules/typescript/lib/lib.es2018.regexp.d.ts",
+      "../node_modules/typescript/lib/lib.es2020.bigint.d.ts",
+      "../node_modules/typescript/lib/lib.es5.d.ts",
+      "../node_modules/typescript/lib/lib.es6.d.ts",
+      "../node_modules/typescript/lib/lib.esnext.intl.d.ts",
+      "../node_modules/typescript/lib/lib.scripthost.d.ts",
+      "../node_modules/typescript/lib/lib.webworker.importscripts.d.ts",
+      "../src/index.ts",
+      "../src/plugins/minidict-bing/index.ts",
+      "../src/plugins/minidict-bing/lib/debug.ts",
+      "../src/plugins/minidict-bing/lib/fetch.ts",
+      "../src/plugins/minidict-bing/lib/parser.ts",
+      "../src/plugins/minidict-youdao/index.ts",
+      "../src/plugins/minidict-youdao/lib/debug.ts",
+      "../src/plugins/minidict-youdao/lib/fetch.ts",
+      "../src/plugins/minidict-youdao/lib/parser.ts",
+      "../src/plugins/output/index.ts",
+      "../src/service/index.ts",
+      "../src/template/index.ts",
+      "../src/template/loader.ts",
+      "../src/translate.ts",
+      "../src/utils/config.ts",
+      "../src/utils/const.ts",
+      "../src/utils/debug.ts",
+      "../src/utils/plugins.ts",
+      "../src/version.ts"
     ]
   },
-  "version": "3.5.3"
+  "version": "3.9.7"
 }
