@@ -1,0 +1,382 @@
+{
+  "program": {
+    "fileInfos": {
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es6.d.ts": {
+        "version": "c180f01a2aaac7d733001fa1db20f881dc83cf33096b674a1546ca26762e69da",
+        "signature": "c180f01a2aaac7d733001fa1db20f881dc83cf33096b674a1546ca26762e69da"
+      },
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es5.d.ts": {
+        "version": "1f753cee573dea40df8a9dc873fef5566957b19ad513874f6643d8dfb14842d0",
+        "signature": "1f753cee573dea40df8a9dc873fef5566957b19ad513874f6643d8dfb14842d0"
+      },
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.d.ts": {
+        "version": "7994d44005046d1413ea31d046577cdda33b8b2470f30281fd9c8b3c99fe2d96",
+        "signature": "7994d44005046d1413ea31d046577cdda33b8b2470f30281fd9c8b3c99fe2d96"
+      },
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.dom.d.ts": {
+        "version": "973df4e41aea3780ce77073777d37dd5896f684124f4c42409f3a832133837a4",
+        "signature": "973df4e41aea3780ce77073777d37dd5896f684124f4c42409f3a832133837a4"
+      },
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.dom.iterable.d.ts": {
+        "version": "eb843da29336c7d5840bb439b24cf68a4a1652fd01c6e4e66ec74d8b136e944a",
+        "signature": "eb843da29336c7d5840bb439b24cf68a4a1652fd01c6e4e66ec74d8b136e944a"
+      },
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.webworker.importscripts.d.ts": {
+        "version": "fe4e59403e34c7ff747abe4ff6abbc7718229556d7c1a5b93473fb53156c913b",
+        "signature": "fe4e59403e34c7ff747abe4ff6abbc7718229556d7c1a5b93473fb53156c913b"
+      },
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.scripthost.d.ts": {
+        "version": "b9faa17292f17d2ad75e34fac77dd63a6403af1dba02d39cd0cbb9ffdf3de8b9",
+        "signature": "b9faa17292f17d2ad75e34fac77dd63a6403af1dba02d39cd0cbb9ffdf3de8b9"
+      },
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.core.d.ts": {
+        "version": "2a0390a665763bcc90f0670e43c587928d8fefe2a94a11209c1e22cba7b09f52",
+        "signature": "2a0390a665763bcc90f0670e43c587928d8fefe2a94a11209c1e22cba7b09f52"
+      },
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.collection.d.ts": {
+        "version": "dd94d8ef48c562389eb58af8df3a3a34d11367f7c818192aa5f16470d469e3f0",
+        "signature": "dd94d8ef48c562389eb58af8df3a3a34d11367f7c818192aa5f16470d469e3f0"
+      },
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.generator.d.ts": {
+        "version": "828413486bdcaa342558e8e4570b1b287b776cb61b4b70b0214bd10c5d9a94c3",
+        "signature": "828413486bdcaa342558e8e4570b1b287b776cb61b4b70b0214bd10c5d9a94c3"
+      },
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.iterable.d.ts": {
+        "version": "6c9f73334f8bf47aea685ca5b46a8f7e992a223e96fbceb030f26a4d2324ba21",
+        "signature": "6c9f73334f8bf47aea685ca5b46a8f7e992a223e96fbceb030f26a4d2324ba21"
+      },
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.promise.d.ts": {
+        "version": "e6b8ff2798f8ebd7a1c7afd8671f2cb67ee1901c422f5964d74b0b34c6574ea2",
+        "signature": "e6b8ff2798f8ebd7a1c7afd8671f2cb67ee1901c422f5964d74b0b34c6574ea2"
+      },
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.proxy.d.ts": {
+        "version": "5e72f949a89717db444e3bd9433468890068bb21a5638d8ab15a1359e05e54fe",
+        "signature": "5e72f949a89717db444e3bd9433468890068bb21a5638d8ab15a1359e05e54fe"
+      },
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.reflect.d.ts": {
+        "version": "f5b242136ae9bfb1cc99a5971cccc44e99947ae6b5ef6fd8aa54b5ade553b976",
+        "signature": "f5b242136ae9bfb1cc99a5971cccc44e99947ae6b5ef6fd8aa54b5ade553b976"
+      },
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.symbol.d.ts": {
+        "version": "9ae2860252d6b5f16e2026d8a2c2069db7b2a3295e98b6031d01337b96437230",
+        "signature": "9ae2860252d6b5f16e2026d8a2c2069db7b2a3295e98b6031d01337b96437230"
+      },
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts": {
+        "version": "3e0a459888f32b42138d5a39f706ff2d55d500ab1031e0988b5568b0f67c2303",
+        "signature": "3e0a459888f32b42138d5a39f706ff2d55d500ab1031e0988b5568b0f67c2303"
+      },
+      "/users/yjf/documents/myproject/minidict/node_modules/moment/moment.d.ts": {
+        "version": "f2b43a96a09d31d1be3aab9a84311b407b72b8e3705af970f2e8f9173aacb470",
+        "signature": "f2b43a96a09d31d1be3aab9a84311b407b72b8e3705af970f2e8f9173aacb470"
+      },
+      "/users/yjf/documents/myproject/minidict/src/utils/debug.ts": {
+        "version": "28b346a0a2c35e83bf2e63f43fce6b8b2cf5b22e1291d7d208e2027b1fa70b1c",
+        "signature": "46a0b34e1264c4d25ca6646ff0e6cfaa7275ea1ae5a6bc23d4dfd84edf2f2b2e"
+      },
+      "/users/yjf/documents/myproject/minidict/src/utils/config.ts": {
+        "version": "bf4288cb6976ce446974b73ff833b2732c2da9a78c6c77c0c1b33433cea22daf",
+        "signature": "70330b19cb50d7ddec1dc1285e4517f5410f0d56a9690c442c16d7017576e334"
+      },
+      "/users/yjf/documents/myproject/minidict/src/utils/plugins.ts": {
+        "version": "9913f1ceff5d75cdafad61abc4bf6b063e831d90a3b0c70b49ce1168e31f8242",
+        "signature": "46a0b34e1264c4d25ca6646ff0e6cfaa7275ea1ae5a6bc23d4dfd84edf2f2b2e"
+      },
+      "/users/yjf/documents/myproject/minidict/src/service/index.ts": {
+        "version": "86fdf26e3414551d7a4a522b91ef4d9026aa8740677c0501956a1aa68d91e749",
+        "signature": "b2890f0e7ff9e3afab1e53afa5113a55fc55a15b6b95d1c038d91615e8d481c9"
+      },
+      "/users/yjf/documents/myproject/minidict/node_modules/chalk/types/index.d.ts": {
+        "version": "091f417275a51ab3c47b949723e9e8a193012157ecc64a96e2d7b1505e82f395",
+        "signature": "091f417275a51ab3c47b949723e9e8a193012157ecc64a96e2d7b1505e82f395"
+      },
+      "/users/yjf/documents/myproject/minidict/node_modules/pad/dist/pad.d.ts": {
+        "version": "c226e88579493bdbad68b1dcb33b26fb15820c67b7786f27ff41c59df773c634",
+        "signature": "c226e88579493bdbad68b1dcb33b26fb15820c67b7786f27ff41c59df773c634"
+      },
+      "/users/yjf/documents/myproject/minidict/src/template/index.ts": {
+        "version": "aebca505622f724392d24dce9f6d6b6e09cf147a161dddc113d65c69a963a22f",
+        "signature": "53149ff65d469fe08e266d2b357913c3ea1bdc75825f38ee52932b6e5dc08434"
+      },
+      "/users/yjf/documents/myproject/minidict/src/template/loader.ts": {
+        "version": "2c539d4cdd9edf96f88785d434f625392efd8363e2f2b12806eee0d35194b7d0",
+        "signature": "b65e55a6c4a1ae32fb5bfe7d7876660f5d019f75fa4c6b915a7e8ea108c1fd6f"
+      },
+      "/users/yjf/documents/myproject/minidict/src/utils/const.ts": {
+        "version": "85e60fe46ef592a3d70e1a979c53f7171d927e4893d480f2e074a6ae73812f68",
+        "signature": "a81da6ed4047fc89a76ce2cc90d71be4db5735dcea82c9f1b49acc5bca2547a2"
+      },
+      "/users/yjf/documents/myproject/minidict/src/translate.ts": {
+        "version": "1ea29bf0e591c5af61abdb9f40a8c93760cb7771bf6bc23366fb32158e92866d",
+        "signature": "9b3e7b9a0cb9e2f5b522e2b549e37f22e11ab7de3effc2957709949ebd651fa9"
+      },
+      "/users/yjf/documents/myproject/minidict/src/version.ts": {
+        "version": "b2a46f58504ee088fea2c181d7534bf14ea56a363b7d9b7784218675bea988bf",
+        "signature": "5be76350ca7592c760cf244a4a29b21a4badfb34040e2ffb3a266f4a260e2ff5"
+      },
+      "/users/yjf/documents/myproject/minidict/src/index.ts": {
+        "version": "73be89ca04907d43f617da14f74da4d2dde97989baacc55247e89f705d806c8c",
+        "signature": "73be89ca04907d43f617da14f74da4d2dde97989baacc55247e89f705d806c8c"
+      },
+      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/lib/fetch.ts": {
+        "version": "ffb99ca7b4c9d43f909b4052608d144c27d129831bed492af3d461be8a437338",
+        "signature": "8c18b064af98ddba6c1c4534cb7a9a0e6a3a06e4d44522fc3cdc7bd58e7cc769"
+      },
+      "/users/yjf/documents/myproject/minidict/node_modules/@types/node/inspector.d.ts": {
+        "version": "6215001ad565ae40d8a73f08b9ac6108058e497f122b2466ef9910be219980fa",
+        "signature": "6215001ad565ae40d8a73f08b9ac6108058e497f122b2466ef9910be219980fa"
+      },
+      "/users/yjf/documents/myproject/minidict/node_modules/@types/node/index.d.ts": {
+        "version": "2ef40f0426e1832abef0854d49ee57697238cbefe52af85e25e865d86a93345f",
+        "signature": "2ef40f0426e1832abef0854d49ee57697238cbefe52af85e25e865d86a93345f"
+      },
+      "/users/yjf/documents/myproject/minidict/node_modules/@types/cheerio/index.d.ts": {
+        "version": "5b92b2f6901b4e84e6196ac4d8574ecba2ccd956f7bdf80800f384e7b4e15d38",
+        "signature": "5b92b2f6901b4e84e6196ac4d8574ecba2ccd956f7bdf80800f384e7b4e15d38"
+      },
+      "/users/yjf/documents/myproject/minidict/src/plugins/output/index.ts": {
+        "version": "dfe11499944b45dc4ca72132b1628362f34c76dff192e0082ae903bd26a2d7e3",
+        "signature": "15e94589fc2d655e1bf9fe8015d0de473aaaaf929a567b75aa946e1ee0bb247e"
+      },
+      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/lib/parser.ts": {
+        "version": "515597f10cf37d130b96946211a29d8cf91bc1c921505ee5ebf7883a6ac65688",
+        "signature": "6c4e5191c0a82699e9f5ca2d77d8713c7ae05d0b38a6c31eb890f7a376c6652c"
+      },
+      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/index.ts": {
+        "version": "342f06eab3185a69bfaa73757d39d5cd6101a8b7b8f14903a959c02ba739943f",
+        "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+      },
+      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/lib/debug.ts": {
+        "version": "06c1c375fd396576fb5c8a07108873b346d303071620980d435b2e0f0b8c2245",
+        "signature": "46a0b34e1264c4d25ca6646ff0e6cfaa7275ea1ae5a6bc23d4dfd84edf2f2b2e"
+      },
+      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/lib/fetch.ts": {
+        "version": "2dc6901bbf6be3c6651958596f6279bcc28af1ad670f9917beec52d04a43706c",
+        "signature": "759b17595cf4eb2c46ad69984e723ba4c896014913e262abcae34c2df34a6834"
+      },
+      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/lib/parser.ts": {
+        "version": "6643747a077866add8447449b3ea1f061b35fc9a41e0402dc00ab53833b4a863",
+        "signature": "6c4e5191c0a82699e9f5ca2d77d8713c7ae05d0b38a6c31eb890f7a376c6652c"
+      },
+      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/index.ts": {
+        "version": "2f05c30a1348d3b149035d606af38f7ea726aa4040e43f5a08474231711d4f57",
+        "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+      },
+      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/lib/debug.ts": {
+        "version": "a22c450449d6328081814c3e5fbbd870ae42a46f12993b6ad90e80cf54492e62",
+        "signature": "46a0b34e1264c4d25ca6646ff0e6cfaa7275ea1ae5a6bc23d4dfd84edf2f2b2e"
+      }
+    },
+    "options": {
+      "module": 1,
+      "declaration": true,
+      "removeComments": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "target": 2,
+      "sourceMap": true,
+      "outDir": "/Users/yjf/Documents/MyProject/minidict/lib",
+      "baseUrl": "/Users/yjf/Documents/MyProject/minidict/",
+      "incremental": true,
+      "project": "tsconfig.json",
+      "configFilePath": "/Users/yjf/Documents/MyProject/minidict/tsconfig.json"
+    },
+    "referencedMap": {
+      "/users/yjf/documents/myproject/minidict/src/utils/config.ts": [
+        "/users/yjf/documents/myproject/minidict/src/utils/debug.ts",
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/index.d.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/src/utils/plugins.ts": [
+        "/users/yjf/documents/myproject/minidict/src/utils/config.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/src/service/index.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/index.d.ts",
+        "/users/yjf/documents/myproject/minidict/src/utils/plugins.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/src/template/index.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/chalk/types/index.d.ts",
+        "/users/yjf/documents/myproject/minidict/node_modules/pad/dist/pad.d.ts",
+        "/users/yjf/documents/myproject/minidict/src/utils/config.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/src/translate.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/moment/moment.d.ts",
+        "/users/yjf/documents/myproject/minidict/src/service/index.ts",
+        "/users/yjf/documents/myproject/minidict/src/template/index.ts",
+        "/users/yjf/documents/myproject/minidict/src/template/loader.ts",
+        "/users/yjf/documents/myproject/minidict/src/utils/const.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/src/index.ts": [
+        "/users/yjf/documents/myproject/minidict/src/translate.ts",
+        "/users/yjf/documents/myproject/minidict/src/version.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/node_modules/@types/node/inspector.d.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/index.d.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/node_modules/@types/node/index.d.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/index.d.ts",
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/inspector.d.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/node_modules/@types/cheerio/index.d.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/index.d.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/lib/parser.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/cheerio/index.d.ts",
+        "/users/yjf/documents/myproject/minidict/src/plugins/output/index.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/index.ts": [
+        "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/lib/fetch.ts",
+        "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/lib/parser.ts",
+        "/users/yjf/documents/myproject/minidict/src/plugins/output/index.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/lib/parser.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/cheerio/index.d.ts",
+        "/users/yjf/documents/myproject/minidict/src/plugins/output/index.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/index.ts": [
+        "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/lib/fetch.ts",
+        "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/lib/parser.ts",
+        "/users/yjf/documents/myproject/minidict/src/plugins/output/index.ts"
+      ]
+    },
+    "exportedModulesMap": {
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es6.d.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es5.d.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.d.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.dom.d.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.dom.iterable.d.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.webworker.importscripts.d.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.scripthost.d.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.core.d.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.collection.d.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.generator.d.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.iterable.d.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.promise.d.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.proxy.d.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.reflect.d.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.symbol.d.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/node_modules/moment/moment.d.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/node_modules/chalk/types/index.d.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/util.d.ts",
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/src/translate.ts": [
+        "/users/yjf/documents/myproject/minidict/src/utils/const.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/src/index.ts": [
+        "/users/yjf/documents/myproject/minidict/src/translate.ts",
+        "/users/yjf/documents/myproject/minidict/src/version.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/node_modules/@types/node/inspector.d.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/index.d.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/node_modules/@types/node/index.d.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/index.d.ts",
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/inspector.d.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/node_modules/@types/cheerio/index.d.ts": [
+        "/users/yjf/documents/myproject/minidict/node_modules/@types/node/index.d.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/lib/parser.ts": [
+        "/users/yjf/documents/myproject/minidict/src/plugins/output/index.ts"
+      ],
+      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/lib/parser.ts": [
+        "/users/yjf/documents/myproject/minidict/src/plugins/output/index.ts"
+      ]
+    },
+    "semanticDiagnosticsPerFile": [
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es6.d.ts",
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es5.d.ts",
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.d.ts",
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.dom.d.ts",
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.dom.iterable.d.ts",
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.webworker.importscripts.d.ts",
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.scripthost.d.ts",
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.core.d.ts",
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.collection.d.ts",
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.generator.d.ts",
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.iterable.d.ts",
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.promise.d.ts",
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.proxy.d.ts",
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.reflect.d.ts",
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.symbol.d.ts",
+      "/users/yjf/documents/myproject/minidict/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
+      "/users/yjf/documents/myproject/minidict/node_modules/moment/moment.d.ts",
+      "/users/yjf/documents/myproject/minidict/src/utils/debug.ts",
+      "/users/yjf/documents/myproject/minidict/src/utils/config.ts",
+      "/users/yjf/documents/myproject/minidict/src/utils/plugins.ts",
+      "/users/yjf/documents/myproject/minidict/node_modules/chalk/types/index.d.ts",
+      "/users/yjf/documents/myproject/minidict/node_modules/pad/dist/pad.d.ts",
+      "/users/yjf/documents/myproject/minidict/src/template/index.ts",
+      "/users/yjf/documents/myproject/minidict/src/template/loader.ts",
+      "/users/yjf/documents/myproject/minidict/src/utils/const.ts",
+      "/users/yjf/documents/myproject/minidict/src/translate.ts",
+      "/users/yjf/documents/myproject/minidict/src/version.ts",
+      "/users/yjf/documents/myproject/minidict/src/index.ts",
+      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/lib/fetch.ts",
+      "/users/yjf/documents/myproject/minidict/node_modules/@types/node/inspector.d.ts",
+      "/users/yjf/documents/myproject/minidict/node_modules/@types/node/index.d.ts",
+      "/users/yjf/documents/myproject/minidict/node_modules/@types/cheerio/index.d.ts",
+      "/users/yjf/documents/myproject/minidict/src/plugins/output/index.ts",
+      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/lib/parser.ts",
+      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/index.ts",
+      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-bing/lib/debug.ts",
+      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/lib/fetch.ts",
+      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/lib/parser.ts",
+      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/index.ts",
+      "/users/yjf/documents/myproject/minidict/src/plugins/minidict-youdao/lib/debug.ts",
+      "/users/yjf/documents/myproject/minidict/src/service/index.ts"
+    ]
+  },
+  "version": "3.5.3"
+}

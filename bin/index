@@ -6,21 +6,18 @@ const program = require('commander');
 const pkg = require('../package.json');
 const {
   translate
-} = require('../index');
+} = require('../lib/index');
 
-/**
- * 主程序
- */
 program
   .usage('<words...>')
   .description('一个简单的命令行字典工具 https://github.com/superfur/minidict')
   .option('-y, --youdao', '使用有道查询')
   .option('-g, --google', '使用谷歌查询')
   .option('-b, --bing', '使用必应查询')
-  .version(pkg.version)
+  .version(pkg.version, '-v, --version', '当前版本')
   .action((...args) => {
     const words = args.slice(0, -1);
-    const { youdao, google, bing } = program;
+    const { youdao = false, google = false, bing = false } = program;
     const option = { youdao, google, bing }
     translate(words, option);
   });
@@ -34,7 +31,6 @@ function showHelp() {
   }
 
   let args = process.argv.slice(2);
-
   return args.every(item => item.startsWith('-'));
 }
 

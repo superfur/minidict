@@ -1,6 +1,6 @@
 # MiniDict
 
-简单的mini字典，基于 Node 开发，支持 Linux、Mac。
+简单的mini字典，基于 Node 开发，支持 Linux、Mac、Windows。
 
 主要功能：
 
@@ -12,7 +12,7 @@ use
 
 运行 MiniDict 需要：
 
-- Node ( **v8+** )
+- Node ( **v10+** )
 - NPM
 
 安装方法请查看 Node 官网：[https://nodejs.org/](https://nodejs.org/)
