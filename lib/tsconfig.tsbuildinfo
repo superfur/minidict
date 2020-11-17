@@ -507,7 +507,7 @@
         "affectsGlobalScope": false
       },
       "../src/plugins/minidict-youdao/lib/parser.ts": {
-        "version": "6820ac1779305105da677689b746564e1af5e5f7f145db339bc75cb6c16ecd6a",
+        "version": "1d03df860582732eaee20806a510abcc2db474af97d5629dfd5fb964e8681627",
         "signature": "6c4e5191c0a82699e9f5ca2d77d8713c7ae05d0b38a6c31eb890f7a376c6652c",
         "affectsGlobalScope": false
       },
@@ -534,6 +534,7 @@
       "baseUrl": "..",
       "incremental": true,
       "project": "../tsconfig.json",
+      "watch": true,
       "configFilePath": "../tsconfig.json"
     },
     "referencedMap": {

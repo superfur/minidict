@@ -1,7 +1,7 @@
 import * as cheerio from 'cheerio';
 import { MDOutput, Phonetic, Translate, CODES, MDError } from '../../output';
 
-let $;
+let $: cheerio.Root | undefined;
 
 export default function main(html) {
     try {
@@ -14,10 +14,10 @@ export default function main(html) {
 /**
  * 解析 HTML
  *
- * @param {*} html
+ * @param {string} html
  * @returns {MDOutput}
  */
-function parser(html): MDOutput {
+function parser(html: string): MDOutput {
     $ = cheerio.load(html, {
         decodeEntities: false
     });
@@ -42,9 +42,11 @@ function parser(html): MDOutput {
 
 /**
  * 音标
- * @param {*}
+ *
+ * @param {cheerio.Cheerio} node
+ * @returns {Phonetic[]}
  */
-function _parsePhonetics(node): Phonetic[] {
+function _parsePhonetics(node: cheerio.Cheerio): Phonetic[] {
     const phonetics = [];
 
     node.find('.pronounce').each((index, item) => {
@@ -58,9 +60,11 @@ function _parsePhonetics(node): Phonetic[] {
 
 /**
  * 翻译
- * @param {*} node
+ *
+ * @param {cheerio.Cheerio} node
+ * @returns {Translate[]}
  */
-function _parseTrans(node): Translate[] {
+function _parseTrans(node: cheerio.Cheerio): Translate[] {
     const translates = [];
 
     node.find('li').each((index, item) => {
@@ -69,6 +73,20 @@ function _parseTrans(node): Translate[] {
         const trans = content[1];
         translates.push(new Translate(type, trans));
     });
+
+    // 兼容有道的多种情况
+    node.find('.wordGroup').each((index, item) => {
+        if ($(item).find('span').length === 2) {
+            const type = $(item).find('span').first().text();
+            const trans = $(item).find('.contentTitle').text();
+            translates.push(new Translate(type, trans));
+        } else if ($(item).find('.contentTitle').length > 1) {
+            $(item).find('.contentTitle').each((index, item) => {
+                const trans = $(item).find('a').text();
+                translates.push(new Translate('', trans));
+            })
+        }
+    })
 
     if (!translates.length) {
         node.find('.contentTitle a').each((index, item) => {
