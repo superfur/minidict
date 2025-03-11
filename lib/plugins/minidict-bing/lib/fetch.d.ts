@@ -1,1 +1,1 @@
-export default function main(url: string): Promise<string>;
+export declare function fetchHtml(url: string): Promise<string>;

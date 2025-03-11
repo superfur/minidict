@@ -1,27 +1,17 @@
-import fetch from 'node-fetch';
-import { MDOutput, MDError } from '../../types';
-import { parse } from './lib/parser';
+import type { DictionaryPlugin, TranslationResult } from '../../types.js';
+import { translate } from './lib/translator.js';
 
-async function main(words: string): Promise<MDOutput> {
-    const url = `https://cn.bing.com/dict/search?q=${encodeURIComponent(words)}`;
-    
+class BingTranslator implements DictionaryPlugin {
+  async translate(word: string): Promise<TranslationResult> {
     try {
-        const response = await fetch(url);
-        const html = await response.text();
-        const output = parse(html);
-        
-        if ('code' in output) {
-            throw new Error(output.message);
-        }
-        
-        output.pluginName = 'Bing';
-        output.words = words;
-        output.url = url;
-        
-        return output;
-    } catch (err) {
-        throw new Error(err instanceof Error ? err.message : '未知错误');
+      const result = await translate(word);
+      return result;
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : '必应词典插件执行失败');
     }
+  }
 }
 
-export = main;
+const translator = new BingTranslator();
+
+export default translator; 

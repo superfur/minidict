@@ -47,4 +47,24 @@ export interface CheerioElement {
     first(): CheerioElement;
     each(callback: (index: number, element: CheerioElement) => void): void;
     length: number;
+}
+
+export interface TranslationResult {
+  word: string;
+  phonetic?: string;
+  translations: string[];
+  examples?: string[];
+  source: string;
+}
+
+export interface DictionaryPlugin {
+  name: string;
+  translate(word: string): Promise<TranslationResult>;
+}
+
+export interface Config {
+  plugins: string[];
+  showPhonetic: boolean;
+  showExamples: boolean;
+  maxExamples: number;
 } 

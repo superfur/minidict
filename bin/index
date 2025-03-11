@@ -2,39 +2,38 @@
 
 'use strict';
 
-const program = require('commander');
+const { Command } = require('commander');
 const pkg = require('../package.json');
-const {
-  translate
-} = require('../lib/index');
+const { translate } = require('../lib/index');
+
+const program = new Command();
 
 program
-  .usage('<words...>')
-  .description('一个简单的命令行字典工具 https://github.com/superfur/minidict')
-  .option('-y, --youdao', '使用有道查询')
-  .option('-g, --google', '使用谷歌查询')
-  .option('-b, --bing', '使用必应查询')
-  .version(pkg.version, '-v, --version', '当前版本')
-  .action((...args) => {
-    const words = args.slice(0, -1);
-    const { youdao = false, google = false, bing = false } = program;
-    const option = { youdao, google, bing }
-    translate(words, option);
+  .name('dict')
+  .description('一个简单而强大的命令行翻译工具')
+  .version(pkg.version, '-v, --version', '显示版本号')
+  .argument('<words...>', '要翻译的词或句子')
+  .option('-y, --youdao', '使用有道词典翻译')
+  .option('-b, --bing', '使用必应词典翻译')
+  .addHelpText('after', `
+示例:
+  $ dict hello                 # 翻译单词
+  $ dict "hello world"         # 翻译短语
+  $ dict 你好                  # 中译英
+  $ dict "这是一个测试句子"    # 翻译长句
+  $ dict -y hello             # 仅使用有道词典
+  $ dict -b world             # 仅使用必应词典
+  
+更多信息请访问: https://github.com/superfur/minidict`)
+  .action((words, options) => {
+    const { youdao = false, bing = false } = options;
+    translate(words, { youdao, bing });
   });
 
-program.parse(process.argv);
-
-function showHelp() {
-  // 没有输入任何参数
-  if (process.argv.length === 2) {
-    return true;
-  }
-
-  let args = process.argv.slice(2);
-  return args.every(item => item.startsWith('-'));
-}
-
-if (showHelp()) {
+// 如果没有任何参数，显示帮助信息
+if (process.argv.length === 2) {
   program.help();
 }
+
+program.parse();
 
