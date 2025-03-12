@@ -3,21 +3,16 @@ import { program } from 'commander';
 import chalk from 'chalk';
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
-const updateNotifier = require('update-notifier');
 const pkg = require('../package.json');
 import { translate } from './translate.js';
 import { loadConfig } from './config.js';
 import type { TranslationResult, MDOutput, MDError } from './types.js';
 
 export async function run(): Promise<void> {
-  // 检查更新
-  const notifier = updateNotifier({ pkg });
-  notifier.notify();
-
   program
     .name('dict')
     .description('一个简单的命令行词典工具')
-    .version('1.0.0');
+    .version(pkg.version);
 
   program
     .argument('<word>', '要查询的单词')

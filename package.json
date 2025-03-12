@@ -1,6 +1,6 @@
 {
     "name": "minidict",
-    "version": "2.2.0",
+    "version": "2.2.1",
     "description": "一个简单易用的命令行词典工具",
     "type": "module",
     "main": "./dist/index.js",
