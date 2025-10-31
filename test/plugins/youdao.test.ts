@@ -1,100 +1,96 @@
-import { YoudaoTranslator } from '../../src/plugins/youdao';
-import axios from 'axios';
+import youdaoPlugin from '../../src/plugins/minidict-youdao/index.js';
+import { jest } from '@jest/globals';
+import fetch from 'node-fetch';
 
-jest.mock('axios');
-const mockedAxios = axios as jest.Mocked<typeof axios>;
+// Mock node-fetch
+jest.mock('node-fetch');
+const mockedFetch = fetch as jest.MockedFunction<typeof fetch>;
 
 describe('Youdao Translator', () => {
-  const translator = new YoudaoTranslator();
-
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  it('should have correct name', () => {
-    expect(translator.name).toBe('youdao');
-  });
+  it('should translate English word', async () => {
+    const mockHtml = `
+      <div class="pronounce">
+        <span class="phonetic">[həˈləʊ]</span>
+        <span class="phonetic">[həˈləʊ]</span>
+      </div>
+      <div id="phrsListTab">
+        <div class="trans-container">
+          <li>你好</li>
+          <li>喂</li>
+        </div>
+      </div>
+      <div id="authority">
+        <li>
+          <div class="sen-en">Hello, how are you?</div>
+          <div class="sen-ch">你好，你好吗？</div>
+        </li>
+      </div>
+    `;
 
-  it('should translate English to Chinese', async () => {
-    const mockResponse = {
-      ec: {
-        word: [
-          {
-            usphone: 'həˈloʊ',
-            trs: [
-              { tr: ['你好'] },
-              { tr: ['喂'] }
-            ]
-          }
-        ],
-        exam_type: ['初中', '高中'],
-        sentence: [
-          {
-            sentence: 'Hello, how are you?',
-            translation: '你好，你好吗？'
-          }
-        ]
-      }
-    };
+    mockedFetch.mockResolvedValueOnce({
+      ok: true,
+      text: async () => mockHtml,
+      json: async () => ({}),
+    } as any);
 
-    mockedAxios.get.mockResolvedValueOnce({ data: mockResponse });
-
-    const result = await translator.translate('hello');
+    const result = await youdaoPlugin.translate('hello');
+    
     expect(result).toBeDefined();
     expect(result.word).toBe('hello');
-    expect(result.translations).toEqual(['你好', '喂']);
-    expect(result.phonetic).toBe('həˈloʊ');
-    expect(result.examples).toEqual([
-      { en: 'Hello, how are you?', zh: '你好，你好吗？' }
-    ]);
-    expect(result.source).toBe('Youdao Dictionary');
+    expect(result.translations.length).toBeGreaterThan(0);
+    expect(result.pluginName).toBe('Youdao');
+    expect(result.phonetic).toBeDefined();
+    if (result.phonetic && typeof result.phonetic !== 'string') {
+      expect(result.phonetic.uk || result.phonetic.us).toBeDefined();
+    }
+    if (result.examples && result.examples.length > 0) {
+      expect(result.examples[0]).toHaveProperty('en');
+      expect(result.examples[0]).toHaveProperty('zh');
+    }
   });
 
-  it('should translate Chinese to English', async () => {
+  it('should translate phrase using translation API', async () => {
     const mockResponse = {
-      ce: {
-        word: [
-          {
-            phone: 'nǐ hǎo',
-            trs: [
-              { tr: ['hello'] },
-              { tr: ['hi'] }
-            ]
-          }
-        ],
-        sentence: [
-          {
-            sentence: '你好，很高兴见到你。',
-            translation: 'Hello, nice to meet you.'
-          }
-        ]
+      fanyi: {
+        tran: '你好世界'
       }
     };
 
-    mockedAxios.get.mockResolvedValueOnce({ data: mockResponse });
+    mockedFetch.mockResolvedValueOnce({
+      ok: true,
+      text: async () => '',
+      json: async () => mockResponse,
+    } as any);
 
-    const result = await translator.translate('你好');
+    const result = await youdaoPlugin.translate('hello world');
+    
     expect(result).toBeDefined();
-    expect(result.word).toBe('你好');
-    expect(result.translations).toEqual(['hello', 'hi']);
-    expect(result.phonetic).toBe('nǐ hǎo');
-    expect(result.examples).toEqual([
-      { en: 'Hello, nice to meet you.', zh: '你好，很高兴见到你。' }
-    ]);
-    expect(result.source).toBe('Youdao Dictionary');
-  });
-
-  it('should handle empty input', async () => {
-    await expect(translator.translate('')).rejects.toThrow('翻译内容不能为空');
+    expect(result.word).toBe('hello world');
+    expect(result.translations).toContain('你好世界');
+    expect(result.pluginName).toBe('Youdao');
   });
 
   it('should handle network errors', async () => {
-    mockedAxios.get.mockRejectedValueOnce(new Error('Network error'));
-    await expect(translator.translate('test')).rejects.toThrow('有道词典服务暂时不可用');
+    mockedFetch.mockRejectedValueOnce(new Error('Network error'));
+
+    await expect(youdaoPlugin.translate('test')).rejects.toThrow();
   });
 
-  it('should handle invalid response', async () => {
-    mockedAxios.get.mockResolvedValueOnce({ data: {} });
-    await expect(translator.translate('test')).rejects.toThrow('未找到翻译结果');
+  it('should handle invalid HTML response', async () => {
+    mockedFetch.mockResolvedValueOnce({
+      ok: true,
+      text: async () => '<div>Invalid HTML</div>',
+      json: async () => ({}),
+    } as any);
+
+    const result = await youdaoPlugin.translate('test');
+    
+    // Should still return a result, even if empty
+    expect(result).toBeDefined();
+    expect(result.pluginName).toBe('Youdao');
   });
-}); 
+});

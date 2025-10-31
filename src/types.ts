@@ -1,5 +1,8 @@
 export interface Config {
-  plugins: Array<'bing' | 'youdao'>;
+  plugins: string[];
+  showPhonetic: boolean;
+  showExamples: boolean;
+  maxExamples: number;
 }
 
 export interface Example {
@@ -17,8 +20,7 @@ export interface TranslationResult {
   phonetic?: string | Phonetic;
   translations: string[];
   examples?: Example[];
-  source?: string;
-  pluginName?: string;
+  pluginName: string;
 }
 
 export interface DictionaryPlugin {

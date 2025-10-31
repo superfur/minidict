@@ -11,8 +11,8 @@ export interface Translation {
 }
 
 export interface Example {
-    source: string;
-    target: string;
+    en: string;
+    zh: string;
 }
 
 export interface MDError {
@@ -49,16 +49,19 @@ export interface CheerioElement {
     length: number;
 }
 
+// 音标类型：支持字符串或对象格式
+export type PhoneticValue = string | { uk?: string; us?: string };
+
 export interface TranslationResult {
   word: string;
-  phonetic?: string;
+  phonetic?: PhoneticValue;
   translations: string[];
-  examples?: string[];
-  source: string;
+  examples?: Example[];
+  pluginName: string;
 }
 
 export interface DictionaryPlugin {
-  name: string;
+  name?: string;
   translate(word: string): Promise<TranslationResult>;
 }
 

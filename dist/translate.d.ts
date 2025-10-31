@@ -1,2 +1,2 @@
-import type { TranslationResult } from './types.js';
-export declare function translate(word: string, plugins?: string[]): Promise<TranslationResult[]>;
+import type { TranslationResult, Config } from './types.js';
+export declare function translate(word: string, config: Config): Promise<TranslationResult[]>;

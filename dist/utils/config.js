@@ -35,7 +35,10 @@ const configInstance = new Conf({
 });
 export async function getConfig(options) {
     return {
-        plugins: [options.bing ? 'bing' : 'youdao']
+        plugins: [options.bing ? 'bing' : 'youdao'],
+        showPhonetic: true,
+        showExamples: false,
+        maxExamples: 3
     };
 }
 export const updateConfig = (newConfig) => {

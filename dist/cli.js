@@ -13,19 +13,32 @@ export async function run() {
         .version(pkg.version);
     program
         .argument('<word>', '要查询的单词')
-        .option('-p, --plugin <plugin>', '指定词典插件 (bing/youdao)', 'bing')
-        .option('--phonetic', '显示音标', false)
+        .option('-p, --plugin <plugin>', '指定词典插件 (bing/youdao)')
+        .option('--phonetic', '显示音标')
         .option('--examples', '显示例句')
-        .option('--max-examples <number>', '最大例句数量', '3')
+        .option('--max-examples <number>', '最大例句数量')
         .option('--config <path>', '配置文件路径')
         .action(async (word, options) => {
         try {
             const config = await loadConfig(options.config);
-            const results = await translate(word, config.plugins);
+            // 命令行选项覆盖配置文件
+            if (options.plugin) {
+                config.plugins = [options.plugin];
+            }
+            if (options.phonetic !== undefined) {
+                config.showPhonetic = options.phonetic;
+            }
+            if (options.examples !== undefined) {
+                config.showExamples = options.examples;
+            }
+            if (options.maxExamples) {
+                config.maxExamples = parseInt(options.maxExamples, 10) || config.maxExamples;
+            }
+            const results = await translate(word, config);
             for (const result of results) {
                 console.log(chalk.bold(`\n= ${result.pluginName} =\n`));
                 console.log(result.word);
-                if (result.phonetic) {
+                if (config.showPhonetic && result.phonetic) {
                     if (typeof result.phonetic === 'string') {
                         console.log(chalk.gray(`[${result.phonetic}]`));
                     }
@@ -49,13 +62,14 @@ export async function run() {
                         }
                     }
                 }
-                if (options.examples && result.examples && result.examples.length > 0) {
+                if (config.showExamples && result.examples && result.examples.length > 0) {
+                    const examples = result.examples.slice(0, config.maxExamples);
                     console.log('\n例句:');
-                    result.examples.forEach((example, index) => {
+                    examples.forEach((example, index) => {
                         console.log(chalk.cyan(`${index + 1}.`));
                         console.log(chalk.blue(example.en));
                         console.log(chalk.gray(example.zh));
-                        if (index < result.examples.length - 1) {
+                        if (index < examples.length - 1) {
                             console.log();
                         }
                     });

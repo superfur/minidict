@@ -1,6 +1,6 @@
 {
     "name": "minidict",
-    "version": "2.2.1",
+    "version": "2.3.0",
     "description": "一个简单易用的命令行词典工具",
     "type": "module",
     "main": "./dist/index.js",
@@ -10,7 +10,7 @@
     },
     "scripts": {
         "clean": "rm -rf dist",
-        "build": "yarn clean && tsc && mkdir -p dist && touch dist/cli.js && chmod +x dist/cli.js",
+        "build": "yarn clean && tsc && chmod +x dist/cli.js",
         "dev": "tsc -w",
         "test": "jest",
         "lint": "eslint src/**/*.ts",
@@ -52,7 +52,7 @@
         "typescript": "^5.3.3"
     },
     "engines": {
-        "node": ">=12.0.0"
+        "node": ">=16.0.0"
     },
     "repository": {
         "type": "git",

@@ -49,29 +49,40 @@ dict -v
 
 ## 配置
 
-配置文件位于 `~/.minidict.yml`，支持以下选项：
+配置文件位于 `~/.minidict.json`，支持以下选项：
 
-```yaml
-# 启用的词典插件，可选：bing、youdao
-plugins:
-  - bing
-  - youdao
+```json
+{
+  "plugins": ["bing", "youdao"],
+  "showPhonetic": true,
+  "showExamples": false,
+  "maxExamples": 3
+}
+```
 
-# 是否显示音标
-showPhonetic: true
+### 配置选项说明
 
-# 是否显示例句
-showExamples: true
+- `plugins` (array): 启用的词典插件列表，可选值：`bing`、`youdao`，默认为 `["bing", "youdao"]`
+- `showPhonetic` (boolean): 是否显示音标，默认为 `true`
+- `showExamples` (boolean): 是否显示例句，默认为 `false`
+- `maxExamples` (number): 最大例句数量，默认为 `3`
 
-# 最大例句数量
-maxExamples: 3
+### 命令行选项优先级
 
-# 输出样式
-style:
-  # 是否启用彩色输出
-  colorful: true
-  # 是否显示词典来源
-  showSource: true
+命令行选项会覆盖配置文件中的对应设置：
+
+```bash
+# 使用指定插件
+dict hello --plugin bing
+
+# 强制显示音标
+dict hello --phonetic
+
+# 显示例句
+dict hello --examples
+
+# 设置最大例句数量
+dict hello --examples --max-examples 5
 ```
 
 ## 开发

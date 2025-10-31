@@ -53,7 +53,10 @@ interface CommandOptions {
 
 export async function getConfig(options: CommandOptions): Promise<Config> {
   return {
-    plugins: [options.bing ? 'bing' : 'youdao']
+    plugins: [options.bing ? 'bing' : 'youdao'],
+    showPhonetic: true,
+    showExamples: false,
+    maxExamples: 3
   };
 }
 

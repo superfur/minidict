@@ -8,8 +8,8 @@ export interface Translation {
     trans: string;
 }
 export interface Example {
-    source: string;
-    target: string;
+    en: string;
+    zh: string;
 }
 export interface MDError {
     code: number;
@@ -41,15 +41,19 @@ export interface CheerioElement {
     each(callback: (index: number, element: CheerioElement) => void): void;
     length: number;
 }
+export type PhoneticValue = string | {
+    uk?: string;
+    us?: string;
+};
 export interface TranslationResult {
     word: string;
-    phonetic?: string;
+    phonetic?: PhoneticValue;
     translations: string[];
-    examples?: string[];
-    source: string;
+    examples?: Example[];
+    pluginName: string;
 }
 export interface DictionaryPlugin {
-    name: string;
+    name?: string;
     translate(word: string): Promise<TranslationResult>;
 }
 export interface Config {

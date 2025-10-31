@@ -1,7 +1,7 @@
 import * as cheerio from 'cheerio';
-import type { MDOutput, MDError, Example } from '../../../types.js';
+import type { Example, TranslationResult } from '../../../types.js';
 
-export function parse(html: string): Omit<MDOutput, 'word'> {
+export function parse(html: string): Omit<TranslationResult, 'word'> {
   const $ = cheerio.load(html);
   
   // 获取音标
