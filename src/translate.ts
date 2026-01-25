@@ -1,19 +1,29 @@
 import type { TranslationResult, Config } from './types.js';
 import bingPlugin from './plugins/minidict-bing/index.js';
 import youdaoPlugin from './plugins/minidict-youdao/index.js';
+import googlePlugin from './plugins/minidict-google/index.js';
 
 export async function translate(word: string, config: Config): Promise<TranslationResult[]> {
   const results: TranslationResult[] = [];
   const plugins = config.plugins || ['bing', 'youdao'];
 
+  // 设置代理
+  if (config.proxy) {
+    bingPlugin.setProxy(config.proxy);
+    youdaoPlugin.setProxy?.(config.proxy);
+    googlePlugin.setProxy?.(config.proxy);
+  }
+
   for (const plugin of plugins) {
     try {
       let result: TranslationResult;
-      
+
       if (plugin === 'bing') {
         result = await bingPlugin.translate(word);
       } else if (plugin === 'youdao') {
         result = await youdaoPlugin.translate(word);
+      } else if (plugin === 'google') {
+        result = await googlePlugin.translate(word);
       } else {
         console.error(`未知的插件: ${plugin}`);
         continue;

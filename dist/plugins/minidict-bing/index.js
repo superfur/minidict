@@ -1,8 +1,11 @@
 import { translate } from './lib/translator.js';
 class BingTranslator {
+    setProxy(proxy) {
+        this.proxy = proxy;
+    }
     async translate(word) {
         try {
-            const result = await translate(word);
+            const result = await translate(word, this.proxy);
             return result;
         }
         catch (error) {
@@ -12,3 +15,4 @@ class BingTranslator {
 }
 const translator = new BingTranslator();
 export default translator;
+export { BingTranslator };

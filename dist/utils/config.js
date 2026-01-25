@@ -3,8 +3,8 @@ import { homedir } from 'os';
 import { existsSync, readFileSync } from 'fs';
 import { join } from 'path';
 import { load } from 'js-yaml';
-const require = createRequire(import.meta.url);
-const debug = require('debug')('minidict');
+const modRequire = createRequire(import.meta.url);
+const debug = modRequire('debug')('minidict');
 const CONFIG_FILE = '.minidict.yml';
 let userConfig = {};
 try {
@@ -27,7 +27,7 @@ if (userConfig && userConfig.plugins) {
     }
 }
 debug('format config: %O', config);
-const Conf = require('conf');
+const Conf = modRequire('conf');
 const configInstance = new Conf({
     defaults: {
         plugins: ['bing', 'youdao']

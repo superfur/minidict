@@ -1,6 +1,6 @@
 {
     "name": "minidict",
-    "version": "2.3.1",
+    "version": "2.3.2",
     "description": "一个简单易用的命令行词典工具",
     "type": "module",
     "main": "./dist/index.js",
@@ -32,9 +32,11 @@
         "commander": "^12.0.0",
         "conf": "10.2.0",
         "fs-extra": "^11.3.0",
+        "https-proxy-agent": "^7.0.4",
         "inquirer": "^8.2.6",
         "node-fetch": "^3.3.2",
-        "ora": "^5.4.1"
+        "ora": "^5.4.1",
+        "socks-proxy-agent": "^8.0.3"
     },
     "devDependencies": {
         "@types/cheerio": "^0.22.35",

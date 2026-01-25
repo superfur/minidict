@@ -1,8 +1,16 @@
+export interface ProxyConfig {
+    host: string;
+    port: number;
+    protocol: 'http' | 'https' | 'socks4' | 'socks5';
+    username?: string;
+    password?: string;
+}
 export interface Config {
     plugins: string[];
     showPhonetic: boolean;
     showExamples: boolean;
     maxExamples: number;
+    proxy?: ProxyConfig;
 }
 export interface Example {
     en: string;

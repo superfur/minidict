@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 import { program } from 'commander';
 import chalk from 'chalk';
+import ora from 'ora';
 import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-const pkg = require('../package.json');
+const modRequire = createRequire(import.meta.url);
+const pkg = modRequire('../package.json');
 import { translate } from './translate.js';
 import { loadConfig } from './config.js';
-import type { Config, TranslationResult } from './types.js';
+import { formatResult, formatSummary, formatLoading, formatError } from './utils/format.js';
+import type { Config } from './types.js';
 
 export async function run(): Promise<void> {
   program
@@ -15,25 +17,33 @@ export async function run(): Promise<void> {
     .version(pkg.version);
 
   program
-    .argument('<word>', '要查询的单词')
-    .option('-p, --plugin <plugin>', '指定词典插件 (bing/youdao)')
+    .argument('<text...>', '要查询的单词、短语或句子')
+    .option('-p, --plugin <plugins>', '指定词典插件 (bing/youdao/google，可用逗号分隔)')
     .option('--phonetic', '显示音标')
     .option('--examples', '显示例句')
     .option('--max-examples <number>', '最大例句数量')
     .option('--config <path>', '配置文件路径')
-    .action(async (word: string, options: { 
-      examples?: boolean; 
+    .action(async (textArray: string[], options: {
+      examples?: boolean;
       phonetic?: boolean;
       maxExamples?: string;
       plugin?: string;
       config?: string;
     }) => {
+      const loading = ora({
+        text: formatLoading('正在查询'),
+        spinner: 'dots'
+      }).start();
+
       try {
+        // 将数组合并为字符串
+        const text = textArray.join(' ');
+
         const config = await loadConfig(options.config);
-        
+
         // 命令行选项覆盖配置文件
         if (options.plugin) {
-          config.plugins = [options.plugin as 'bing' | 'youdao'];
+          config.plugins = options.plugin.split(',').map(p => p.trim().toLowerCase());
         }
         if (options.phonetic !== undefined) {
           config.showPhonetic = options.phonetic;
@@ -44,52 +54,21 @@ export async function run(): Promise<void> {
         if (options.maxExamples) {
           config.maxExamples = parseInt(options.maxExamples, 10) || config.maxExamples;
         }
-        
-        const results = await translate(word, config);
 
+        const results = await translate(text, config);
+
+        loading.stop();
+
+        // 打印汇总信息
+        console.log(formatSummary(results));
+
+        // 打印每个结果
         for (const result of results) {
-          console.log(chalk.bold(`\n= ${result.pluginName} =\n`));
-          console.log(result.word);
-
-          if (config.showPhonetic && result.phonetic) {
-            if (typeof result.phonetic === 'string') {
-              console.log(chalk.gray(`[${result.phonetic}]`));
-            } else {
-              if (result.phonetic.uk) {
-                console.log(chalk.gray(`英 [${result.phonetic.uk}]`));
-              }
-              if (result.phonetic.us) {
-                console.log(chalk.gray(`美 [${result.phonetic.us}]`));
-              }
-            }
-          }
-
-          if (result.translations.length > 0) {
-            console.log('\n翻译:');
-            for (const trans of result.translations) {
-              if (trans.startsWith('网络')) {
-                console.log(chalk.gray(`- ${trans}`));
-              } else {
-                console.log(chalk.green(`- ${trans}`));
-              }
-            }
-          }
-
-          if (config.showExamples && result.examples && result.examples.length > 0) {
-            const examples = result.examples.slice(0, config.maxExamples);
-            console.log('\n例句:');
-            examples.forEach((example, index) => {
-              console.log(chalk.cyan(`${index + 1}.`));
-              console.log(chalk.blue(example.en));
-              console.log(chalk.gray(example.zh));
-              if (index < examples.length - 1) {
-                console.log();
-              }
-            });
-          }
+          console.log(formatResult(result, config.showPhonetic, config.showExamples, config.maxExamples));
         }
       } catch (error) {
-        console.error(chalk.red(`\n错误: ${error instanceof Error ? error.message : '未知错误'}`));
+        loading.stop();
+        console.error(formatError(error instanceof Error ? error.message : '未知错误'));
         process.exit(1);
       }
     });
