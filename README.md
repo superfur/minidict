@@ -1,5 +1,11 @@
 # MiniDict
 
+[![NPM version][npm-image]][npm-url]
+[![Build Status][github-actions-image]][github-actions-url]
+[![License][license-image]][license-url]
+[![Lgtm Alerts][lgtm-alerts-image]][lgtm-alerts-url]
+[![Lgtm Grade][lgtm-grade-image]][lgtm-grade-url]
+
 简单的mini字典，基于 Node 开发，支持 Linux、Mac、Windows。
 
 主要功能：

@@ -1,2 +1,3 @@
-export * from './translate';
-export * from './version';
+import './plugins';
+export { translate } from './translate';
+export { version } from './version';

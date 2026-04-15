@@ -1,7 +1,7 @@
 # 启用的插件
 enable:
-  # - google
   - youdao
+  - google
   - bing
 
 # 彩色输出
@@ -34,7 +34,7 @@ plugins:
   google:
     retries: 2
     timeout: 5000
-    proxy: false
+    proxy: socks5://127.0.0.1:1080   # socks5:// 或 https:// 实际代理地址
 
   bing:
     retries: 2
