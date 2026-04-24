@@ -21,7 +21,10 @@ export const COLORS = {
     exampleZh: chalk.gray,
     pluginTag: chalk.bgBlack.bold.white,
     error: chalk.red,
-    success: chalk.green
+    success: chalk.green,
+    bold: chalk.bold,
+    gray: chalk.gray,
+    yellow: chalk.yellow
 };
 /**
  * 格式化音标
@@ -47,12 +50,16 @@ export function formatPhonetic(phonetic) {
 export function formatTranslations(translations) {
     if (translations.length === 0)
         return '';
-    return translations.map((t, i) => {
-        const prefix = COLORS.translationNet('-');
-        const text = t.startsWith('网络')
-            ? COLORS.translationNet(t)
-            : COLORS.translation(t);
-        return `${prefix} ${text}`;
+    return translations.map(t => {
+        if (t.startsWith('网络')) {
+            return '  ·   ' + COLORS.gray(t.replace('网络', ''));
+        }
+        const match = t.match(/^([a-z]+\.)\s*(.+)$/i);
+        if (match) {
+            const [_, pos, text] = match;
+            return '  ' + COLORS.yellow(pos.padEnd(5)) + text;
+        }
+        return '  ' + COLORS.translation(t);
     }).join('\n');
 }
 /**
@@ -64,9 +71,8 @@ export function formatExamples(examples, maxExamples = 3) {
     const limited = examples.slice(0, maxExamples);
     return limited.map((ex, i) => {
         return [
-            `${COLORS.exampleIndex(`${i + 1}.`)}`,
-            COLORS.exampleEn(ex.en),
-            `  ${COLORS.exampleZh(ex.zh)}`
+            `  ${COLORS.exampleIndex(`${i + 1}.`)}  ${COLORS.exampleEn(ex.en)}`,
+            `      ${COLORS.exampleZh(ex.zh)}`
         ].join('\n');
     }).join('\n\n');
 }
@@ -75,32 +81,18 @@ export function formatExamples(examples, maxExamples = 3) {
  */
 export function formatResult(result, showPhonetic, showExamples, maxExamples) {
     const lines = [];
-    // 分隔线
-    lines.push(ICONS.DIVIDER);
-    // 插件标签
-    const pluginTag = ` ${result.pluginName} `;
-    lines.push(COLORS.pluginTag(pluginTag.padEnd(44, ' ')));
-    // 单词
-    lines.push('');
-    lines.push(ICONS.BOOK + ' ' + COLORS.word(result.word));
-    // 音标
-    if (showPhonetic && result.phonetic) {
-        lines.push(ICONS.SPEAKER + ' ' + formatPhonetic(result.phonetic));
-    }
+    // 插件标题行
+    lines.push(`  ${COLORS.bold.gray(result.pluginName)}  ` + COLORS.gray('─'.repeat(36 - result.pluginName.length)));
     // 翻译
     if (result.translations.length > 0) {
-        lines.push('');
-        lines.push(ICONS.NOTE + ' ' + COLORS.title('翻译'));
         lines.push(formatTranslations(result.translations));
     }
     // 例句
     if (showExamples && result.examples && result.examples.length > 0) {
         lines.push('');
-        lines.push(ICONS.WEB + ' ' + COLORS.title('例句'));
+        lines.push(`  ${COLORS.title('例句')}`);
         lines.push(formatExamples(result.examples, maxExamples));
     }
-    // 分隔线
-    lines.push(ICONS.DIVIDER);
     lines.push('');
     return lines.join('\n');
 }
@@ -152,11 +144,29 @@ export function formatLoading(text) {
 /**
  * 格式化汇总信息
  */
-export function formatSummary(results) {
+export function formatSummary(results, elapsed) {
     const lines = [];
     if (results.length === 0) {
         return COLORS.error('未找到任何翻译结果');
     }
-    lines.push(chalk.bold.cyan(`\n查询到 ${results.length} 个词典的结果\n`));
+    const statusParts = [];
+    for (const result of results) {
+        if (result.error) {
+            statusParts.push(`${chalk.red(result.pluginName + ' ✗')}`);
+        }
+        else {
+            statusParts.push(`${chalk.green(result.pluginName + ' ✓')}`);
+        }
+    }
+    lines.push('');
+    lines.push(chalk.gray('  ' + '━'.repeat(41)));
+    let summary = '  完成';
+    if (elapsed) {
+        summary += ` ${elapsed}s`;
+    }
+    summary += ' · ';
+    summary += statusParts.join('  ');
+    lines.push(summary);
+    lines.push('');
     return lines.join('\n');
 }

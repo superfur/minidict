@@ -11,6 +11,7 @@ export interface Config {
   showPhonetic: boolean;
   showExamples: boolean;
   maxExamples: number;
+  timeout?: number;
   proxy?: ProxyConfig;
 }
 
@@ -30,13 +31,15 @@ export interface TranslationResult {
   translations: string[];
   examples?: Example[];
   pluginName: string;
+  error?: string;
 }
 
 export interface DictionaryPlugin {
   translate(word: string): Promise<TranslationResult>;
+  setProxy?(proxy?: ProxyConfig): void;
+  setTimeout?(timeoutMs: number): void;
 }
 
-// 为 Bing 和 Youdao 插件添加类型
 export interface MDOutput {
   word: string;
   phonetic?: string | Phonetic;

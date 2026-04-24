@@ -1,13 +1,12 @@
 #!/usr/bin/env node
 import { program } from 'commander';
 import chalk from 'chalk';
-import ora from 'ora';
 import { createRequire } from 'module';
 const modRequire = createRequire(import.meta.url);
 const pkg = modRequire('../package.json');
 import { translate } from './translate.js';
 import { loadConfig } from './config.js';
-import { formatResult, formatSummary, formatLoading, formatError } from './utils/format.js';
+import { formatResult, formatSummary, COLORS } from './utils/format.js';
 export async function run() {
     program
         .name('dict')
@@ -20,46 +19,82 @@ export async function run() {
         .option('--examples', '显示例句')
         .option('--max-examples <number>', '最大例句数量')
         .option('--config <path>', '配置文件路径')
+        .option('--timeout <number>', '请求超时时间（毫秒）')
         .action(async (textArray, options) => {
-        const loading = ora({
-            text: formatLoading('正在查询'),
-            spinner: 'dots'
-        }).start();
-        try {
-            // 将数组合并为字符串
-            const text = textArray.join(' ');
-            const config = await loadConfig(options.config);
-            // 命令行选项覆盖配置文件
-            if (options.plugin) {
-                config.plugins = options.plugin.split(',').map(p => p.trim().toLowerCase());
-            }
-            if (options.phonetic !== undefined) {
-                config.showPhonetic = options.phonetic;
-            }
-            if (options.examples !== undefined) {
-                config.showExamples = options.examples;
-            }
-            if (options.maxExamples) {
-                config.maxExamples = parseInt(options.maxExamples, 10) || config.maxExamples;
-            }
-            const results = await translate(text, config);
-            loading.stop();
-            // 打印汇总信息
-            console.log(formatSummary(results));
-            // 打印每个结果
-            for (const result of results) {
-                console.log(formatResult(result, config.showPhonetic, config.showExamples, config.maxExamples));
-            }
+        const text = textArray.join(' ');
+        const config = await loadConfig(options.config);
+        if (options.plugin) {
+            config.plugins = options.plugin.split(',').map(p => p.trim().toLowerCase());
         }
-        catch (error) {
-            loading.stop();
-            console.error(formatError(error instanceof Error ? error.message : '未知错误'));
-            process.exit(1);
+        if (options.phonetic !== undefined) {
+            config.showPhonetic = options.phonetic;
         }
+        if (options.examples !== undefined) {
+            config.showExamples = options.examples;
+        }
+        if (options.maxExamples) {
+            config.maxExamples = parseInt(options.maxExamples, 10) || config.maxExamples;
+        }
+        if (options.timeout) {
+            config.timeout = parseInt(options.timeout, 10);
+        }
+        console.log(chalk.bold.cyan(`  dict ${text}`));
+        console.log(chalk.gray('  ' + '━'.repeat(41)));
+        console.log('');
+        const startTime = Date.now();
+        const results = [];
+        let phoneticShown = false;
+        await translate(text, config, (result) => {
+            results.push(result);
+            if (!phoneticShown && !result.error && config.showPhonetic && result.phonetic) {
+                console.log(formatPhoneticLine(result.phonetic));
+                console.log('');
+                phoneticShown = true;
+            }
+            if (result.error) {
+                console.log(formatErrorResult(result));
+            }
+            else {
+                console.log(formatResult(result, false, config.showExamples, config.maxExamples));
+            }
+        });
+        const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+        console.log(formatSummary(results, elapsed));
     });
     program.parse();
 }
-// 直接执行 run 函数
+function formatPhoneticLine(phonetic) {
+    if (typeof phonetic === 'string') {
+        return `  🔊 [${phonetic}]`;
+    }
+    const parts = [];
+    if (phonetic.uk) {
+        parts.push(`英 [${phonetic.uk}]`);
+    }
+    if (phonetic.us) {
+        parts.push(`美 [${phonetic.us}]`);
+    }
+    if (parts.length > 0) {
+        return `  🔊 ${parts.join('  ')}`;
+    }
+    return '';
+}
+function formatErrorResult(result) {
+    let status = '⚠';
+    let reason = '不可用';
+    if (result.error) {
+        if (result.error.includes('超时')) {
+            reason = '连接超时';
+        }
+        else if (result.error.includes('HTTP error')) {
+            reason = '网络错误';
+        }
+        else {
+            reason = '请求失败';
+        }
+    }
+    return `  ${COLORS.bold.gray(result.pluginName)}  ${chalk.red(status + ' ' + reason)}${result.error ? ' · ' + COLORS.gray(result.error) : ''}`;
+}
 run().catch(error => {
     console.error(chalk.red(`错误: ${error instanceof Error ? error.message : '未知错误'}`));
     process.exit(1);

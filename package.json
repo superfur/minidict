@@ -1,6 +1,6 @@
 {
     "name": "minidict",
-    "version": "2.3.2",
+    "version": "2.4.0",
     "description": "一个简单易用的命令行词典工具",
     "type": "module",
     "main": "./dist/index.js",
@@ -35,7 +35,6 @@
         "https-proxy-agent": "^7.0.4",
         "inquirer": "^8.2.6",
         "node-fetch": "^3.3.2",
-        "ora": "^5.4.1",
         "socks-proxy-agent": "^8.0.3"
     },
     "devDependencies": {

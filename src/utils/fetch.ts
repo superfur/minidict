@@ -14,7 +14,6 @@ export async function getProxyAgent(proxy: ProxyConfig): Promise<{
 
   const { protocol, host, port, username, password } = proxy;
 
-  // 构建代理 URL
   let proxyUrl: string;
   if (username && password) {
     proxyUrl = `${protocol}://${encodeURIComponent(username)}:${encodeURIComponent(password)}@${host}:${port}`;
@@ -38,25 +37,66 @@ export async function getProxyAgent(proxy: ProxyConfig): Promise<{
 }
 
 /**
- * 创建带有代理配置的 fetch 选项
+ * 带超时的 fetch 函数
+ * @param url 请求 URL
+ * @param options fetch 选项
+ * @param timeoutMs 超时时间（毫秒），默认 3000ms
  */
-export async function getFetchOptions(proxy?: ProxyConfig): Promise<RequestInit> {
-  const options: RequestInit = {
+export async function fetchWithTimeout(
+  url: string,
+  options: RequestInit = {},
+  timeoutMs: number = 3000
+): Promise<Response> {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const response = await fetch(url, {
+      ...options,
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
+    return response;
+  } catch (error) {
+    clearTimeout(timeoutId);
+    if (error instanceof Error && error.name === 'AbortError') {
+      throw new Error(`请求超时 (${timeoutMs}ms)`);
+    }
+    throw error;
+  }
+}
+
+/**
+ * 带代理和超时的 fetch 函数
+ * @param url 请求 URL
+ * @param options fetch 选项
+ * @param proxy 代理配置
+ * @param timeoutMs 超时时间（毫秒），默认 3000ms
+ */
+export async function fetchWithProxy(
+  url: string,
+  options: RequestInit = {},
+  proxy?: ProxyConfig,
+  timeoutMs: number = 3000
+): Promise<Response> {
+  const enhancedOptions: RequestInit = {
     headers: {
       'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36',
       'Accept': 'application/json, text/html, */*',
-      'Accept-Language': 'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7'
-    }
+      'Accept-Language': 'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7',
+      ...options.headers
+    },
+    ...options
   };
 
   if (proxy) {
     const agentConfig = await getProxyAgent(proxy);
-    if (agentConfig) {
-      (options as { agent?: unknown }).agent = agentConfig.httpsAgent;
+    if (agentConfig && agentConfig.httpsAgent) {
+      (enhancedOptions as { agent?: unknown }).agent = agentConfig.httpsAgent;
     }
   }
 
-  return options;
+  return fetchWithTimeout(url, enhancedOptions, timeoutMs);
 }
 
 /**

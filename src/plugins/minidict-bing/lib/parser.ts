@@ -4,18 +4,18 @@ import * as cheerio from 'cheerio';
 export function parse(html: string): TranslationResult {
   try {
     const $ = cheerio.load(html);
-    
+
     // 获取音标 - 使用多个备选选择器
     const phonetic: { uk?: string; us?: string } = {};
-    
+
     // 尝试多个音标选择器
     const ukPhonetic = $('.hd_prUS, .hd_pr .hd_prUS, .pronounce .phonetic').first().text().trim() ||
                        $('[class*="phonetic"][class*="uk"]').first().text().trim();
     const usPhonetic = $('.hd_pr, .hd_prUS ~ .hd_pr, .pronounce .phonetic').first().text().trim() ||
                        $('[class*="phonetic"][class*="us"]').first().text().trim();
-    
-    if (ukPhonetic) phonetic.uk = ukPhonetic.replace(/[\[\]]/g, '');
+
     if (usPhonetic) phonetic.us = usPhonetic.replace(/[\[\]]/g, '');
+    if (ukPhonetic) phonetic.uk = ukPhonetic.replace(/[\[\]]/g, '');
 
     // 获取翻译 - 使用多个备选选择器
     const translations: string[] = [];

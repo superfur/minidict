@@ -21,6 +21,9 @@ export declare const COLORS: {
     pluginTag: chalk.Chalk;
     error: chalk.Chalk;
     success: chalk.Chalk;
+    bold: chalk.Chalk;
+    gray: chalk.Chalk;
+    yellow: chalk.Chalk;
 };
 /**
  * 格式化音标
@@ -53,4 +56,4 @@ export declare function formatLoading(text: string): string;
 /**
  * 格式化汇总信息
  */
-export declare function formatSummary(results: TranslationResult[]): string;
+export declare function formatSummary(results: TranslationResult[], elapsed?: string): string;

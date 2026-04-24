@@ -9,10 +9,10 @@ export function parse(html) {
             $('[class*="phonetic"][class*="uk"]').first().text().trim();
         const usPhonetic = $('.hd_pr, .hd_prUS ~ .hd_pr, .pronounce .phonetic').first().text().trim() ||
             $('[class*="phonetic"][class*="us"]').first().text().trim();
-        if (ukPhonetic)
-            phonetic.uk = ukPhonetic.replace(/[\[\]]/g, '');
         if (usPhonetic)
             phonetic.us = usPhonetic.replace(/[\[\]]/g, '');
+        if (ukPhonetic)
+            phonetic.uk = ukPhonetic.replace(/[\[\]]/g, '');
         // 获取翻译 - 使用多个备选选择器
         const translations = [];
         // 主要释义 - 尝试多个选择器

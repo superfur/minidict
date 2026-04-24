@@ -1,11 +1,17 @@
 import { translate } from './lib/translator.js';
 class BingTranslator {
+    constructor() {
+        this.timeoutMs = 3000;
+    }
     setProxy(proxy) {
         this.proxy = proxy;
     }
+    setTimeout(timeoutMs) {
+        this.timeoutMs = timeoutMs;
+    }
     async translate(word) {
         try {
-            const result = await translate(word, this.proxy);
+            const result = await translate(word, this.proxy, this.timeoutMs);
             return result;
         }
         catch (error) {

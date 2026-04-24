@@ -10,13 +10,17 @@
 - 多词典源聚合
   - 有道词典：权威释义、网络释义与多选择器解析回退
   - 必应词典：高质量双语例句、健壮解析策略
+  - Google 翻译：快速翻译接口（国内网络环境可能超时，可配置超时）
 - 智能与可配置
-  - 自动判断“单词 vs 短语/句子”，走最优接口
+  - 自动判断"单词 vs 短语/句子"，走最优接口
   - 结果过滤与去重，噪声更少
   - 可配置是否展示音标、例句与例句数量
+  - 可配置请求超时时间（默认 3000ms）
 - 友好的 CLI 输出
   - 彩色输出、清晰分组
   - 插件来源标识，便于对比
+  - 并行查询，渐进式输出，响应更快
+  - 失败插件友好提示，不影响其他结果
 
 ## 安装
 
@@ -53,17 +57,19 @@ dict -v
 
 ```json
 {
-  "plugins": ["bing", "youdao"],
+  "plugins": ["bing", "youdao", "google"],
   "showPhonetic": true,
   "showExamples": false,
-  "maxExamples": 3
+  "maxExamples": 3,
+  "timeout": 3000
 }
 ```
 
-- `plugins` (array): 启用的词典插件列表，可选：`bing`、`youdao`（默认两者都启用）
+- `plugins` (array): 启用的词典插件列表，可选：`bing`、`youdao`、`google`（默认三者都启用）
 - `showPhonetic` (boolean): 是否显示音标（默认 `true`）
 - `showExamples` (boolean): 是否显示例句（默认 `false`）
 - `maxExamples` (number): 最多显示的例句数量（默认 `3`）
+- `timeout` (number): 请求超时时间，单位毫秒（默认 `3000`，Google 翻译可能需要更长时间）
 
 命令行参数会覆盖配置文件中的对应项：
 
@@ -71,11 +77,17 @@ dict -v
 # 指定插件
 dict hello --plugin bing
 
+# 使用多个插件
+dict hello --plugin bing,youdao,google
+
 # 强制显示音标
 dict hello --phonetic
 
 # 开启例句并调整数量
 dict hello --examples --max-examples 5
+
+# 设置超时时间（Google 可能需要更长时间）
+dict hello --timeout 5000
 ```
 
 ## 命令行用法（CLI）
@@ -84,10 +96,11 @@ dict hello --examples --max-examples 5
 dict <word> [options]
 
 Options:
-  -p, --plugin <plugin>       指定插件（bing/youdao）
+  -p, --plugin <plugins>      指定插件（bing/youdao/google，可用逗号分隔）
       --phonetic              显示音标
       --examples              显示例句
       --max-examples <num>    最大例句数量
+      --timeout <ms>          请求超时时间（毫秒，默认 3000）
       --config <path>         指定配置文件路径（默认 ~/.minidict.json）
   -h, --help                  显示帮助
   -v, --version               显示版本
@@ -102,6 +115,9 @@ dict "take off" --plugin bing --examples --max-examples 2
 # 使用有道插件，显示音标
 dict hello --plugin youdao --phonetic
 
+# 使用所有插件，设置更长超时时间
+dict hello --plugin bing,youdao,google --timeout 5000
+
 # 从指定配置文件加载
 dict hello --config /path/to/my-minidict.json
 ```
@@ -115,19 +131,24 @@ import { translate } from 'minidict/dist/translate.js';
 import type { Config } from 'minidict/dist/types.js';
 
 const config: Config = {
-  plugins: ['bing', 'youdao'],
+  plugins: ['bing', 'youdao', 'google'],
   showPhonetic: true,
   showExamples: true,
-  maxExamples: 3
+  maxExamples: 3,
+  timeout: 3000
 };
 
-const results = await translate('hello world', config);
+// 支持回调，每个插件返回结果时立即调用
+const results = await translate('hello world', config, (result) => {
+  console.log(`${result.pluginName}:`, result.translations);
+});
 // results: Array<{
 //   word: string;
 //   phonetic?: string | { uk?: string; us?: string };
 //   translations: string[];
 //   examples?: Array<{ en: string; zh: string }>;
-//   pluginName: 'Bing' | 'Youdao';
+//   pluginName: 'Bing' | 'Youdao' | 'Google';
+//   error?: string;  // 当插件失败时包含错误信息
 // }>
 ```
 
@@ -144,17 +165,21 @@ const results = await translate('hello world', config);
 ### 当前内置插件
 - `minidict-bing`: 解析 `cn.bing.com/dict` 页面并支持短语接口 `ttranslatev3`
 - `minidict-youdao`: 解析 `dict.youdao.com` 页面并支持 JSON 接口
+- `minidict-google`: 使用 Google Translate API v2 进行翻译（支持超时配置）
 
 ## 错误处理与边界
 
 - 解析失败：选择器更新或页面变化会触发解析失败；本项目提供多选择器回退与过滤逻辑
 - 网络问题：接口请求失败会在控制台提示相应插件失败，不影响其他插件结果
+- Google 超时：国内网络环境下 Google 翻译可能超时，可通过 `--timeout` 或配置文件调整超时时间
+- 并行查询：所有插件同时发起请求，每个插件返回后立即显示结果，无需等待全部完成
 - 例句数量：最终展示由 `config.maxExamples` 限制
 
 ## 故障排查（Troubleshooting）
 
 - Node 版本过低：请升级至 Node.js >= 16
 - 外网不可达：短语/句子翻译与页面抓取依赖网络；单测通过 mock，不依赖网络
+- Google 翻译不可用：国内网络环境下 Google API 可能超时，可配置更长的超时时间（`--timeout 5000`）或禁用该插件
 - 输出异常或无结果：尝试切换插件 `--plugin youdao` 或 `--plugin bing`
 
 ## 常见问题（FAQ）
@@ -165,6 +190,10 @@ const results = await translate('hello world', config);
   - A：配置 `showPhonetic: false` 或命令行不加 `--phonetic`
 - Q：例句太多？
   - A：配置 `maxExamples` 或命令行 `--max-examples <num>`
+- Q：Google 翻译总是超时怎么办？
+  - A：可以增加超时时间（`--timeout 5000`）或禁用该插件（`--plugin bing,youdao`）
+- Q：查询速度慢？
+  - A：v2.4.0 已优化为并行查询，响应速度大幅提升
 
 ## 开发与测试
 

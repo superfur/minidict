@@ -7,7 +7,8 @@ const defaultConfig: Config = {
   plugins: ['bing', 'youdao', 'google'],
   showPhonetic: true,
   showExamples: false,
-  maxExamples: 3
+  maxExamples: 3,
+  timeout: 3000
 };
 
 /**

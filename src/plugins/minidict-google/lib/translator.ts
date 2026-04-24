@@ -1,5 +1,5 @@
 import type { TranslationResult, ProxyConfig } from '../../../types.js';
-import fetch from 'node-fetch';
+import { fetchWithProxy } from '../../../utils/fetch.js';
 
 interface GoogleTranslateResponse {
   data?: {
@@ -7,19 +7,6 @@ interface GoogleTranslateResponse {
       translatedText: string;
     }>;
   };
-}
-
-async function fetchWithProxy(url: string, options: RequestInit = {}, proxy?: ProxyConfig): Promise<globalThis.Response> {
-  if (proxy) {
-    const { getProxyUrl } = await import('../../../utils/fetch.js');
-    const proxyUrl = getProxyUrl(proxy);
-    if (proxyUrl) {
-      const { HttpsProxyAgent } = await import('https-proxy-agent');
-      const agent = new HttpsProxyAgent(proxyUrl);
-      (options as { agent?: unknown }).agent = agent;
-    }
-  }
-  return fetch(url, options as any) as unknown as Promise<globalThis.Response>;
 }
 
 function isChineseText(text: string): boolean {
@@ -32,7 +19,7 @@ function isChineseText(text: string): boolean {
   return false;
 }
 
-export async function translate(word: string, proxy?: ProxyConfig): Promise<TranslationResult> {
+export async function translate(word: string, proxy?: ProxyConfig, timeoutMs: number = 3000): Promise<TranslationResult> {
   try {
     const containsChinese = isChineseText(word);
     const sourceLang = containsChinese ? 'zh-CN' : 'en';
@@ -49,11 +36,9 @@ export async function translate(word: string, proxy?: ProxyConfig): Promise<Tran
     const response = await fetchWithProxy(`${url}?${params.toString()}`, {
       method: 'POST',
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36',
-        'Accept': 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded'
       }
-    }, proxy);
+    }, proxy, timeoutMs);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);

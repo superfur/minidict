@@ -1,6 +1,6 @@
 # 启用的插件
 enable:
-  # - google
+  - google
   - youdao
   - bing
 
@@ -23,6 +23,9 @@ output:
     examples: 2
     phonetics: -1
     translates: 4
+
+# 请求超时设置（毫秒）
+timeout: 3000
 
 # 插件设置（插件支持该项设置才有效）
 plugins:

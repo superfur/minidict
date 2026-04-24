@@ -1,16 +1,4 @@
-import fetch from 'node-fetch';
-async function fetchWithProxy(url, options = {}, proxy) {
-    if (proxy) {
-        const { getProxyUrl } = await import('../../../utils/fetch.js');
-        const proxyUrl = getProxyUrl(proxy);
-        if (proxyUrl) {
-            const { HttpsProxyAgent } = await import('https-proxy-agent');
-            const agent = new HttpsProxyAgent(proxyUrl);
-            options.agent = agent;
-        }
-    }
-    return fetch(url, options);
-}
+import { fetchWithProxy } from '../../../utils/fetch.js';
 function isChineseText(text) {
     for (let i = 0; i < text.length; i++) {
         const code = text.charCodeAt(i);
@@ -20,7 +8,7 @@ function isChineseText(text) {
     }
     return false;
 }
-export async function translate(word, proxy) {
+export async function translate(word, proxy, timeoutMs = 3000) {
     try {
         const containsChinese = isChineseText(word);
         const sourceLang = containsChinese ? 'zh-CN' : 'en';
@@ -35,11 +23,9 @@ export async function translate(word, proxy) {
         const response = await fetchWithProxy(`${url}?${params.toString()}`, {
             method: 'POST',
             headers: {
-                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36',
-                'Accept': 'application/json',
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
-        }, proxy);
+        }, proxy, timeoutMs);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }

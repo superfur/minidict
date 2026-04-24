@@ -1,6 +1,6 @@
 import type { TranslationResult, ProxyConfig } from '../../../types.js';
 import { parse } from './parser.js';
-import fetch from 'node-fetch';
+import { fetchWithProxy } from '../../../utils/fetch.js';
 
 interface BingTranslateResponse {
   statusCode: number;
@@ -8,19 +8,6 @@ interface BingTranslateResponse {
     text: string;
     to: string;
   }>;
-}
-
-async function fetchWithProxy(url: string, options: RequestInit = {}, proxy?: ProxyConfig): Promise<globalThis.Response> {
-  if (proxy) {
-    const { getProxyUrl } = await import('../../../utils/fetch.js');
-    const proxyUrl = getProxyUrl(proxy);
-    if (proxyUrl) {
-      const { HttpsProxyAgent } = await import('https-proxy-agent');
-      const agent = new HttpsProxyAgent(proxyUrl);
-      (options as { agent?: unknown }).agent = agent;
-    }
-  }
-  return fetch(url, options as any) as unknown as Promise<globalThis.Response>;
 }
 
 function isChineseText(text: string): boolean {
@@ -33,12 +20,10 @@ function isChineseText(text: string): boolean {
   return false;
 }
 
-export async function translate(word: string, proxy?: ProxyConfig): Promise<TranslationResult> {
+export async function translate(word: string, proxy?: ProxyConfig, timeoutMs: number = 3000): Promise<TranslationResult> {
   try {
-    // 检查是否包含中文字符
     const containsChinese = /[\u4e00-\u9fa5]/.test(word);
 
-    // 如果是短语或句子，使用翻译接口
     if (word.includes(' ')) {
       const translationUrl = 'https://cn.bing.com/ttranslatev3';
       const params = new URLSearchParams({
@@ -50,20 +35,17 @@ export async function translate(word: string, proxy?: ProxyConfig): Promise<Tran
       const response = await fetchWithProxy(translationUrl, {
         method: 'POST',
         headers: {
-          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36',
-          'Accept': 'application/json',
           'Content-Type': 'application/x-www-form-urlencoded',
           'Origin': 'https://cn.bing.com',
           'Referer': 'https://cn.bing.com/translator'
         },
         body: params.toString()
-      }, proxy);
+      }, proxy, timeoutMs);
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      // 检查响应是否为 JSON
       const contentType = response.headers.get('content-type') || '';
       if (!contentType.includes('application/json')) {
         throw new Error(`API 返回非 JSON 响应: ${contentType}`);
@@ -85,17 +67,15 @@ export async function translate(word: string, proxy?: ProxyConfig): Promise<Tran
       }
     }
 
-    // 如果是单词，使用词典接口
     const url = `https://cn.bing.com/dict/search?q=${encodeURIComponent(word)}`;
     const response = await fetchWithProxy(url, {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
         'Accept-Language': 'en-US,en;q=0.5',
         'Connection': 'keep-alive',
         'Cache-Control': 'max-age=0'
       }
-    }, proxy);
+    }, proxy, timeoutMs);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);

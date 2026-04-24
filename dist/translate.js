@@ -1,39 +1,46 @@
 import bingPlugin from './plugins/minidict-bing/index.js';
 import youdaoPlugin from './plugins/minidict-youdao/index.js';
 import googlePlugin from './plugins/minidict-google/index.js';
-export async function translate(word, config) {
-    const results = [];
+const PLUGIN_MAP = {
+    bing: { name: 'bing', plugin: bingPlugin },
+    youdao: { name: 'youdao', plugin: youdaoPlugin },
+    google: { name: 'google', plugin: googlePlugin }
+};
+export async function translate(word, config, onResult) {
     const plugins = config.plugins || ['bing', 'youdao'];
-    // 设置代理
-    if (config.proxy) {
-        bingPlugin.setProxy(config.proxy);
-        youdaoPlugin.setProxy?.(config.proxy);
-        googlePlugin.setProxy?.(config.proxy);
-    }
-    for (const plugin of plugins) {
+    const timeout = config.timeout || 3000;
+    bingPlugin.setProxy?.(config.proxy);
+    bingPlugin.setTimeout?.(timeout);
+    youdaoPlugin.setProxy?.(config.proxy);
+    youdaoPlugin.setTimeout?.(timeout);
+    googlePlugin.setProxy?.(config.proxy);
+    googlePlugin.setTimeout?.(timeout);
+    const results = [];
+    const tasks = plugins
+        .map(pluginName => PLUGIN_MAP[pluginName])
+        .filter(Boolean)
+        .map(async (task) => {
         try {
-            let result;
-            if (plugin === 'bing') {
-                result = await bingPlugin.translate(word);
-            }
-            else if (plugin === 'youdao') {
-                result = await youdaoPlugin.translate(word);
-            }
-            else if (plugin === 'google') {
-                result = await googlePlugin.translate(word);
-            }
-            else {
-                console.error(`未知的插件: ${plugin}`);
-                continue;
-            }
-            // 应用配置的maxExamples限制
+            const result = await task.plugin.translate(word);
             if (result.examples && config.maxExamples) {
                 result.examples = result.examples.slice(0, config.maxExamples);
             }
-            results.push(result);
+            return result;
         }
         catch (error) {
-            console.error(`${plugin}插件执行失败:`, error instanceof Error ? error.message : String(error));
+            return {
+                word,
+                translations: [],
+                examples: [],
+                pluginName: task.name.charAt(0).toUpperCase() + task.name.slice(1),
+                error: error instanceof Error ? error.message : '未知错误'
+            };
+        }
+    });
+    for await (const taskResult of tasks) {
+        results.push(taskResult);
+        if (onResult) {
+            onResult(taskResult);
         }
     }
     return results;
