@@ -1,6 +1,6 @@
 {
     "name": "minidict",
-    "version": "2.4.0",
+    "version": "2.4.1",
     "description": "一个简单易用的命令行词典工具",
     "type": "module",
     "main": "./dist/index.js",
@@ -8,6 +8,9 @@
     "bin": {
         "dict": "./dist/cli.js"
     },
+    "files": [
+        "dist"
+    ],
     "scripts": {
         "clean": "rm -rf dist",
         "build": "yarn clean && tsc && chmod +x dist/cli.js",
