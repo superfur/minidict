@@ -1,7 +1,7 @@
 import { translate } from './lib/translator.js';
 class GoogleTranslator {
     constructor() {
-        this.timeoutMs = 3000;
+        this.timeoutMs = 10000;
     }
     setProxy(proxy) {
         this.proxy = proxy;

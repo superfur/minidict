@@ -8,7 +8,7 @@ function isChineseText(text) {
     }
     return false;
 }
-export async function translate(word, proxy, timeoutMs = 3000) {
+export async function translate(word, proxy, timeoutMs = 10000) {
     try {
         const containsChinese = isChineseText(word);
         const sourceLang = containsChinese ? 'zh-CN' : 'en';

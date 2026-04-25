@@ -8,7 +8,7 @@ const PLUGIN_MAP = {
 };
 export async function translate(word, config, onResult) {
     const plugins = config.plugins || ['bing', 'youdao'];
-    const timeout = config.timeout || 3000;
+    const timeout = config.timeout || 10000;
     bingPlugin.setProxy?.(config.proxy);
     bingPlugin.setTimeout?.(timeout);
     youdaoPlugin.setProxy?.(config.proxy);

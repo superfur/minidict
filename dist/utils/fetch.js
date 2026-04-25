@@ -30,9 +30,9 @@ export async function getProxyAgent(proxy) {
  * 带超时的 fetch 函数
  * @param url 请求 URL
  * @param options fetch 选项
- * @param timeoutMs 超时时间（毫秒），默认 3000ms
+ * @param timeoutMs 超时时间（毫秒），默认 10000ms
  */
-export async function fetchWithTimeout(url, options = {}, timeoutMs = 3000) {
+export async function fetchWithTimeout(url, options = {}, timeoutMs = 10000) {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
     try {
@@ -56,9 +56,9 @@ export async function fetchWithTimeout(url, options = {}, timeoutMs = 3000) {
  * @param url 请求 URL
  * @param options fetch 选项
  * @param proxy 代理配置
- * @param timeoutMs 超时时间（毫秒），默认 3000ms
+ * @param timeoutMs 超时时间（毫秒），默认 10000ms
  */
-export async function fetchWithProxy(url, options = {}, proxy, timeoutMs = 3000) {
+export async function fetchWithProxy(url, options = {}, proxy, timeoutMs = 10000) {
     const enhancedOptions = {
         headers: {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36',

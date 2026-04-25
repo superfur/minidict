@@ -9,7 +9,7 @@ function isChineseText(text) {
     }
     return false;
 }
-export async function translate(word, proxy, timeoutMs = 3000) {
+export async function translate(word, proxy, timeoutMs = 10000) {
     try {
         const containsChinese = /[\u4e00-\u9fa5]/.test(word);
         if (word.includes(' ')) {

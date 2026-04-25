@@ -11,7 +11,7 @@ export declare function getProxyAgent(proxy: ProxyConfig): Promise<{
  * 带超时的 fetch 函数
  * @param url 请求 URL
  * @param options fetch 选项
- * @param timeoutMs 超时时间（毫秒），默认 3000ms
+ * @param timeoutMs 超时时间（毫秒），默认 10000ms
  */
 export declare function fetchWithTimeout(url: string, options?: RequestInit, timeoutMs?: number): Promise<Response>;
 /**
@@ -19,7 +19,7 @@ export declare function fetchWithTimeout(url: string, options?: RequestInit, tim
  * @param url 请求 URL
  * @param options fetch 选项
  * @param proxy 代理配置
- * @param timeoutMs 超时时间（毫秒），默认 3000ms
+ * @param timeoutMs 超时时间（毫秒），默认 10000ms
  */
 export declare function fetchWithProxy(url: string, options?: RequestInit, proxy?: ProxyConfig, timeoutMs?: number): Promise<Response>;
 /**

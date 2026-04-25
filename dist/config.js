@@ -6,7 +6,7 @@ const defaultConfig = {
     showPhonetic: true,
     showExamples: false,
     maxExamples: 3,
-    timeout: 3000
+    timeout: 10000
 };
 /**
  * 解析代理 URL 字符串为 ProxyConfig 对象

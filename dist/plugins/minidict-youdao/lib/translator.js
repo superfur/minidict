@@ -2,7 +2,7 @@ import { parse } from './parser.js';
 import { fetchWithProxy } from '../../../utils/fetch.js';
 export class YoudaoTranslator {
     constructor() {
-        this.timeoutMs = 3000;
+        this.timeoutMs = 10000;
     }
     setProxy(proxy) {
         this.proxy = proxy;
