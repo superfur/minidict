@@ -3,7 +3,7 @@ import { translate } from './lib/translator.js';
 
 class GoogleTranslator implements DictionaryPlugin {
   private proxy?: ProxyConfig;
-  private timeoutMs: number = 3000;
+  private timeoutMs: number = 10000;
 
   setProxy(proxy?: ProxyConfig): void {
     this.proxy = proxy;

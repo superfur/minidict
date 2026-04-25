@@ -8,7 +8,7 @@ const defaultConfig: Config = {
   showPhonetic: true,
   showExamples: false,
   maxExamples: 3,
-  timeout: 3000
+  timeout: 10000
 };
 
 /**

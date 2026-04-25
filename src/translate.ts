@@ -20,7 +20,7 @@ export async function translate(
   onResult?: (result: TranslationResult) => void
 ): Promise<TranslationResult[]> {
   const plugins = config.plugins || ['bing', 'youdao'];
-  const timeout = config.timeout || 3000;
+  const timeout = config.timeout || 10000;
 
   bingPlugin.setProxy?.(config.proxy);
   bingPlugin.setTimeout?.(timeout);

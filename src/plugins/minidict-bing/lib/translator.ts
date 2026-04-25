@@ -20,7 +20,7 @@ function isChineseText(text: string): boolean {
   return false;
 }
 
-export async function translate(word: string, proxy?: ProxyConfig, timeoutMs: number = 3000): Promise<TranslationResult> {
+export async function translate(word: string, proxy?: ProxyConfig, timeoutMs: number = 10000): Promise<TranslationResult> {
   try {
     const containsChinese = /[\u4e00-\u9fa5]/.test(word);
 

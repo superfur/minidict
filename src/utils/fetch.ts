@@ -40,12 +40,12 @@ export async function getProxyAgent(proxy: ProxyConfig): Promise<{
  * 带超时的 fetch 函数
  * @param url 请求 URL
  * @param options fetch 选项
- * @param timeoutMs 超时时间（毫秒），默认 3000ms
+ * @param timeoutMs 超时时间（毫秒），默认 10000ms
  */
 export async function fetchWithTimeout(
   url: string,
   options: RequestInit = {},
-  timeoutMs: number = 3000
+  timeoutMs: number = 10000
 ): Promise<Response> {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
@@ -71,13 +71,13 @@ export async function fetchWithTimeout(
  * @param url 请求 URL
  * @param options fetch 选项
  * @param proxy 代理配置
- * @param timeoutMs 超时时间（毫秒），默认 3000ms
+ * @param timeoutMs 超时时间（毫秒），默认 10000ms
  */
 export async function fetchWithProxy(
   url: string,
   options: RequestInit = {},
   proxy?: ProxyConfig,
-  timeoutMs: number = 3000
+  timeoutMs: number = 10000
 ): Promise<Response> {
   const enhancedOptions: RequestInit = {
     headers: {
