@@ -3,7 +3,7 @@ import { translate } from './lib/translator.js';
 
 class BingTranslator implements DictionaryPlugin {
   private proxy?: ProxyConfig;
-  private timeoutMs: number = 10000;
+  private timeoutMs: number = 3000;
 
   setProxy(proxy?: ProxyConfig): void {
     this.proxy = proxy;
@@ -27,4 +27,3 @@ const translator = new BingTranslator();
 
 export default translator;
 export { BingTranslator };
- 

@@ -10,27 +10,29 @@
 - 多词典源聚合
   - 有道词典：权威释义、网络释义与多选择器解析回退
   - 必应词典：高质量双语例句、健壮解析策略
-  - Google 翻译：快速翻译接口（国内网络环境可能超时，可配置超时）
+  - Google 翻译：网页版免 key 接口，自动检测源语言（国内网络可能需配置代理）
 - 智能与可配置
   - 自动判断"单词 vs 短语/句子"，走最优接口
   - 结果过滤与去重，噪声更少
   - 可配置是否展示音标、例句与例句数量
-  - 可配置请求超时时间（默认 3000ms）
+  - 可配置请求超时时间（默认 10000ms）
+  - 结果缓存（默认开启，7 天有效期），重复查询近乎瞬时返回；`--no-cache` 可临时绕过
+  - 支持外部插件（`externalPlugins`），无需改动核心即可扩展词典源
 - 友好的 CLI 输出
-  - 彩色输出、清晰分组
+  - 彩色卡片输出、清晰分组
   - 插件来源标识，便于对比
-  - 并行查询，渐进式输出，响应更快
+  - 并行查询、真正的流式输出：哪个插件先返回就先展示，快插件不被慢插件阻塞
   - 失败插件友好提示，不影响其他结果
 
 ## 安装
 
 ```bash
-yarn global add minidict
+bun add -g minidict
 # 或
 npm i -g minidict
 ```
 
-环境要求：Node.js >= 16（使用 ESM 与 node-fetch@3）
+环境要求：Node.js >= 16（使用 ESM 与 node-fetch@3）。开发使用 [Bun](https://bun.sh) 作为包管理与脚本运行器。
 
 ## 快速开始
 
@@ -61,7 +63,9 @@ dict -v
   "showPhonetic": true,
   "showExamples": false,
   "maxExamples": 3,
-  "timeout": 3000
+  "timeout": 10000,
+  "cache": { "enabled": true, "ttl": 604800000 },
+  "externalPlugins": []
 }
 ```
 
@@ -69,7 +73,9 @@ dict -v
 - `showPhonetic` (boolean): 是否显示音标（默认 `true`）
 - `showExamples` (boolean): 是否显示例句（默认 `false`）
 - `maxExamples` (number): 最多显示的例句数量（默认 `3`）
-- `timeout` (number): 请求超时时间，单位毫秒（默认 `3000`，Google 翻译可能需要更长时间）
+- `timeout` (number): 请求超时时间，单位毫秒（默认 `10000`，Google 翻译可能需要更长时间）
+- `cache` (object): 查询结果缓存。`enabled` 是否启用（默认 `true`），`ttl` 有效期毫秒（默认 7 天 `604800000`）。缓存存于 `~/.minidict/cache`，可用环境变量 `MINIDICT_CACHE_DIR` 覆盖位置
+- `externalPlugins` (array): 额外的外部插件模块（npm 包名或绝对路径），其默认导出需实现 `DictionaryPlugin` 接口，按需动态加载；加载失败会被安全跳过
 
 命令行参数会覆盖配置文件中的对应项：
 
@@ -100,8 +106,10 @@ Options:
       --phonetic              显示音标
       --examples              显示例句
       --max-examples <num>    最大例句数量
-      --timeout <ms>          请求超时时间（毫秒，默认 3000）
+      --timeout <ms>          请求超时时间（毫秒，默认 10000）
       --config <path>         指定配置文件路径（默认 ~/.minidict.json）
+      --no-cache              本次查询不使用缓存
+      --clear-cache           清空查询缓存后退出
   -h, --help                  显示帮助
   -v, --version               显示版本
 ```
@@ -127,15 +135,16 @@ dict hello --config /path/to/my-minidict.json
 minidict 同时提供可编程接口（ESM）：
 
 ```ts
-import { translate } from 'minidict/dist/translate.js';
-import type { Config } from 'minidict/dist/types.js';
+import { translate, availablePlugins } from 'minidict';
+import type { Config } from 'minidict';
 
 const config: Config = {
   plugins: ['bing', 'youdao', 'google'],
   showPhonetic: true,
   showExamples: true,
   maxExamples: 3,
-  timeout: 3000
+  timeout: 10000,
+  cache: { enabled: true, ttl: 604800000 }
 };
 
 // 支持回调，每个插件返回结果时立即调用
@@ -163,15 +172,46 @@ const results = await translate('hello world', config, (result) => {
   4. 过滤与去重，返回 `TranslationResult`
 
 ### 当前内置插件
-- `minidict-bing`: 解析 `cn.bing.com/dict` 页面并支持短语接口 `ttranslatev3`
+- `minidict-bing`: 解析 `cn.bing.com/dict` 页面（需带 `mkt=zh-CN`）并支持短语接口 `ttranslatev3`
 - `minidict-youdao`: 解析 `dict.youdao.com` 页面并支持 JSON 接口
-- `minidict-google`: 使用 Google Translate API v2 进行翻译（支持超时配置）
+- `minidict-google`: 使用 Google 翻译网页版的免 key 接口（`translate_a/single`，无需 API 密钥），源语言自动检测
+
+### 开发外部插件
+
+无需改动核心代码即可扩展词典源。编写一个模块，默认导出一个实现 `DictionaryPlugin` 的对象：
+
+```js
+// minidict-myplugin.mjs
+export default {
+  async translate(word) {
+    return {
+      word,
+      translations: [`示例：${word}`],
+      examples: [],
+      pluginName: 'MyPlugin'
+    };
+  },
+  setProxy(proxy) {},      // 可选：接收代理配置
+  setTimeout(ms) {}        // 可选：接收超时（毫秒）
+};
+```
+
+然后在 `~/.minidict.json` 中声明并启用（名称由模块名推导：`minidict-myplugin` → `myplugin`）：
+
+```json
+{
+  "plugins": ["youdao", "myplugin"],
+  "externalPlugins": ["/绝对路径/minidict-myplugin.mjs"]
+}
+```
+
+加载失败的外部插件会被安全跳过，引用时以「未知插件」提示，不影响其它来源。
 
 ## 错误处理与边界
 
 - 解析失败：选择器更新或页面变化会触发解析失败；本项目提供多选择器回退与过滤逻辑
 - 网络问题：接口请求失败会在控制台提示相应插件失败，不影响其他插件结果
-- Google 超时：国内网络环境下 Google 翻译可能超时，可通过 `--timeout` 或配置文件调整超时时间
+- Google 网络可达性：国内网络环境下 `translate.googleapis.com` 可能不可达，可配置代理（`HTTP_PROXY`/`HTTPS_PROXY` 或配置文件中的 `proxy`）；无需 API 密钥
 - 并行查询：所有插件同时发起请求，每个插件返回后立即显示结果，无需等待全部完成
 - 例句数量：最终展示由 `config.maxExamples` 限制
 
@@ -179,7 +219,7 @@ const results = await translate('hello world', config, (result) => {
 
 - Node 版本过低：请升级至 Node.js >= 16
 - 外网不可达：短语/句子翻译与页面抓取依赖网络；单测通过 mock，不依赖网络
-- Google 翻译不可用：国内网络环境下 Google API 可能超时，可配置更长的超时时间（`--timeout 5000`）或禁用该插件
+- Google 翻译不可用：使用的是免 key 网页接口；若 `translate.googleapis.com` 在你的网络下被屏蔽/不可达，请配置代理，或临时禁用该插件（`--plugin bing,youdao`）
 - 输出异常或无结果：尝试切换插件 `--plugin youdao` 或 `--plugin bing`
 
 ## 常见问题（FAQ）
@@ -190,8 +230,8 @@ const results = await translate('hello world', config, (result) => {
   - A：配置 `showPhonetic: false` 或命令行不加 `--phonetic`
 - Q：例句太多？
   - A：配置 `maxExamples` 或命令行 `--max-examples <num>`
-- Q：Google 翻译总是超时怎么办？
-  - A：可以增加超时时间（`--timeout 5000`）或禁用该插件（`--plugin bing,youdao`）
+- Q：Google 翻译不可用/超时怎么办？
+  - A：免 key 接口本身不需密钥；多为网络不可达，配置代理即可，或禁用该插件（`--plugin bing,youdao`）
 - Q：查询速度慢？
   - A：v2.4.0 已优化为并行查询，响应速度大幅提升
 
@@ -199,25 +239,32 @@ const results = await translate('hello world', config, (result) => {
 
 ```bash
 # 安装依赖
-yarn install
+bun install
 
 # 开发编译（watch 模式）
-yarn dev
+bun run dev
 
-# 运行测试
-yarn test
+# 运行测试（注意是 bun run test，而非 bun test —— 后者会启用 bun 自带的测试运行器而非 jest）
+bun run test
 
 # 构建
-yarn build
+bun run build
 
 # 代码检查
-yarn lint
+bun run lint
+
+# 代码格式化（Prettier）
+bun run format          # 写入
+bun run format:check    # 仅检查
 ```
+
+> 提交时会通过 husky + lint-staged 自动对改动的 `.ts` 运行 `eslint --fix` 与 `prettier --write`。
+> CI（GitHub Actions）在 push / PR 到 `main` 时使用 Bun 运行 `lint → test → build`。
 
 ## 发布与版本
 
 - 版本规范：遵循语义化版本（SemVer）
-- 发布前自动构建：`prepublishOnly` 会触发 `yarn build`
+- 发布前自动构建：`prepublishOnly` 会触发 `bun run build`
 - 建议使用 `npm pack --dry-run` 确认发布包内容
 
 ## 许可证

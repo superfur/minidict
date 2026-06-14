@@ -20,6 +20,7 @@ export default {
   testMatch: ['**/*.test.ts'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   moduleNameMapper: {
+    '^node-fetch$': '<rootDir>/test/__mocks__/node-fetch.ts',
     '^(\\.{1,2}/.*)\\.js$': '$1',
   },
 };

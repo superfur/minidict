@@ -1,21 +1,30 @@
 import type { TranslationResult } from '../../../types.js';
 import * as cheerio from 'cheerio';
 
+/** 从形如「美 [heˈləʊ]」的文本中提取方括号内的音标；无方括号时回退为去标签的原文。 */
+function extractPhonetic(raw: string): string {
+  const match = raw.match(/\[([^\]]*)\]/);
+  if (match) return match[1].trim();
+  return raw.replace(/[[\]]/g, '').replace(/^(美|英|US|UK)\s*/i, '').trim();
+}
+
 export function parse(html: string): TranslationResult {
   try {
     const $ = cheerio.load(html);
 
-    // 获取音标 - 使用多个备选选择器
+    // 获取音标。Bing 当前 DOM：
+    //   .hd_prUS  → 美式发音（文本形如「美 [heˈləʊ]」）
+    //   .hd_pr    → 英式发音（文本形如「英 [həˈləʊ]」）
+    // 仅取方括号内的音标符号，剥离「美/英/US/UK」等前缀标签。
     const phonetic: { uk?: string; us?: string } = {};
 
-    // 尝试多个音标选择器
-    const ukPhonetic = $('.hd_prUS, .hd_pr .hd_prUS, .pronounce .phonetic').first().text().trim() ||
-                       $('[class*="phonetic"][class*="uk"]').first().text().trim();
-    const usPhonetic = $('.hd_pr, .hd_prUS ~ .hd_pr, .pronounce .phonetic').first().text().trim() ||
+    const usPhonetic = $('.hd_prUS').first().text().trim() ||
                        $('[class*="phonetic"][class*="us"]').first().text().trim();
+    const ukPhonetic = $('.hd_pr').first().text().trim() ||
+                       $('[class*="phonetic"][class*="uk"]').first().text().trim();
 
-    if (usPhonetic) phonetic.us = usPhonetic.replace(/[\[\]]/g, '');
-    if (ukPhonetic) phonetic.uk = ukPhonetic.replace(/[\[\]]/g, '');
+    if (usPhonetic) phonetic.us = extractPhonetic(usPhonetic);
+    if (ukPhonetic) phonetic.uk = extractPhonetic(ukPhonetic);
 
     // 获取翻译 - 使用多个备选选择器
     const translations: string[] = [];

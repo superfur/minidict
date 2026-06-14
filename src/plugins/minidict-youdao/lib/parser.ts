@@ -8,8 +8,8 @@ export function parse(html: string): Omit<TranslationResult, 'word'> {
   const phonetic: { uk?: string; us?: string } = {};
   const ukPhonetic = $('.pronounce .phonetic').eq(0).text().trim();
   const usPhonetic = $('.pronounce .phonetic').eq(1).text().trim();
-  if (ukPhonetic) phonetic.uk = ukPhonetic.replace(/[\[\]]/g, '');
-  if (usPhonetic) phonetic.us = usPhonetic.replace(/[\[\]]/g, '');
+  if (ukPhonetic) phonetic.uk = ukPhonetic.replace(/[[\]]/g, '');
+  if (usPhonetic) phonetic.us = usPhonetic.replace(/[[\]]/g, '');
 
   // 获取翻译
   const translations: string[] = [];
@@ -181,8 +181,8 @@ export function parse(html: string): Omit<TranslationResult, 'word'> {
       if (en.length < 10 || zh.length < 10) return false;
       if (en.length > 200 || zh.length > 200) return false;
       return true;
-    })
-    .slice(0, 3); // 只保留前3个例句
+    });
+  // 例句数量上限由 translate() 按 config.maxExamples 统一截断，parser 不在此硬编码
 
   return {
     translations: filteredTranslations,

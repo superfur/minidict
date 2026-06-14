@@ -11,13 +11,13 @@ const BOX = {
   bottomLeft: '╰',
   bottomRight: '╯',
   horizontal: '─',
-  vertical: '│',
+  vertical: '│'
 };
 
 export const ICONS = {
   SEARCH: '🔍',
   SPEAKER: '🔊',
-  WARNING: '⚠',
+  WARNING: '⚠'
 };
 
 export const COLORS = {
@@ -36,7 +36,7 @@ export const COLORS = {
   success: chalk.green,
   dim: chalk.gray,
   bold: chalk.bold,
-  yellow: chalk.yellow,
+  yellow: chalk.yellow
 };
 
 function stripAnsi(str: string): string {
@@ -73,9 +73,11 @@ function wrapText(text: string, maxWidth: number): string[] {
     }
 
     if (visiblePos + charWidth > maxWidth) {
-      if (lastBreakVisible > 0 && (visiblePos - lastBreakVisible) < maxWidth / 2) {
+      if (lastBreakVisible > 0 && visiblePos - lastBreakVisible < maxWidth / 2) {
         result.push(text.substring(lineStart, lastBreak).replace(/\s+$/, ''));
-        lineStart = text.substring(lastBreak).match(/^\s*/) ? lastBreak + text.substring(lastBreak).match(/^\s*/)![0].length : lastBreak;
+        lineStart = text.substring(lastBreak).match(/^\s*/)
+          ? lastBreak + text.substring(lastBreak).match(/^\s*/)![0].length
+          : lastBreak;
       } else {
         result.push(text.substring(lineStart, pos).replace(/\s+$/, ''));
         lineStart = pos;
@@ -104,7 +106,11 @@ function boxTop(title?: string): string {
     const coloredTitle = COLORS.pluginName(` ${title} `);
     const titleVisibleLen = stripAnsi(` ${title} `).length;
     const remain = BOX_WIDTH - 2 - titleVisibleLen;
-    return b(BOX.topLeft + BOX.horizontal) + coloredTitle + b(BOX.horizontal.repeat(Math.max(0, remain)) + BOX.topRight);
+    return (
+      b(BOX.topLeft + BOX.horizontal) +
+      coloredTitle +
+      b(BOX.horizontal.repeat(Math.max(0, remain)) + BOX.topRight)
+    );
   }
   return b(BOX.topLeft + BOX.horizontal.repeat(BOX_WIDTH - 2) + BOX.topRight);
 }
@@ -113,11 +119,13 @@ function boxLine(content: string): string {
   const b = COLORS.border;
   const paddedContent = ' ' + content;
   const wrapped = wrapText(paddedContent, INNER_WIDTH);
-  return wrapped.map(line => {
-    const visibleLen = stripAnsi(line).length;
-    const padding = Math.max(0, INNER_WIDTH - visibleLen);
-    return b(BOX.vertical) + ' ' + line + ' '.repeat(padding) + ' ' + b(BOX.vertical);
-  }).join('\n');
+  return wrapped
+    .map(line => {
+      const visibleLen = stripAnsi(line).length;
+      const padding = Math.max(0, INNER_WIDTH - visibleLen);
+      return b(BOX.vertical) + ' ' + line + ' '.repeat(padding) + ' ' + b(BOX.vertical);
+    })
+    .join('\n');
 }
 
 function boxEmptyLine(): string {
@@ -140,7 +148,14 @@ export function formatHeader(word: string, phonetic?: string | Phonetic): string
   for (const line of wrapped) {
     const visibleLen = stripAnsi(line).length;
     const padding = Math.max(0, INNER_WIDTH - visibleLen);
-    lines.push(COLORS.border(BOX.vertical) + ' ' + line + ' '.repeat(padding) + ' ' + COLORS.border(BOX.vertical));
+    lines.push(
+      COLORS.border(BOX.vertical) +
+        ' ' +
+        line +
+        ' '.repeat(padding) +
+        ' ' +
+        COLORS.border(BOX.vertical)
+    );
   }
 
   if (phonetic) {
@@ -150,7 +165,14 @@ export function formatHeader(word: string, phonetic?: string | Phonetic): string
       for (const line of pWrapped) {
         const visibleLen = stripAnsi(line).length;
         const padding = Math.max(0, INNER_WIDTH - visibleLen);
-        lines.push(COLORS.border(BOX.vertical) + ' ' + line + ' '.repeat(padding) + ' ' + COLORS.border(BOX.vertical));
+        lines.push(
+          COLORS.border(BOX.vertical) +
+            ' ' +
+            line +
+            ' '.repeat(padding) +
+            ' ' +
+            COLORS.border(BOX.vertical)
+        );
       }
     }
   }
@@ -225,11 +247,24 @@ function formatExamples(examples: Example[], maxExamples: number): string[] {
   return lines;
 }
 
-export function formatResult(result: TranslationResult, showPhonetic: boolean, showExamples: boolean, maxExamples: number): string {
+export function formatResult(
+  result: TranslationResult,
+  showPhonetic: boolean,
+  showExamples: boolean,
+  maxExamples: number
+): string {
   const lines: string[] = [];
 
   lines.push(boxTop(result.pluginName));
   lines.push(boxEmptyLine());
+
+  if (showPhonetic && result.phonetic) {
+    const phoneticText = formatPhoneticInline(result.phonetic);
+    if (phoneticText) {
+      lines.push(boxLine(phoneticText));
+      lines.push(boxEmptyLine());
+    }
+  }
 
   const translationLines = formatTranslations(result.translations);
   for (const tl of translationLines) {
@@ -275,7 +310,12 @@ export function formatErrorResult(result: TranslationResult): string {
   return lines.join('\n');
 }
 
-export function formatResultCompact(result: TranslationResult, showPhonetic: boolean, showExamples: boolean, maxExamples: number): string {
+export function formatResultCompact(
+  result: TranslationResult,
+  showPhonetic: boolean,
+  showExamples: boolean,
+  maxExamples: number
+): string {
   return formatResult(result, showPhonetic, showExamples, maxExamples);
 }
 
@@ -284,7 +324,7 @@ export function formatError(message: string, pluginName?: string): string {
     word: '',
     translations: [],
     pluginName: pluginName || 'unknown',
-    error: message,
+    error: message
   });
 }
 

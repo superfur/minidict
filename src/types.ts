@@ -6,6 +6,13 @@ export interface ProxyConfig {
   password?: string;
 }
 
+export interface CacheConfig {
+  /** 是否启用查询结果缓存（默认启用） */
+  enabled: boolean;
+  /** 缓存有效期，单位毫秒（默认 7 天） */
+  ttl: number;
+}
+
 export interface Config {
   plugins: string[];
   showPhonetic: boolean;
@@ -13,6 +20,10 @@ export interface Config {
   maxExamples: number;
   timeout?: number;
   proxy?: ProxyConfig;
+  /** 缓存配置 */
+  cache?: CacheConfig;
+  /** 额外的外部插件模块说明符（npm 包名或绝对路径），按需动态加载 */
+  externalPlugins?: string[];
 }
 
 export interface Example {
@@ -52,4 +63,4 @@ export interface MDOutput {
 export interface MDError {
   message: string;
   code: string;
-} 
+}

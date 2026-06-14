@@ -10,16 +10,6 @@ interface BingTranslateResponse {
   }>;
 }
 
-function isChineseText(text: string): boolean {
-  for (let i = 0; i < text.length; i++) {
-    const code = text.charCodeAt(i);
-    if (code >= 0x4e00 && code <= 0x9fa5) {
-      return true;
-    }
-  }
-  return false;
-}
-
 export async function translate(word: string, proxy?: ProxyConfig, timeoutMs: number = 10000): Promise<TranslationResult> {
   try {
     const containsChinese = /[\u4e00-\u9fa5]/.test(word);
@@ -67,7 +57,8 @@ export async function translate(word: string, proxy?: ProxyConfig, timeoutMs: nu
       }
     }
 
-    const url = `https://cn.bing.com/dict/search?q=${encodeURIComponent(word)}`;
+    // 必须带 mkt=zh-CN，否则 Bing 会返回「无结果」页面而非真正的词典内容。
+    const url = `https://cn.bing.com/dict/search?q=${encodeURIComponent(word)}&mkt=zh-CN`;
     const response = await fetchWithProxy(url, {
       headers: {
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',

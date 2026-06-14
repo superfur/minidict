@@ -3,12 +3,16 @@ import path from 'path';
 import os from 'os';
 import type { Config, ProxyConfig } from './types.js';
 
+const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
+
 const defaultConfig: Config = {
   plugins: ['bing', 'youdao', 'google'],
   showPhonetic: true,
   showExamples: false,
   maxExamples: 3,
-  timeout: 10000
+  timeout: 10000,
+  cache: { enabled: true, ttl: SEVEN_DAYS_MS },
+  externalPlugins: []
 };
 
 /**
@@ -46,7 +50,8 @@ export function parseProxyUrl(url: string): ProxyConfig | null {
  * 支持 HTTP_PROXY, HTTPS_PROXY, ALL_PROXY 环境变量
  */
 export function getProxyFromEnv(): ProxyConfig | undefined {
-  const proxyUrl = process.env.HTTP_PROXY ||
+  const proxyUrl =
+    process.env.HTTP_PROXY ||
     process.env.http_proxy ||
     process.env.HTTPS_PROXY ||
     process.env.https_proxy ||
@@ -71,10 +76,33 @@ export async function loadConfig(configPath?: string): Promise<Config> {
     // 合并用户配置和默认配置
     const config: Config = {
       plugins: Array.isArray(userConfig.plugins) ? userConfig.plugins : defaultConfig.plugins,
-      showPhonetic: typeof userConfig.showPhonetic === 'boolean' ? userConfig.showPhonetic : defaultConfig.showPhonetic,
-      showExamples: typeof userConfig.showExamples === 'boolean' ? userConfig.showExamples : defaultConfig.showExamples,
-      maxExamples: typeof userConfig.maxExamples === 'number' ? userConfig.maxExamples : defaultConfig.maxExamples,
-      proxy: userConfig.proxy || getProxyFromEnv()
+      showPhonetic:
+        typeof userConfig.showPhonetic === 'boolean'
+          ? userConfig.showPhonetic
+          : defaultConfig.showPhonetic,
+      showExamples:
+        typeof userConfig.showExamples === 'boolean'
+          ? userConfig.showExamples
+          : defaultConfig.showExamples,
+      maxExamples:
+        typeof userConfig.maxExamples === 'number'
+          ? userConfig.maxExamples
+          : defaultConfig.maxExamples,
+      timeout: typeof userConfig.timeout === 'number' ? userConfig.timeout : defaultConfig.timeout,
+      proxy: userConfig.proxy || getProxyFromEnv(),
+      cache: {
+        enabled:
+          typeof userConfig.cache?.enabled === 'boolean'
+            ? userConfig.cache.enabled
+            : defaultConfig.cache!.enabled,
+        ttl:
+          typeof userConfig.cache?.ttl === 'number'
+            ? userConfig.cache.ttl
+            : defaultConfig.cache!.ttl
+      },
+      externalPlugins: Array.isArray(userConfig.externalPlugins)
+        ? userConfig.externalPlugins
+        : defaultConfig.externalPlugins
     };
 
     return config;
@@ -85,4 +113,4 @@ export async function loadConfig(configPath?: string): Promise<Config> {
       proxy: getProxyFromEnv()
     };
   }
-} 
+}
