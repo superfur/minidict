@@ -21,6 +21,8 @@ export default {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   moduleNameMapper: {
     '^node-fetch$': '<rootDir>/test/__mocks__/node-fetch.ts',
+    '^boxen$': '<rootDir>/test/__mocks__/boxen.ts',
+    '^string-width$': '<rootDir>/test/__mocks__/string-width.ts',
     '^(\\.{1,2}/.*)\\.js$': '$1',
   },
 };

@@ -6,9 +6,16 @@ const modRequire = createRequire(import.meta.url);
 const pkg = modRequire('../package.json');
 import { translate } from './translate.js';
 import { loadConfig } from './config.js';
-import { formatHeader, formatResult, formatErrorResult, formatSummary } from './utils/format.js';
+import {
+  formatHeader,
+  formatResult,
+  formatErrorResult,
+  formatSummary,
+  formatUpdateNotice
+} from './utils/format.js';
 import { clearCache } from './utils/cache.js';
-import type { TranslationResult } from './types.js';
+import { checkForUpdate, runUpdate } from './utils/update.js';
+import type { TranslationResult, ProxyConfig } from './types.js';
 
 interface CommandOptions {
   examples?: boolean;
@@ -19,6 +26,8 @@ interface CommandOptions {
   timeout?: string;
   cache?: boolean;
   clearCache?: boolean;
+  update?: boolean;
+  updateCheck?: boolean;
 }
 
 /** 解析正整数 CLI 参数，非法（NaN / ≤0）时回退到 fallback。 */
@@ -26,6 +35,75 @@ function parsePositiveInt(value: string | undefined, fallback: number): number {
   if (value === undefined) return fallback;
   const n = parseInt(value, 10);
   return Number.isFinite(n) && n > 0 ? n : fallback;
+}
+
+/** 执行 `dict -u`：检查最新版并按检测到的包管理器升级，结果以中文提示呈现。 */
+async function performUpdate(proxy: ProxyConfig | undefined, timeout: number): Promise<void> {
+  const result = await runUpdate({ current: pkg.version, proxy, timeout });
+  switch (result.status) {
+    case 'latest':
+      console.log(chalk.green(`✓ 已是最新版本 v${result.current}`));
+      break;
+    case 'upgraded':
+      console.log(chalk.green(`✓ 已升级到 v${result.latest}（${result.command}）`));
+      break;
+    case 'node-too-old':
+      console.log(
+        chalk.red(
+          `✗ 新版本 v${result.latest} 需要 Node >= ${result.requiredNode}，当前 ${process.version}。\n` +
+            `  请先升级 Node 后再运行 dict -u。`
+        )
+      );
+      break;
+    case 'pm-missing':
+      console.log(
+        chalk.yellow(
+          `⚠ 未找到包管理器命令「${result.packageManager}」。\n` + `  请手动执行：${result.command}`
+        )
+      );
+      break;
+    case 'failed':
+      console.log(
+        chalk.red(
+          `✗ 升级失败。可手动执行：${result.command}\n` +
+            `  若为全局目录权限问题，请尝试加 sudo 或修复 npm 全局前缀。`
+        )
+      );
+      break;
+    case 'check-failed':
+    default:
+      console.log(chalk.yellow('⚠ 无法获取最新版本信息（网络或代理问题），请稍后重试。'));
+      break;
+  }
+}
+
+/** 正常查询后的新版本提示：节流、可关闭、CI 静默，绝不影响主流程。 */
+async function maybeNotifyUpdate(
+  config: Awaited<ReturnType<typeof loadConfig>>,
+  options: CommandOptions,
+  current: string
+): Promise<void> {
+  const disabled =
+    config.autoUpdate?.enabled === false ||
+    options.updateCheck === false ||
+    !!process.env.CI ||
+    !!process.env.MINIDICT_NO_UPDATE_CHECK;
+  if (disabled) return;
+
+  try {
+    const notice = await checkForUpdate({
+      current,
+      proxy: config.proxy,
+      timeout: 3000,
+      intervalMs: config.autoUpdate?.checkInterval
+    });
+    if (notice) {
+      console.log('');
+      console.log(formatUpdateNotice(notice.current, notice.latest, notice.requiredNode));
+    }
+  } catch {
+    // 更新检查失败绝不影响查询结果
+  }
 }
 
 export async function run(): Promise<void> {
@@ -41,10 +119,18 @@ export async function run(): Promise<void> {
     .option('--timeout <number>', '请求超时时间（毫秒）')
     .option('--no-cache', '本次查询不使用缓存')
     .option('--clear-cache', '清空查询缓存后退出')
+    .option('-u, --update', '检查并升级到最新版本后退出')
+    .option('--no-update-check', '本次查询不检查新版本')
     .action(async (textArray: string[], options: CommandOptions) => {
       if (options.clearCache) {
         await clearCache();
         console.log(chalk.green('已清空缓存'));
+        process.exit(0);
+      }
+
+      if (options.update) {
+        const config = await loadConfig(options.config);
+        await performUpdate(config.proxy, config.timeout ?? 10000);
         process.exit(0);
       }
 
@@ -95,6 +181,8 @@ export async function run(): Promise<void> {
 
       const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
       console.log(formatSummary(results, elapsed));
+
+      await maybeNotifyUpdate(config, options, pkg.version);
 
       process.exit(0);
     });

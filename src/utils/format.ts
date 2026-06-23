@@ -1,204 +1,81 @@
 import chalk from 'chalk';
+import boxen, { type Options as BoxenOptions } from 'boxen';
+import stringWidth from 'string-width';
 import type { TranslationResult, Phonetic, Example } from '../types.js';
 
-const BOX_WIDTH = 50;
-const CONTENT_PAD = 2;
-const INNER_WIDTH = BOX_WIDTH - 2 - CONTENT_PAD;
+// 统一卡片宽度：随终端自适应，但限制在 [44, 72] 之间，
+// 保证三种字典的卡片轮廓完全一致。
+const TERM_WIDTH = process.stdout.columns || 80;
+const CARD_WIDTH = Math.max(44, Math.min(TERM_WIDTH - 1, 72));
+// POS / 网络 等标签列对齐宽度（按显示列宽计算）
+const TAG_COLUMN = 6;
 
-const BOX = {
-  topLeft: '╭',
-  topRight: '╮',
-  bottomLeft: '╰',
-  bottomRight: '╯',
-  horizontal: '─',
-  vertical: '│'
-};
-
+// 仅使用「显示列宽 = 1」且被各终端一致渲染的符号。
+// 刻意避开 emoji（🔍🔊⚠）——它们在不同终端/字体下宽度不一致（1 或 2 格），
+// 是卡片右边框错位的根因。
 export const ICONS = {
-  SEARCH: '🔍',
-  SPEAKER: '🔊',
-  WARNING: '⚠'
+  SEARCH: '▸',
+  WARNING: '✗'
 };
 
 export const COLORS = {
   title: chalk.bold.cyan,
   word: chalk.bold.cyan,
   phonetic: chalk.magenta,
-  posTag: chalk.bold.blue,
-  translation: chalk.white,
+  phoneticLabel: chalk.dim,
+  posTag: chalk.bold.cyan,
+  netTag: chalk.bold.green,
+  translation: chalk.whiteBright,
+  netText: chalk.gray,
   pluginName: chalk.bold.yellow,
-  exampleTitle: chalk.bold.cyan,
-  exampleIndex: chalk.cyan,
-  exampleEn: chalk.blue,
+  exampleTitle: chalk.bold.magenta,
+  exampleIndex: chalk.bold.cyan,
+  exampleEn: chalk.white,
   exampleZh: chalk.gray,
+  marker: chalk.cyan,
   border: chalk.gray,
-  error: chalk.red,
-  success: chalk.green,
+  error: chalk.bold.red,
+  success: chalk.bold.green,
   dim: chalk.gray,
   bold: chalk.bold,
   yellow: chalk.yellow
 };
 
-function stripAnsi(str: string): string {
-  return str.replace(/\x1B\[[0-9;]*m/g, '');
+/** 所有卡片共用的 boxen 配置，确保边框风格、内边距、宽度完全统一。 */
+function card(content: string, title?: string): string {
+  const opts: BoxenOptions = {
+    width: CARD_WIDTH,
+    padding: { top: 0, bottom: 0, left: 1, right: 1 },
+    borderStyle: 'round',
+    borderColor: 'gray',
+    ...(title ? { title: COLORS.pluginName(title), titleAlignment: 'left' as const } : {})
+  };
+  return boxen(content, opts);
 }
 
-function wrapText(text: string, maxWidth: number): string[] {
-  const clean = stripAnsi(text);
-  if (clean.length <= maxWidth) return [text];
-
-  const result: string[] = [];
-  const ansiRegex = /\x1B\[[0-9;]*m/g;
-  let pos = 0;
-  let visiblePos = 0;
-  let lineStart = 0;
-  let lastBreak = 0;
-  let lastBreakVisible = 0;
-
-  while (pos < text.length) {
-    const match = ansiRegex.exec(text);
-    if (match && match.index === pos) {
-      pos = match.index + match[0].length;
-      continue;
-    }
-
-    const ch = text[pos];
-    const code = ch.codePointAt(0) || 0;
-    const isDouble = code > 0x7f;
-    const charWidth = isDouble ? 2 : 1;
-
-    if (ch === ' ' || ch === '；' || ch === '，' || ch === '、') {
-      lastBreak = pos;
-      lastBreakVisible = visiblePos;
-    }
-
-    if (visiblePos + charWidth > maxWidth) {
-      if (lastBreakVisible > 0 && visiblePos - lastBreakVisible < maxWidth / 2) {
-        result.push(text.substring(lineStart, lastBreak).replace(/\s+$/, ''));
-        lineStart = text.substring(lastBreak).match(/^\s*/)
-          ? lastBreak + text.substring(lastBreak).match(/^\s*/)![0].length
-          : lastBreak;
-      } else {
-        result.push(text.substring(lineStart, pos).replace(/\s+$/, ''));
-        lineStart = pos;
-      }
-      visiblePos = 0;
-      lastBreakVisible = 0;
-      lastBreak = lineStart;
-      ansiRegex.lastIndex = lineStart;
-      continue;
-    }
-
-    visiblePos += charWidth;
-    pos++;
-  }
-
-  if (lineStart < text.length) {
-    result.push(text.substring(lineStart));
-  }
-
-  return result;
+/** 按显示列宽把标签补齐到固定列，使释义文本左对齐。 */
+function padTag(tag: string): string {
+  const pad = Math.max(1, TAG_COLUMN - stringWidth(tag));
+  return tag + ' '.repeat(pad);
 }
 
-function boxTop(title?: string): string {
-  const b = COLORS.border;
-  if (title) {
-    const coloredTitle = COLORS.pluginName(` ${title} `);
-    const titleVisibleLen = stripAnsi(` ${title} `).length;
-    const remain = BOX_WIDTH - 2 - titleVisibleLen;
-    return (
-      b(BOX.topLeft + BOX.horizontal) +
-      coloredTitle +
-      b(BOX.horizontal.repeat(Math.max(0, remain)) + BOX.topRight)
-    );
-  }
-  return b(BOX.topLeft + BOX.horizontal.repeat(BOX_WIDTH - 2) + BOX.topRight);
+/** 折叠文本内部的换行/制表/多余空白，避免源数据破坏卡片布局。 */
+function clean(text: string): string {
+  return text.replace(/\s+/g, ' ').trim();
 }
 
-function boxLine(content: string): string {
-  const b = COLORS.border;
-  const paddedContent = ' ' + content;
-  const wrapped = wrapText(paddedContent, INNER_WIDTH);
-  return wrapped
-    .map(line => {
-      const visibleLen = stripAnsi(line).length;
-      const padding = Math.max(0, INNER_WIDTH - visibleLen);
-      return b(BOX.vertical) + ' ' + line + ' '.repeat(padding) + ' ' + b(BOX.vertical);
-    })
-    .join('\n');
-}
-
-function boxEmptyLine(): string {
-  const b = COLORS.border;
-  return b(BOX.vertical + ' '.repeat(BOX_WIDTH - 2) + BOX.vertical);
-}
-
-function boxBottom(): string {
-  const b = COLORS.border;
-  return b(BOX.bottomLeft + BOX.horizontal.repeat(BOX_WIDTH - 2) + BOX.bottomRight);
-}
-
-export function formatHeader(word: string, phonetic?: string | Phonetic): string {
-  const lines: string[] = [];
-
-  lines.push(boxTop());
-
-  const headerText = `${ICONS.SEARCH} dict ${COLORS.word(word)}`;
-  const wrapped = wrapText(headerText, INNER_WIDTH);
-  for (const line of wrapped) {
-    const visibleLen = stripAnsi(line).length;
-    const padding = Math.max(0, INNER_WIDTH - visibleLen);
-    lines.push(
-      COLORS.border(BOX.vertical) +
-        ' ' +
-        line +
-        ' '.repeat(padding) +
-        ' ' +
-        COLORS.border(BOX.vertical)
-    );
-  }
-
-  if (phonetic) {
-    const phoneticText = formatPhoneticInline(phonetic);
-    if (phoneticText) {
-      const pWrapped = wrapText(phoneticText, INNER_WIDTH);
-      for (const line of pWrapped) {
-        const visibleLen = stripAnsi(line).length;
-        const padding = Math.max(0, INNER_WIDTH - visibleLen);
-        lines.push(
-          COLORS.border(BOX.vertical) +
-            ' ' +
-            line +
-            ' '.repeat(padding) +
-            ' ' +
-            COLORS.border(BOX.vertical)
-        );
-      }
-    }
-  }
-
-  lines.push(boxBottom());
-
-  return lines.join('\n');
-}
+// ── 音标 ──────────────────────────────────────────────────────────────
 
 function formatPhoneticInline(phonetic: string | Phonetic): string {
   if (typeof phonetic === 'string') {
-    return `${ICONS.SPEAKER} ${COLORS.phonetic(`[${phonetic}]`)}`;
+    return COLORS.phonetic(`[${phonetic}]`);
   }
 
   const parts: string[] = [];
-  if (phonetic.uk) {
-    parts.push(COLORS.phonetic(`英 [${phonetic.uk}]`));
-  }
-  if (phonetic.us) {
-    parts.push(COLORS.phonetic(`美 [${phonetic.us}]`));
-  }
+  if (phonetic.uk) parts.push(COLORS.phoneticLabel('英 ') + COLORS.phonetic(`[${phonetic.uk}]`));
+  if (phonetic.us) parts.push(COLORS.phoneticLabel('美 ') + COLORS.phonetic(`[${phonetic.us}]`));
 
-  if (parts.length > 0) {
-    return `${ICONS.SPEAKER} ${parts.join('  ')}`;
-  }
-  return '';
+  return parts.join('  ');
 }
 
 export function formatPhonetic(phonetic?: string | Phonetic): string {
@@ -206,45 +83,83 @@ export function formatPhonetic(phonetic?: string | Phonetic): string {
   return formatPhoneticInline(phonetic);
 }
 
+// ── 释义 ──────────────────────────────────────────────────────────────
+
+const POS_RE = /^([a-z]+\.)\s*(.+)$/i;
+
+/**
+ * 把原始释义数组规整为统一结构的文本行：
+ *   1. 词性释义（int./n./v. …）→ 对齐的词性标签 + 释义
+ *   2. 网络释义（以「网络」前缀标记，各源已归一）→ 合并为一行「网络  …」
+ *   3. 其它纯文本（如 Google 整句翻译）→ 原样展示
+ * 三种字典经此函数后输出结构一致。
+ */
 function formatTranslations(translations: string[]): string[] {
   if (translations.length === 0) return [];
 
-  return translations.map(t => {
+  const lines: string[] = [];
+  const netMeanings: string[] = [];
+
+  for (const raw of translations) {
+    const t = clean(raw);
+    if (!t) continue;
+
     if (t.startsWith('网络')) {
-      return COLORS.dim('·  ' + t.replace('网络', '').trim());
+      const text = t.replace(/^网络/, '').trim();
+      if (text) netMeanings.push(text);
+      continue;
     }
 
-    const match = t.match(/^([a-z]+\.)\s*(.+)$/i);
+    const match = t.match(POS_RE);
     if (match) {
-      const pos = match[1];
-      const text = match[2];
-      const posColored = COLORS.posTag(pos);
-      const posVisibleLen = pos.length;
-      const padLen = 6 - posVisibleLen;
-      return posColored + ' '.repeat(padLen) + COLORS.translation(text);
+      const pos = match[1].toLowerCase();
+      lines.push(COLORS.posTag(padTag(pos)) + COLORS.translation(match[2]));
+    } else {
+      lines.push(COLORS.translation(t));
     }
+  }
 
-    return COLORS.translation(t);
-  });
+  if (netMeanings.length > 0) {
+    // 合并网络释义为一行：拆分、去重、取前 6 条，保证 Youdao（多条）与 Bing（单条）一致，
+    // 也避免过长释义把「网络」标签挤到单独一行。
+    const merged = [...new Set(netMeanings.flatMap(m => m.split(/[；;]/).map(s => s.trim())))]
+      .filter(Boolean)
+      .slice(0, 6)
+      .join('；');
+    lines.push(COLORS.netTag(padTag('网络')) + COLORS.netText(merged));
+  }
+
+  return lines;
 }
+
+// ── 例句 ──────────────────────────────────────────────────────────────
 
 function formatExamples(examples: Example[], maxExamples: number): string[] {
   if (!examples || examples.length === 0) return [];
 
-  const lines: string[] = [];
+  const lines: string[] = [COLORS.exampleTitle('例句')];
   const limited = examples.slice(0, maxExamples);
 
-  lines.push(COLORS.exampleTitle('例句'));
-
   limited.forEach((ex, i) => {
-    lines.push(`  ${COLORS.exampleIndex(`${i + 1}.`)}  ${COLORS.exampleEn(ex.en)}`);
-    lines.push(`      ${COLORS.exampleZh(ex.zh)}`);
-    if (i < limited.length - 1) {
-      lines.push('');
-    }
+    lines.push(`${COLORS.exampleIndex(`${i + 1}.`)} ${COLORS.exampleEn(clean(ex.en))}`);
+    lines.push(`   ${COLORS.exampleZh(clean(ex.zh))}`);
+    if (i < limited.length - 1) lines.push('');
   });
 
   return lines;
+}
+
+// ── 对外渲染入口 ───────────────────────────────────────────────────────
+
+export function formatHeader(word: string, phonetic?: string | Phonetic): string {
+  const lines: string[] = [
+    `${COLORS.marker(ICONS.SEARCH)} ${COLORS.dim('dict')} ${COLORS.word(word)}`
+  ];
+  if (phonetic) {
+    const p = formatPhoneticInline(phonetic);
+    if (p) lines.push(p);
+  }
+  return card(lines.join('\n'));
 }
 
 export function formatResult(
@@ -253,44 +168,30 @@ export function formatResult(
   showExamples: boolean,
   maxExamples: number
 ): string {
-  const lines: string[] = [];
-
-  lines.push(boxTop(result.pluginName));
-  lines.push(boxEmptyLine());
+  const sections: string[][] = [];
 
   if (showPhonetic && result.phonetic) {
-    const phoneticText = formatPhoneticInline(result.phonetic);
-    if (phoneticText) {
-      lines.push(boxLine(phoneticText));
-      lines.push(boxEmptyLine());
-    }
+    const p = formatPhoneticInline(result.phonetic);
+    if (p) sections.push([p]);
   }
 
   const translationLines = formatTranslations(result.translations);
-  for (const tl of translationLines) {
-    lines.push(boxLine(tl));
+  if (translationLines.length > 0) {
+    sections.push(translationLines);
+  } else {
+    sections.push([COLORS.dim('（无释义）')]);
   }
 
   if (showExamples && result.examples && result.examples.length > 0) {
-    lines.push(boxEmptyLine());
-    const exampleLines = formatExamples(result.examples, maxExamples);
-    for (const el of exampleLines) {
-      lines.push(boxLine(el));
-    }
+    sections.push(formatExamples(result.examples, maxExamples));
   }
 
-  lines.push(boxEmptyLine());
-  lines.push(boxBottom());
-
-  return lines.join('\n');
+  // 各区块之间空一行，结构在三种字典间保持一致。
+  const content = sections.map(s => s.join('\n')).join('\n\n');
+  return card(content, result.pluginName);
 }
 
 export function formatErrorResult(result: TranslationResult): string {
-  const lines: string[] = [];
-
-  lines.push(boxTop(result.pluginName));
-  lines.push(boxEmptyLine());
-
   let reason = '不可用';
   if (result.error) {
     if (result.error.includes('超时')) {
@@ -302,12 +203,9 @@ export function formatErrorResult(result: TranslationResult): string {
     }
   }
 
-  const errorLine = `${ICONS.WARNING} ${COLORS.error(reason)}${result.error ? ' · ' + COLORS.dim(result.error) : ''}`;
-  lines.push(boxLine(errorLine));
-  lines.push(boxEmptyLine());
-  lines.push(boxBottom());
-
-  return lines.join('\n');
+  const detail = result.error ? ' · ' + COLORS.dim(result.error) : '';
+  const content = `${COLORS.error(ICONS.WARNING + ' ' + reason)}${detail}`;
+  return card(content, result.pluginName);
 }
 
 export function formatResultCompact(
@@ -329,38 +227,36 @@ export function formatError(message: string, pluginName?: string): string {
 }
 
 export function formatLoading(text: string): string {
-  return chalk.cyan(`  ${ICONS.SPEAKER} ${text}...`);
+  return chalk.cyan(`  ${ICONS.SEARCH} ${text}...`);
 }
 
 export function formatSummary(results: TranslationResult[], elapsed?: string): string {
-  const lines: string[] = [];
-
   if (results.length === 0) {
-    lines.push(boxTop());
-    lines.push(boxLine(COLORS.error('未找到任何翻译结果')));
-    lines.push(boxBottom());
-    return lines.join('\n');
+    return card(COLORS.error('未找到任何翻译结果'));
   }
 
-  const statusParts: string[] = [];
-  for (const result of results) {
-    if (result.error) {
-      statusParts.push(`${COLORS.error(result.pluginName + ' ✗')}`);
-    } else {
-      statusParts.push(`${COLORS.success(result.pluginName + ' ✓')}`);
-    }
-  }
+  const statusParts = results.map(result =>
+    result.error ? COLORS.error(`${result.pluginName} ✗`) : COLORS.success(`${result.pluginName} ✓`)
+  );
 
   let summary = '';
-  if (elapsed) {
-    summary += COLORS.dim(`${elapsed}s`) + '  ';
-  }
+  if (elapsed) summary += COLORS.dim(`${elapsed}s`) + '  ';
   summary += statusParts.join('  ');
 
-  lines.push('');
-  lines.push(boxTop());
-  lines.push(boxLine(summary));
-  lines.push(boxBottom());
+  return card(summary);
+}
 
-  return lines.join('\n');
+/** 查询结束后的一行新版本提示（非卡片，保持轻量、配色统一）。 */
+export function formatUpdateNotice(current: string, latest: string, requiredNode?: string): string {
+  const head = COLORS.success('✨ 新版本可用');
+  const ver = `${COLORS.dim(current)} ${COLORS.dim('→')} ${COLORS.bold(latest)}`;
+  let line = `${head}  ${ver}  ${COLORS.dim('运行')} ${COLORS.word('dict -u')} ${COLORS.dim('升级')}`;
+  if (requiredNode) {
+    line +=
+      '\n' +
+      COLORS.error(
+        `   ${ICONS.WARNING} 新版本需要 Node >= ${requiredNode}，当前 ${process.version}，请先升级 Node`
+      );
+  }
+  return line;
 }

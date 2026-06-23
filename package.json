@@ -1,6 +1,6 @@
 {
     "name": "minidict",
-    "version": "2.5.0",
+    "version": "2.6.0",
     "description": "一个简单易用的命令行词典工具",
     "type": "module",
     "main": "./dist/index.js",
@@ -49,6 +49,7 @@
     "author": "Septem <septem@gmail.com>",
     "license": "MIT",
     "dependencies": {
+        "boxen": "^8.0.1",
         "chalk": "^4.1.2",
         "cheerio": "^1.2.0",
         "commander": "^12.1.0",

@@ -110,9 +110,21 @@ Options:
       --config <path>         指定配置文件路径（默认 ~/.minidict.json）
       --no-cache              本次查询不使用缓存
       --clear-cache           清空查询缓存后退出
+  -u, --update                检查并升级到最新版本后退出
+      --no-update-check       本次查询不检查新版本
   -h, --help                  显示帮助
   -v, --version               显示版本
 ```
+
+### 自动更新
+
+- 每次查询结束后，minidict 会在后台静默检查 npm 上是否有新版本（默认开启，**每 24 小时最多检查一次**，结果缓存在 `~/.minidict/update-check.json`）。有新版本时会在结尾给出一行提示。
+- `dict -u`（或 `dict --update`）会检查最新版本，并**自动识别你的全局安装来源（npm/pnpm/yarn/bun）执行对应的升级命令**。
+  - 若新版本要求的 Node 版本高于当前，或所需包管理器命令缺失，会明确提示问题所在，而不会静默失败。
+- 关闭自动检查的三种方式（任一即可）：
+  - 单次：加 `--no-update-check`
+  - 环境变量：设置 `MINIDICT_NO_UPDATE_CHECK=1`（CI 环境会自动跳过）
+  - 永久：在 `~/.minidict.json` 中设置 `"autoUpdate": { "enabled": false }`
 
 ## 使用示例
 
@@ -266,6 +278,23 @@ bun run format:check    # 仅检查
 - 版本规范：遵循语义化版本（SemVer）
 - 发布前自动构建：`prepublishOnly` 会触发 `bun run build`
 - 建议使用 `npm pack --dry-run` 确认发布包内容
+
+### 通过 tag 自动发布到 npm
+
+发布由 `.github/workflows/release.yml` 在 push `v*` tag 时自动完成（lint → test → build → 校验 tag 与版本一致 → `npm publish`）。
+
+一次性准备：在 GitHub 仓库 `Settings → Secrets and variables → Actions` 添加 `NPM_TOKEN`（npm 上生成的 Automation token）。
+
+> ⚠️ **当前 `NPM_TOKEN` 有效期至 2026-09-21**，到期后发布会失败，需在 npm 重新生成 token 并更新该 Secret。
+
+发布某个版本：
+
+```bash
+# 1. 确认 package.json 的 version 已更新（例如 2.6.0）并合入 main
+# 2. 打 tag 并推送，即触发发布
+git tag v2.6.0
+git push origin v2.6.0
+```
 
 ## 许可证
 

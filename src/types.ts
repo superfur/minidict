@@ -13,6 +13,13 @@ export interface CacheConfig {
   ttl: number;
 }
 
+export interface AutoUpdateConfig {
+  /** 是否在查询后静默检查新版本（默认启用） */
+  enabled: boolean;
+  /** 两次检查之间的最小间隔，单位毫秒（默认 24 小时） */
+  checkInterval: number;
+}
+
 export interface Config {
   plugins: string[];
   showPhonetic: boolean;
@@ -22,6 +29,8 @@ export interface Config {
   proxy?: ProxyConfig;
   /** 缓存配置 */
   cache?: CacheConfig;
+  /** 自动更新检查配置 */
+  autoUpdate?: AutoUpdateConfig;
   /** 额外的外部插件模块说明符（npm 包名或绝对路径），按需动态加载 */
   externalPlugins?: string[];
 }

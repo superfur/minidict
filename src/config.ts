@@ -4,6 +4,7 @@ import os from 'os';
 import type { Config, ProxyConfig } from './types.js';
 
 const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
+const ONE_DAY_MS = 24 * 60 * 60 * 1000;
 
 const defaultConfig: Config = {
   plugins: ['bing', 'youdao', 'google'],
@@ -12,6 +13,7 @@ const defaultConfig: Config = {
   maxExamples: 3,
   timeout: 10000,
   cache: { enabled: true, ttl: SEVEN_DAYS_MS },
+  autoUpdate: { enabled: true, checkInterval: ONE_DAY_MS },
   externalPlugins: []
 };
 
@@ -99,6 +101,16 @@ export async function loadConfig(configPath?: string): Promise<Config> {
           typeof userConfig.cache?.ttl === 'number'
             ? userConfig.cache.ttl
             : defaultConfig.cache!.ttl
+      },
+      autoUpdate: {
+        enabled:
+          typeof userConfig.autoUpdate?.enabled === 'boolean'
+            ? userConfig.autoUpdate.enabled
+            : defaultConfig.autoUpdate!.enabled,
+        checkInterval:
+          typeof userConfig.autoUpdate?.checkInterval === 'number'
+            ? userConfig.autoUpdate.checkInterval
+            : defaultConfig.autoUpdate!.checkInterval
       },
       externalPlugins: Array.isArray(userConfig.externalPlugins)
         ? userConfig.externalPlugins

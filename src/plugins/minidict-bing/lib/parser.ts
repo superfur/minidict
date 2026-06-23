@@ -37,10 +37,14 @@ export function parse(html: string): TranslationResult {
       }
     });
 
-    // 网络释义 - 尝试多个选择器
+    // 网络释义 - 尝试多个选择器。统一以「网络」前缀标记（剥离 Bing 自带的
+    // 「Web」标签），与 Youdao 保持一致，由 formatter 合并展示。
     $('.def_fl .df_div2, .def_fl .web_phrase, .web_phrase, .web-trans').each((_, el) => {
-      const text = $(el).text().trim();
-      if (text && !translations.includes(text)) {
+      const text = $(el)
+        .text()
+        .trim()
+        .replace(/^Web\s*/i, '');
+      if (text && !translations.includes(`网络${text}`)) {
         translations.push(`网络${text}`);
       }
     });
@@ -83,7 +87,10 @@ export function parse(html: string): TranslationResult {
 
     // 过滤翻译结果
     const filteredTranslations = translations
-      .map(t => t.replace(/^na\./, '').trim())  // 移除 "na." 前缀
+      .map(t => t.replace(/^na\./, '').trim()) // 移除 "na." 前缀
+      // Bing 把网络释义混在主释义列表里、以「Web」开头，统一改写为「网络」前缀，
+      // 与 Youdao 一致，交由 formatter 合并展示。
+      .map(t => t.replace(/^Web\s*/i, '网络'))
       .filter(t => {
         if (t.length === 0) return false;
         if (t.includes('http')) return false;

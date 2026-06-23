@@ -1,5 +1,27 @@
 # Changelog
 
+## v2.6.0 (2026-06-23)
+---
+* **三种字典输出统一**
+  - Bing/Youdao/Google 统一为相同结构：音标 → 词性释义 → 网络释义 → 例句
+  - 网络释义标签统一为「网络」（Bing 原 `Web` 前缀已归一），多条合并去重为一行
+  - 词性标签（int./n./v./adj. …）按显示列宽对齐
+* **边框轮廓修复**
+  - 改用 `boxen` 绘制所有卡片，借 `string-width` 正确处理中英文/全角宽度
+  - 移除 emoji（🔍🔊⚠）——它们在不同终端宽度不一致，是右边框错位的根因，改用宽度恒为 1 的符号
+  - 折叠源文本中的换行/制表符，避免破坏卡片布局
+* **Google 增强**
+  - 新增音标与按词性归类的释义（`dt=rm` / `dt=bd`），与其它词典结构一致
+* **Bing / Youdao 短语句子修复**
+  - Bing 短语/整句改用带令牌的 `ttranslatev3`（www.bing.com）真实机翻
+  - Youdao 短语改为解析 jsonapi（释义/音标/网络/例句）；整句给出明确降级提示
+* **新增自动更新**
+  - 查询后静默检查新版本（默认开启，24h 节流，CI 与 `--no-update-check` / `MINIDICT_NO_UPDATE_CHECK` / 配置可关闭）
+  - `dict -u` / `dict --update`：检测包管理器（npm/pnpm/yarn/bun）并执行对应全局升级
+  - 当新版本要求的 Node 版本高于当前、或所需包管理器缺失时，明确告知问题
+* **发布流程**
+  - 新增 tag 触发的 GitHub Actions release workflow（push `v*` → lint/test/build → 校验版本 → `npm publish`）
+
 ## v2.4.3 (2026-04-25)
 ---
 * **调整默认超时时间**
