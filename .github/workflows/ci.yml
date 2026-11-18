@@ -9,13 +9,28 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # 运行时是 Node：在声明支持的各个主版本上验证（engines: >=20.18.1）。
+        node-version: [20, 22, 24]
     steps:
       - uses: actions/checkout@v4
+      - name: Setup Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
       - run: bun install --frozen-lockfile
       - run: bun run lint
+      - run: bun run format:check
+      - run: bun run typecheck
       - run: bun run test
       - run: bun run build
+      - name: Smoke test the built CLI
+        run: |
+          node dist/cli.js --version
+          node dist/cli.js --list-plugins

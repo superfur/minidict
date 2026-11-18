@@ -1,0 +1,167 @@
+{
+ "ce": {
+  "source": {
+   "name": "有道词典",
+   "url": "https://dict.youdao.com"
+  },
+  "word": [
+   {
+    "trs": [
+     {
+      "tr": [
+       {
+        "l": {
+         "i": [
+          "",
+          {
+           "#text": "apple",
+           "@action": "link",
+           "@href": "app:ds:apple"
+          }
+         ],
+         "#tran": "苹果；苹果树；苹果公司（Apple Inc.）；"
+        }
+       }
+      ]
+     }
+    ],
+    "return-phrase": {
+     "l": {
+      "i": "苹果"
+     }
+    }
+   }
+  ]
+ },
+ "web_trans": {
+  "web-translation": [
+   {
+    "key": "苹果",
+    "trans": [
+     {
+      "value": "Apple"
+     },
+     {
+      "value": "apple"
+     }
+    ]
+   },
+   {
+    "key": "苹果公司",
+    "trans": [
+     {
+      "value": "apple inc"
+     },
+     {
+      "value": "Apple"
+     },
+     {
+      "value": "AAPL"
+     },
+     {
+      "value": "Apple Computer"
+     }
+    ]
+   },
+   {
+    "key": "苹果酒",
+    "trans": [
+     {
+      "value": "cider"
+     },
+     {
+      "value": "apple wine"
+     },
+     {
+      "value": "Apfelwein"
+     }
+    ]
+   },
+   {
+    "key": "苹果酸",
+    "trans": [
+     {
+      "value": "malic acid"
+     },
+     {
+      "value": "malate"
+     },
+     {
+      "value": "hydroxysuccinic acid"
+     }
+    ]
+   },
+   {
+    "key": "苹果商店",
+    "trans": [
+     {
+      "value": "Apple Store"
+     },
+     {
+      "value": "App Store"
+     },
+     {
+      "value": "Apple Shops"
+     }
+    ]
+   }
+  ]
+ },
+ "blng_sents_part": {
+  "sentence-count": 30,
+  "sentence-pair": [
+   {
+    "sentence": "她文雅地咬了一小口苹果。",
+    "sentence-translation": "She took a dainty little bite of the apple."
+   },
+   {
+    "sentence": "树上都挂满了苹果。",
+    "sentence-translation": "The trees were laden with apples."
+   },
+   {
+    "sentence": "这苹果尝起来跟我记忆中的完全一样–味道十足，酸中带甜。",
+    "sentence-translation": "The apple tasted just as I remembered – sharp, sour, yet sweet."
+   }
+  ],
+  "more": "blng_sents",
+  "trs-classify": [
+   {
+    "proportion": "100%",
+    "tr": "全部"
+   },
+   {
+    "proportion": "100.0%",
+    "tr": "apple"
+   }
+  ]
+ },
+ "simple": {
+  "query": "苹果",
+  "word": [
+   {
+    "return-phrase": "苹果"
+   }
+  ]
+ },
+ "meta": {
+  "input": "苹果",
+  "guessLanguage": "zh",
+  "isHasSimpleDict": "1",
+  "le": "en",
+  "lang": "eng",
+  "dicts": [
+   "web_trans",
+   "special",
+   "blng_sents_part",
+   "ce",
+   "aiDefinition",
+   "baike",
+   "meta",
+   "wuguanghua",
+   "ce_new",
+   "simple",
+   "media_sents_part",
+   "newhh"
+  ]
+ }
+}

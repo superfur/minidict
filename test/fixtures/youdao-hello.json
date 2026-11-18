@@ -1,0 +1,228 @@
+{
+ "ec": {
+  "exam_type": [
+   "初中",
+   "高中",
+   "CET4",
+   "CET6",
+   "考研"
+  ],
+  "source": {
+   "name": "有道词典",
+   "url": "https://dict.youdao.com"
+  },
+  "word": [
+   {
+    "usphone": "həˈloʊ",
+    "ukphone": "həˈləʊ",
+    "ukspeech": "hello&type=1",
+    "trs": [
+     {
+      "tr": [
+       {
+        "l": {
+         "i": [
+          "int. 喂，你好（用于问候或打招呼）；喂，你好（打电话时的招呼语）；喂，你好（引起别人注意的招呼语）；<非正式>喂，嘿 (认为别人说了蠢话或分心)；<英，旧>嘿（表示惊讶）"
+         ]
+        }
+       }
+      ]
+     },
+     {
+      "tr": [
+       {
+        "l": {
+         "i": [
+          "n. 招呼，问候；（Hello）（法、印、美、俄）埃洛（人名）"
+         ]
+        }
+       }
+      ]
+     },
+     {
+      "tr": [
+       {
+        "l": {
+         "i": [
+          "v. 说（或大声说）“喂”；打招呼"
+         ]
+        }
+       }
+      ]
+     }
+    ],
+    "wfs": [
+     {
+      "wf": {
+       "name": "复数",
+       "value": "hellos"
+      }
+     },
+     {
+      "wf": {
+       "name": "第三人称单数",
+       "value": "helloes"
+      }
+     },
+     {
+      "wf": {
+       "name": "现在分词",
+       "value": "helloing"
+      }
+     },
+     {
+      "wf": {
+       "name": "过去式",
+       "value": "helloed"
+      }
+     },
+     {
+      "wf": {
+       "name": "过去分词",
+       "value": "helloed"
+      }
+     }
+    ],
+    "return-phrase": {
+     "l": {
+      "i": "hello"
+     }
+    },
+    "usspeech": "hello&type=2"
+   }
+  ]
+ },
+ "web_trans": {
+  "web-translation": [
+   {
+    "key": "Hello",
+    "trans": [
+     {
+      "value": "您好"
+     },
+     {
+      "value": "哈啰"
+     },
+     {
+      "value": "喂"
+     }
+    ]
+   },
+   {
+    "key": "Hello Kitty",
+    "trans": [
+     {
+      "value": "凯蒂猫"
+     },
+     {
+      "value": "吉蒂猫"
+     }
+    ]
+   },
+   {
+    "key": "Hello Neighbor",
+    "trans": [
+     {
+      "value": "你好邻居"
+     }
+    ]
+   }
+  ]
+ },
+ "blng_sents_part": {
+  "sentence-count": 30,
+  "sentence-pair": [
+   {
+    "sentence": "'Oh, hello,' he said, with a smile.",
+    "sentence-translation": "“嗨，你好。”他微笑着说。"
+   },
+   {
+    "sentence": "Why not start a \"hello\" today?",
+    "sentence-translation": "为什么不从今天开始说“你好”呢？"
+   },
+   {
+    "sentence": "Let's go and say hello to her.",
+    "sentence-translation": "我们去跟她打个招呼吧。"
+   }
+  ],
+  "more": "blng_sents",
+  "trs-classify": [
+   {
+    "proportion": "100%",
+    "tr": "全部"
+   },
+   {
+    "proportion": "74.2%",
+    "tr": "你好"
+   },
+   {
+    "proportion": "10.5%",
+    "tr": "您好"
+   },
+   {
+    "proportion": "9.0%",
+    "tr": "喂"
+   },
+   {
+    "proportion": "3.4%",
+    "tr": "哈罗"
+   },
+   {
+    "proportion": "1.9%",
+    "tr": "你好啊"
+   },
+   {
+    "proportion": "1.1%",
+    "tr": "哈啰"
+   }
+  ]
+ },
+ "simple": {
+  "query": "hello",
+  "word": [
+   {
+    "usphone": "həˈloʊ",
+    "ukphone": "həˈləʊ",
+    "ukspeech": "hello&type=1",
+    "return-phrase": "hello",
+    "usspeech": "hello&type=2",
+    "collegeExamVoice": {
+     "speechWord": "hello"
+    }
+   }
+  ]
+ },
+ "meta": {
+  "input": "hello",
+  "guessLanguage": "eng",
+  "isHasSimpleDict": "1",
+  "le": "en",
+  "lang": "eng",
+  "dicts": [
+   "web_trans",
+   "oxfordAdvanceHtml",
+   "ee",
+   "blng_sents_part",
+   "aiDefinition",
+   "individual",
+   "collins_primary",
+   "oxfordAdvanceTen",
+   "auth_sents_part",
+   "simple",
+   "media_sents_part",
+   "expand_ec",
+   "etym",
+   "phrs",
+   "oxford",
+   "senior",
+   "syno",
+   "music_sents",
+   "collins",
+   "meta",
+   "webster",
+   "wikipedia_digest",
+   "ec",
+   "oxfordAdvance"
+  ]
+ }
+}

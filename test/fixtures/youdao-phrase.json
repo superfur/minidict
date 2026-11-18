@@ -1,0 +1,156 @@
+{
+ "ec": {
+  "source": {
+   "name": "有道词典",
+   "url": "https://dict.youdao.com"
+  },
+  "word": [
+   {
+    "trs": [
+     {
+      "tr": [
+       {
+        "l": {
+         "sentence": [
+          {
+           "enShow": "<b>I love you</b> more than anything in this world.",
+           "en": "I love you more than anything in this world.",
+           "type": "双语例句-《精编例句》",
+           "zh": "我爱你胜过这个世界上的任何事物。"
+          }
+         ],
+         "i": [
+          "我爱你：表达对某人深深的爱意和情感。"
+         ]
+        }
+       }
+      ]
+     }
+    ],
+    "speech": "I+love+you",
+    "return-phrase": {
+     "l": {
+      "i": "I love you"
+     }
+    }
+   }
+  ]
+ },
+ "web_trans": {
+  "web-translation": [
+   {
+    "key": "I Love You",
+    "trans": [
+     {
+      "value": "我爱你"
+     },
+     {
+      "value": "爱老虎油"
+     }
+    ]
+   },
+   {
+    "key": "Because I love you",
+    "trans": [
+     {
+      "value": "因为我爱你"
+     },
+     {
+      "value": "因我爱你"
+     },
+     {
+      "value": "因为爱你"
+     }
+    ]
+   },
+   {
+    "key": "And I Love You So",
+    "trans": [
+     {
+      "value": "我是如此爱你"
+     },
+     {
+      "value": "爱你爱之深"
+     },
+     {
+      "value": "爱你情深"
+     }
+    ]
+   },
+   {
+    "key": "I Love You Phillip Morris",
+    "trans": [
+     {
+      "value": "娘子汉大丈夫"
+     },
+     {
+      "value": "我爱你莫里斯"
+     },
+     {
+      "value": "基志双雄"
+     },
+     {
+      "value": "我爱莫里斯"
+     }
+    ]
+   },
+   {
+    "key": "Rose Rose I love you",
+    "trans": [
+     {
+      "value": "玫瑰玫瑰我爱你"
+     },
+     {
+      "value": "玫瑰我爱你"
+     }
+    ]
+   }
+  ]
+ },
+ "blng_sents_part": {
+  "sentence-count": 29,
+  "sentence-pair": [
+   {
+    "sentence": "I love you.",
+    "sentence-translation": "我爱你。"
+   },
+   {
+    "sentence": "The words 'I love you' were written inside a big red heart.",
+    "sentence-translation": "“我爱你”这几个字写在一个大红心里。"
+   },
+   {
+    "sentence": "I love you always and forever.",
+    "sentence-translation": "我一直爱你，永远爱你。"
+   }
+  ],
+  "more": "blng_sents"
+ },
+ "simple": {
+  "query": "I love you",
+  "word": [
+   {
+    "speech": "I+love+you",
+    "return-phrase": "I love you"
+   }
+  ]
+ },
+ "meta": {
+  "input": "I love you",
+  "guessLanguage": "eng",
+  "isHasSimpleDict": "1",
+  "le": "en",
+  "lang": "eng",
+  "dicts": [
+   "web_trans",
+   "ee",
+   "blng_sents_part",
+   "music_sents",
+   "baike",
+   "meta",
+   "auth_sents_part",
+   "simple",
+   "media_sents_part",
+   "ec"
+  ]
+ }
+}

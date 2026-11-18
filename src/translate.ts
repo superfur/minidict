@@ -1,78 +1,47 @@
-import type { TranslationResult, Config, DictionaryPlugin } from './types.js';
-import bingPlugin from './plugins/minidict-bing/index.js';
-import youdaoPlugin from './plugins/minidict-youdao/index.js';
-import googlePlugin from './plugins/minidict-google/index.js';
-import { getCached, setCached } from './utils/cache.js';
+import type {
+  Config,
+  DictionaryPlugin,
+  TranslateContext,
+  TranslationResult,
+  UserConfig
+} from './types.js';
+import { resolveConfig } from './config.js';
+import { MinidictError, errorCodeOf, errorMessageOf } from './errors.js';
+import { resolveLanguages } from './lang.js';
+import { BUILTIN_PLUGINS, buildRegistry } from './plugins/index.js';
+import { getCached, normalizeQuery, pruneCache, setCached } from './utils/cache.js';
 
-interface PluginTask {
-  name: string;
-  plugin: DictionaryPlugin;
-}
+/** 插件请求成功但未返回任何释义时使用的错误信息。 */
+export const NO_RESULT_MESSAGE = '未找到释义';
 
-const PLUGIN_MAP: Record<string, PluginTask> = {
-  bing: { name: 'bing', plugin: bingPlugin },
-  youdao: { name: 'youdao', plugin: youdaoPlugin },
-  google: { name: 'google', plugin: googlePlugin }
-};
-
-const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
-
-/** 返回内置插件名列表，供 CLI/外部校验使用 */
+/** 返回内置插件名列表。 */
 export function availablePlugins(): string[] {
-  return Object.keys(PLUGIN_MAP);
+  return Object.keys(BUILTIN_PLUGINS);
 }
 
 function capitalize(name: string): string {
   return name.charAt(0).toUpperCase() + name.slice(1);
 }
 
-/** 从模块说明符推导插件名：'minidict-openai' → 'openai'，'/path/foo.js' → 'foo'。 */
-function derivePluginName(spec: string): string {
-  const base = spec.split('/').pop() || spec;
-  return base
-    .replace(/\.[mc]?js$/, '')
-    .replace(/^minidict-/, '')
-    .toLowerCase();
-}
-
-/**
- * 构建运行时插件注册表：内置插件 + 配置中声明的外部插件（按需动态加载）。
- * 外部插件加载失败时静默跳过——引用它时会以「未知插件」形式提示，不影响其它插件。
- */
-async function buildRegistry(config: Config): Promise<Record<string, PluginTask>> {
-  const registry: Record<string, PluginTask> = { ...PLUGIN_MAP };
-  for (const spec of config.externalPlugins ?? []) {
-    try {
-      const mod = await import(spec);
-      const plugin = (mod.default ?? mod) as DictionaryPlugin;
-      if (typeof plugin?.translate !== 'function') continue;
-      const name = derivePluginName(spec);
-      registry[name] = { name, plugin };
-    } catch {
-      // 加载失败：跳过该外部插件
-    }
-  }
-  return registry;
-}
-
+/** 返回例句被截断到 maxExamples 条的新结果（不修改入参）；maxExamples ≤ 0 表示不限制。 */
 export function applyMaxExamples(
   result: TranslationResult,
   maxExamples: number
 ): TranslationResult {
-  if (result.examples && maxExamples) {
-    result.examples = result.examples.slice(0, maxExamples);
+  if (!result.examples || !(maxExamples > 0) || result.examples.length <= maxExamples) {
+    return result;
   }
-  return result;
+  return { ...result, examples: result.examples.slice(0, maxExamples) };
 }
 
 /**
- * 编排级安全网：插件自身已有 fetch 超时，但解析等非网络阶段仍可能卡住。
- * 这里给整个插件调用套一个更宽松的总超时，确保 CLI 永不无限挂起。
+ * 编排级安全网：给整个插件调用套一个总超时，确保即使插件自身实现有缺陷
+ * （如外部插件忽略了 context.timeout），调用方也不会无限挂起。
  */
 function withGuardTimeout<T>(promise: Promise<T>, guardMs: number, label: string): Promise<T> {
   return new Promise<T>((resolve, reject) => {
     const timer = setTimeout(
-      () => reject(new Error(`插件 ${label} 响应超时 (${guardMs}ms)`)),
+      () => reject(new MinidictError('TIMEOUT', `插件 ${label} 响应超时 (${guardMs}ms)`)),
       guardMs
     );
     promise.then(
@@ -88,84 +57,135 @@ function withGuardTimeout<T>(promise: Promise<T>, guardMs: number, label: string
   });
 }
 
-export async function translate(
+function failure(
   word: string,
-  config: Config,
-  onResult?: (result: TranslationResult) => void
-): Promise<TranslationResult[]> {
-  const plugins = config.plugins || ['bing', 'youdao'];
-  const timeout = config.timeout || 10000;
-  // 总超时安全网需覆盖 fetch 超时 + 一次重试 + 退避，留足缓冲。
-  const guardMs = timeout * 2 + 5000;
-  const cacheEnabled = config.cache?.enabled ?? true;
-  const cacheTtl = config.cache?.ttl ?? SEVEN_DAYS_MS;
+  pluginName: string,
+  error: unknown,
+  extra: Partial<TranslationResult> = {}
+): TranslationResult {
+  return {
+    word,
+    translations: [],
+    examples: [],
+    pluginName,
+    error: errorMessageOf(error),
+    errorCode: errorCodeOf(error),
+    ...extra
+  };
+}
 
-  const registry = await buildRegistry(config);
+async function runPlugin(
+  name: string,
+  plugin: DictionaryPlugin,
+  text: string,
+  context: TranslateContext,
+  config: Config
+): Promise<TranslationResult> {
+  const displayName = plugin.displayName || capitalize(name);
+  const meta = { from: context.from, to: context.to };
+  const cacheKey = { plugin: name, text, from: context.from, to: context.to };
+  const started = Date.now();
 
-  // 仅对「被选中且有效」的插件设置代理/超时（去重，避免重复调用）。
-  const configured = new Set<string>();
-  for (const pluginName of plugins) {
-    const task = registry[pluginName];
-    if (task && !configured.has(pluginName)) {
-      task.plugin.setProxy?.(config.proxy);
-      task.plugin.setTimeout?.(timeout);
-      configured.add(pluginName);
+  if (config.cache.enabled) {
+    const cached = await getCached(cacheKey, config.cache.ttl);
+    if (cached) {
+      return { ...cached, ...meta, cached: true, elapsedMs: Date.now() - started };
     }
   }
 
-  const results: TranslationResult[] = [];
+  try {
+    // 2.x 遗留接口：仍然调用，保证旧的外部插件无需修改即可工作。
+    plugin.setProxy?.(context.proxy);
+    plugin.setTimeout?.(context.timeout);
 
-  // 每个插件查询封装为一个 Promise<TranslationResult>，永不 reject；
-  // 未知插件名同样产出一个 error 结果（而非静默丢弃），便于用户察觉拼写错误。
-  const tasks = plugins.map(async (pluginName): Promise<TranslationResult> => {
-    const task = registry[pluginName];
-    if (!task) {
-      return {
-        word,
-        translations: [],
-        examples: [],
-        pluginName: capitalize(pluginName),
-        error: `未知插件 "${pluginName}"，可用插件：${Object.keys(registry).join(' / ')}`
-      };
+    // 总超时需覆盖「两次请求（如先取令牌再翻译）+ 一次重试」，留足缓冲。
+    const guardMs = context.timeout * 2 + 5000;
+    const raw = await withGuardTimeout(plugin.translate(text, context), guardMs, name);
+
+    if (raw?.error) {
+      throw new MinidictError(raw.errorCode ?? 'UNKNOWN', raw.error);
+    }
+    // 「请求成功但没有任何释义」不是成功：既不显示 ✓，也不写入缓存。
+    if (!Array.isArray(raw?.translations) || raw.translations.length === 0) {
+      throw new MinidictError('NO_RESULT', NO_RESULT_MESSAGE);
     }
 
-    // 命中缓存则直接返回（仍按当前 maxExamples 截断）。
-    if (cacheEnabled) {
-      const cached = await getCached(task.name, word, cacheTtl);
-      if (cached) {
-        return applyMaxExamples(cached, config.maxExamples);
-      }
+    const result: TranslationResult = {
+      ...raw,
+      word: raw.word || text,
+      pluginName: raw.pluginName || displayName
+    };
+    if (config.cache.enabled) {
+      await setCached(cacheKey, result);
     }
+    return { ...result, ...meta, cached: false, elapsedMs: Date.now() - started };
+  } catch (error) {
+    return failure(text, displayName, error, { ...meta, elapsedMs: Date.now() - started });
+  }
+}
 
+/**
+ * 并发查询所有启用的词典插件。
+ *
+ * @param text     要查询的单词、短语或句子
+ * @param options  配置（均可省略，缺省值见 defaultConfig）
+ * @param onResult 每个来源完成时立即回调（按完成先后），用于流式展示
+ * @returns 所有来源的结果，顺序与 `plugins` 一致；失败的来源以带 `error` 的结果表示，本函数不因单个来源失败而 reject
+ */
+export async function translate(
+  text: string,
+  options: UserConfig = {},
+  onResult?: (result: TranslationResult) => void
+): Promise<TranslationResult[]> {
+  const config = resolveConfig(options);
+  const query = normalizeQuery(text ?? '');
+  if (!query) {
+    throw new MinidictError('UNSUPPORTED', '查询内容不能为空');
+  }
+
+  const { from, to } = resolveLanguages(query, config.from, config.to);
+  const context: TranslateContext = { from, to, timeout: config.timeout, proxy: config.proxy };
+  const registry = await buildRegistry(config.externalPlugins);
+
+  // 归一并去重插件名，保持用户给定的顺序。
+  const names = [...new Set(config.plugins.map(p => p.trim().toLowerCase()).filter(Boolean))];
+
+  const tasks = names.map(async (name): Promise<TranslationResult> => {
+    const plugin = registry.plugins[name];
+    let result: TranslationResult;
+    if (plugin) {
+      result = applyMaxExamples(
+        await runPlugin(name, plugin, query, context, config),
+        config.maxExamples
+      );
+    } else if (registry.loadErrors[name]) {
+      result = failure(
+        query,
+        capitalize(name),
+        new MinidictError('PLUGIN_LOAD', `外部插件加载失败：${registry.loadErrors[name]}`)
+      );
+    } else {
+      const available = Object.keys(registry.plugins).join(' / ');
+      result = failure(
+        query,
+        capitalize(name),
+        new MinidictError('UNKNOWN_PLUGIN', `未知插件 "${name}"，可用插件：${available}`)
+      );
+    }
     try {
-      const result = await withGuardTimeout(task.plugin.translate(word), guardMs, task.name);
-
-      if (cacheEnabled) {
-        await setCached(task.name, word, result);
-      }
-
-      return applyMaxExamples(result, config.maxExamples);
-    } catch (error) {
-      return {
-        word,
-        translations: [],
-        examples: [],
-        pluginName: capitalize(task.name),
-        error: error instanceof Error ? error.message : '未知错误'
-      };
+      onResult?.(result);
+    } catch {
+      // 回调里的异常不应中断其它来源
     }
+    return result;
   });
 
-  // 按「完成先后」触发 onResult，使快插件先于慢插件被展示（真正的流式输出）。
-  await Promise.all(
-    tasks.map(task =>
-      task.then(result => {
-        results.push(result);
-        onResult?.(result);
-        return result;
-      })
-    )
-  );
+  const results = await Promise.all(tasks);
+
+  if (config.cache.enabled) {
+    // 每天至多一次：顺手清理过期缓存文件，避免目录无限增长。
+    await pruneCache(config.cache.ttl);
+  }
 
   return results;
 }

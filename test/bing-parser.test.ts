@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { parse } from '../src/plugins/minidict-bing/lib/parser.js';
+import { parse } from '../src/plugins/bing/parser.js';
 
 const html = fs.readFileSync(path.join(process.cwd(), 'test/fixtures/bing-hello.html'), 'utf-8');
 
@@ -29,5 +29,21 @@ describe('bing parser (fixture: hello)', () => {
 
   it('does not return the "no results" suggestion text as a translation', () => {
     expect(result.translations.join(' ')).not.toMatch(/Ensure words are spelled/i);
+  });
+});
+
+describe('bing parser: no-result page', () => {
+  // Bing 查无结果时返回的页面骨架：.no_results + .content 下的英文搜索建议列表。
+  const html = `
+    <div class="content">
+      <div class="no_results">No results found for asdfqwerzxcv.</div>
+      <ul>
+        <li>Ensure words are spelled correctly.</li>
+        <li>Try rephrasing keywords or using synonyms.</li>
+      </ul>
+    </div>`;
+
+  it('yields no translations instead of the search suggestions', () => {
+    expect(parse(html).translations).toEqual([]);
   });
 });
