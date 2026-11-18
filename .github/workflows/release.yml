@@ -1,6 +1,7 @@
 name: Release
 
 # 打 v* tag 时自动发布到 npm。流程：lint/格式/类型/test/build → 校验 tag 与版本一致 → npm publish。
+# 认证方式是 npm Trusted Publishing（OIDC），需要先在 npmjs.com 的包设置里登记本仓库与本文件名。
 on:
   push:
     tags:
@@ -8,7 +9,7 @@ on:
 
 permissions:
   contents: read
-  id-token: write # npm provenance 需要
+  id-token: write # Trusted Publishing（OIDC）需要
 
 jobs:
   publish:
@@ -38,15 +39,16 @@ jobs:
             exit 1
           fi
 
-      - name: Setup Node for npm auth
+      # Trusted Publishing 需要 npm >= 11.5.1（Node 24 自带 npm 11，再升到最新以确保满足）。
+      - name: Setup Node for npm publish
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           registry-url: 'https://registry.npmjs.org'
 
+      - run: npm install -g npm@latest
+
+      # 通过 OIDC（Trusted Publishing）认证，不需要 NPM_TOKEN；provenance 会自动生成。
       # prepublishOnly 会再跑一次 bun run build（bun 已在 PATH）。
-      # provenance 若因 token 类型不支持可去掉 --provenance。
       - name: Publish to npm
-        run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public

@@ -311,7 +311,7 @@ src/
 
 ### 发布
 
-`.github/workflows/release.yml` 在 push `v*` tag 时运行检查、校验 tag 与 `package.json` 版本一致，然后执行 `npm publish`。它需要仓库 Secret `NPM_TOKEN`。也可以在本地手动发布：
+`.github/workflows/release.yml` 在 push `v*` tag 时运行检查、校验 tag 与 `package.json` 版本一致，然后执行 `npm publish`。认证使用 npm 的 Trusted Publishing（OIDC），不需要令牌：在 npmjs.com 的包设置 → Trusted Publisher 中登记 GitHub 仓库 `superfur/minidict` 与 workflow 文件名 `release.yml` 即可。也可以在本地手动发布：
 
 ```bash
 bun run check
