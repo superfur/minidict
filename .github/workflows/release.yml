@@ -39,16 +39,15 @@ jobs:
             exit 1
           fi
 
-      # Trusted Publishing 需要 npm >= 11.5.1（Node 24 自带 npm 11，再升到最新以确保满足）。
+      # Trusted Publishing 需要 npm >= 11.5.1；不设 registry-url，避免 setup-node 写入
+      # 要求 NODE_AUTH_TOKEN 的 .npmrc，让 npm 直接走 OIDC 认证。
       - name: Setup Node for npm publish
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          registry-url: 'https://registry.npmjs.org'
 
       - run: npm install -g npm@latest
 
       # 通过 OIDC（Trusted Publishing）认证，不需要 NPM_TOKEN；provenance 会自动生成。
-      # prepublishOnly 会再跑一次 bun run build（bun 已在 PATH）。
       - name: Publish to npm
         run: npm publish --access public
