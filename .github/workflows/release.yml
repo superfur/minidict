@@ -44,5 +44,8 @@ jobs:
         with:
           node-version: 20
 
+      # Node 20 自带 npm 10，不支持 OIDC Trusted Publishing，需升级到 9.5.0+。
+      - run: npm install -g npm@latest
+
       - name: Publish to npm
         run: npm publish --provenance --access public
