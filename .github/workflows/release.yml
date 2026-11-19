@@ -9,7 +9,7 @@ on:
 
 permissions:
   contents: read
-  id-token: write # Trusted Publishing（OIDC）需要
+  id-token: write
 
 jobs:
   publish:
@@ -29,25 +29,20 @@ jobs:
       - run: bun run test
       - run: bun run build
 
-      - name: Verify tag matches package.json version
+      - name: Verify tag matches package.json
         run: |
-          PKG=$(node -p "require('./package.json').version")
+          PKG=$(node -p "require('./package.js
           TAG=${GITHUB_REF_NAME#v}
           echo "package.json=$PKG tag=$TAG"
           if [ "$PKG" != "$TAG" ]; then
-            echo "::error::tag ($TAG) 与 package.json 版本 ($PKG) 不一致"
+            echo "::error::tag ($TAG) 与 packa"
             exit 1
           fi
 
-      # Trusted Publishing 需要 npm >= 11.5.1；不设 registry-url，避免 setup-node 写入
-      # 要求 NODE_AUTH_TOKEN 的 .npmrc，让 npm 直接走 OIDC 认证。
       - name: Setup Node for npm publish
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 20
 
-      - run: npm install -g npm@latest
-
-      # 通过 OIDC（Trusted Publishing）认证，不需要 NPM_TOKEN；provenance 会自动生成。
       - name: Publish to npm
-        run: npm publish --access public
+        run: npm publish --provenance --access
