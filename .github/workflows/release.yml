@@ -29,13 +29,13 @@ jobs:
       - run: bun run test
       - run: bun run build
 
-      - name: Verify tag matches package.json
+      - name: Verify tag matches package.json version
         run: |
-          PKG=$(node -p "require('./package.js
+          PKG=$(node -p "require('./package.json').version")
           TAG=${GITHUB_REF_NAME#v}
           echo "package.json=$PKG tag=$TAG"
           if [ "$PKG" != "$TAG" ]; then
-            echo "::error::tag ($TAG) 与 packa"
+            echo "::error::tag ($TAG) 与 package.json 版本 ($PKG) 不一致"
             exit 1
           fi
 
@@ -45,4 +45,4 @@ jobs:
           node-version: 20
 
       - name: Publish to npm
-        run: npm publish --provenance --access
+        run: npm publish --provenance --access public
