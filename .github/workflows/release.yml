@@ -42,9 +42,9 @@ jobs:
       - name: Setup Node for npm publish
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
-      # Node 20 自带 npm 10，不支持 OIDC Trusted Publishing，需升级到 9.5.0+。
+      # Node 22 自带 npm 10，npm 12 才支持 OIDC Trusted Publishing，升级到最新版。
       - run: npm install -g npm@latest
 
       - name: Publish to npm
