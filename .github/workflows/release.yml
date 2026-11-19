@@ -39,13 +39,13 @@ jobs:
             exit 1
           fi
 
+      # setup-node@v7 配合 registry-url 是 npm 官方文档要求的 OIDC Trusted Publishing 配置。
+      # v4 不支持 OIDC token 交换（持续 403）；v7 正确设置了 OIDC 认证链路。
       - name: Setup Node for npm publish
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: 22
-
-      # Node 22 自带 npm 10，npm 12 才支持 OIDC Trusted Publishing，升级到最新版。
-      - run: npm install -g npm@latest
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Publish to npm
         run: npm publish --provenance --access public
