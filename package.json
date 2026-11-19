@@ -1,6 +1,6 @@
 {
   "name": "minidict",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "一个简单易用的命令行词典 / 翻译工具（Bing、有道、Google）",
   "type": "module",
   "main": "./dist/index.js",
