@@ -1,5 +1,19 @@
 # Changelog
 
+## v3.0.1 (2026-11-19)
+
+---
+
+文档与发布流程的修订，程序行为没有变化。
+
+- **文档**
+  - README 增加徽章与目录；安装一节补充 pnpm、`npx` 试用、安装后的验证与升级命令，并说明用 bun 安装时仍需要 Node.js
+  - 常见问题补充：大陆网络下 Google 的代理用法、刚发布时安装报 404、`dict: command not found`
+  - 发布一节改写为完整步骤，补充 Trusted Publisher 的登记字段与常见报错的排查表
+- **工程**
+  - 发布改用 npm Trusted Publishing（OIDC），不再需要 `NPM_TOKEN`
+  - 规范 `package.json` 的 `bin` 与 `repository.url` 写法，消除 `npm publish` 时的自动修正警告
+
 ## v3.0.0 (2026-11-18)
 
 ---

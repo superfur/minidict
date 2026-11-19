@@ -1,6 +1,6 @@
 {
   "name": "minidict",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "一个简单易用的命令行词典 / 翻译工具（Bing、有道、Google）",
   "type": "module",
   "main": "./dist/index.js",
@@ -13,7 +13,7 @@
     "./package.json": "./package.json"
   },
   "bin": {
-    "dict": "./dist/cli.js"
+    "dict": "dist/cli.js"
   },
   "files": [
     "dist"
@@ -88,7 +88,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/superfur/minidict.git"
+    "url": "git+https://github.com/superfur/minidict.git"
   },
   "bugs": {
     "url": "https://github.com/superfur/minidict/issues"

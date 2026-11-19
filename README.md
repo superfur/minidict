@@ -1,6 +1,13 @@
 # minidict
 
+[![npm version](https://img.shields.io/npm/v/minidict.svg)](https://www.npmjs.com/package/minidict)
+[![CI](https://github.com/superfur/minidict/actions/workflows/ci.yml/badge.svg)](https://github.com/superfur/minidict/actions/workflows/ci.yml)
+[![node](https://img.shields.io/node/v/minidict.svg)](https://nodejs.org)
+[![license](https://img.shields.io/npm/l/minidict.svg)](./LICENSE)
+
 一个简单易用的命令行词典 / 翻译工具。一次查询并发聚合 **Bing、有道、Google** 三个来源，哪个先返回就先显示；也可以作为 Node.js 库使用。
+
+**目录**：[安装](#安装) · [使用](#使用) · [配置](#配置) · [编程接口](#编程接口nodejs) · [外部插件](#外部插件) · [常见问题](#常见问题) · [从 2.x 升级](#从-2x-升级) · [开发](#开发)
 
 ```text
 $ dict hello
@@ -31,12 +38,22 @@ $ dict hello
 ## 安装
 
 ```bash
-npm i -g minidict
-# 或
-bun add -g minidict
+npm i -g minidict       # npm
+pnpm add -g minidict    # pnpm
+bun add -g minidict     # bun
 ```
 
-环境要求：Node.js >= 20.18.1。
+安装后得到 `dict` 命令：
+
+```bash
+dict --version    # 确认安装成功
+dict hello        # 开始查询
+dict -u           # 以后升级到最新版本
+```
+
+不想安装也可以直接试用：`npx minidict hello`。
+
+环境要求：Node.js >= 20.18.1。用 bun 安装时同样需要 Node.js，bun 只负责安装，`dict` 命令由 Node.js 运行。
 
 ## 使用
 
@@ -264,7 +281,10 @@ export default {
 
 ## 常见问题
 
-- **Google 不可用或很慢？** 使用的是免密钥的网页接口，国内网络通常需要代理。主接口被限流时会自动改用备用接口，此时只有译文，没有音标和词性释义。
+- **Google 不可用或很慢？** Google 在中国大陆无法直接访问，需要代理：临时使用可以 `HTTPS_PROXY=http://127.0.0.1:7890 dict hello`，长期使用在配置文件里设置 `"proxy"`（见[代理](#代理)）。没有代理时 Bing 和有道仍然可用，可以用 `-p bing,youdao` 跳过 Google，省去等它超时。
+- **Google 只有译文，没有音标和词性？** 主接口被限流时会自动改用备用接口，备用接口只返回译文。
+- **安装或升级时报 404（`minidict-x.y.z.tgz`）？** 新版本刚发布的几分钟内，包文件可能还没同步到 CDN，稍后重试即可。
+- **提示 `dict: command not found`？** 全局安装目录不在 `PATH` 里。npm 用 `npm prefix -g` 查看安装位置，bun 默认是 `~/.bun/bin`，把对应的 `bin` 目录加入 `PATH`。
 - **有道提示未收录？** 有道的免费接口是词典而不是机器翻译，整句通常查不到，请参考 Bing / Google 的结果。
 - **只想用一个来源？** `dict hello -p bing`，或在配置中设置 `"plugins": ["bing"]`。
 - **查到的是旧结果？** 加 `--no-cache` 跳过缓存，或用 `--clear-cache` 清空。
@@ -311,7 +331,41 @@ src/
 
 ### 发布
 
-`.github/workflows/release.yml` 在 push `v*` tag 时运行检查、校验 tag 与 `package.json` 版本一致，然后执行 `npm publish`。认证使用 npm 的 Trusted Publishing（OIDC），不需要令牌：在 npmjs.com 的包设置 → Trusted Publisher 中登记 GitHub 仓库 `superfur/minidict` 与 workflow 文件名 `release.yml` 即可。也可以在本地手动发布：
+发布由 `.github/workflows/release.yml` 完成：push `v*` tag 后，它运行全部检查、校验 tag 与 `package.json` 版本一致，然后执行 `npm publish`。
+
+```bash
+# 1. 修改 package.json 的 version，并在 CHANGELOG.md 顶部添加条目
+bun run check
+git commit -am "release: vX.Y.Z" && git push origin main
+
+# 2. 打 tag 触发发布
+git tag vX.Y.Z && git push origin vX.Y.Z
+
+# 3. 确认结果（发布后 registry 可能有一两分钟延迟）
+npm view minidict version
+```
+
+认证使用 npm 的 Trusted Publishing（OIDC），不需要令牌，也没有过期问题。它依赖 npmjs.com 上的一次性登记：包页面 → Settings → Trusted Publisher，选 GitHub Actions 并填写：
+
+| 字段                 | 值                          |
+| -------------------- | --------------------------- |
+| Organization or user | `superfur`                  |
+| Repository           | `minidict`                  |
+| Workflow filename    | `release.yml`（只填文件名） |
+| Environment name     | 留空                        |
+| Allowed actions      | 勾选 **Allow npm publish**  |
+
+登记创建后不能修改，填错需要删除重建。发布失败时按报错排查：
+
+| 报错                                         | 原因                                                                                  |
+| -------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `403 OIDC permission denied for this action` | 登记里没有勾选 **Allow npm publish**（默认只允许 `npm stage publish`）                |
+| `404 Not found` / `ENEEDAUTH`                | npm 版本低于 11.5.1，没有走 OIDC；workflow 里用 Node 24 并升级 npm 就是为了满足这一点 |
+| tag 与 `package.json` 版本不一致             | 先改版本号并推送，再打 tag                                                            |
+
+修正 workflow 后要让同一个版本重新发布，需要删除并重新推送 tag；重跑旧的运行仍会使用旧 tag 上的 workflow 文件。
+
+也可以在本地手动发布（需要 `npm login`）：
 
 ```bash
 bun run check
