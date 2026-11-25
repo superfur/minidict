@@ -4,7 +4,7 @@ import os from 'os';
 import crypto from 'crypto';
 import type { TranslationResult } from '../types.js';
 
-interface CacheEntry {
+export interface CacheEntry {
   timestamp: number;
   result: TranslationResult;
 }
@@ -115,6 +115,68 @@ export async function pruneCache(ttlMs: number, force: boolean = false): Promise
   } catch {
     return 0;
   }
+}
+
+/** 验证磁盘上的缓存内容，避免损坏或不完整的记录中断导出。 */
+function isCacheEntry(value: unknown): value is CacheEntry {
+  if (!value || typeof value !== 'object') return false;
+  const { timestamp, result } = value as Partial<CacheEntry>;
+  if (typeof timestamp !== 'number' || !Number.isFinite(timestamp)) return false;
+  if (!result || typeof result !== 'object' || result.error) return false;
+  if (typeof result.word !== 'string' || !result.word.trim()) return false;
+  if (typeof result.pluginName !== 'string' || !result.pluginName.trim()) return false;
+  if (
+    !Array.isArray(result.translations) ||
+    !result.translations.every(t => typeof t === 'string')
+  ) {
+    return false;
+  }
+  const { phonetic, examples } = result;
+  if (phonetic !== undefined && typeof phonetic !== 'string') {
+    if (!phonetic || typeof phonetic !== 'object' || Array.isArray(phonetic)) return false;
+    if (phonetic.uk !== undefined && typeof phonetic.uk !== 'string') return false;
+    if (phonetic.us !== undefined && typeof phonetic.us !== 'string') return false;
+  }
+  if (
+    examples !== undefined &&
+    (!Array.isArray(examples) ||
+      !examples.every(e => e && typeof e.en === 'string' && typeof e.zh === 'string'))
+  ) {
+    return false;
+  }
+  return true;
+}
+
+/** 列出可导出的缓存；默认与查询使用相同的有效期判断，不修改任何缓存文件。 */
+export async function readCacheEntries(
+  ttlMs: number,
+  includeExpired = false
+): Promise<CacheEntry[]> {
+  const directory = cacheDir();
+  let files;
+  try {
+    files = await fs.readdir(directory, { withFileTypes: true });
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') return [];
+    throw error;
+  }
+
+  const now = Date.now();
+  const entries: CacheEntry[] = [];
+  for (const file of files) {
+    if (!file.isFile() || !file.name.endsWith('.json')) continue;
+    try {
+      const entry: unknown = JSON.parse(
+        await fs.readFile(path.join(directory, file.name), 'utf-8')
+      );
+      if (!isCacheEntry(entry)) continue;
+      if (!includeExpired && now - entry.timestamp >= ttlMs) continue;
+      entries.push(entry);
+    } catch {
+      // 单个缓存损坏、无法读取或在导出期间被删除时，继续处理其他记录。
+    }
+  }
+  return entries;
 }
 
 /** 清空整个缓存目录。 */
