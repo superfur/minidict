@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { Command } from 'commander';
+import { Command, Option } from 'commander';
 import chalk from 'chalk';
 import { translate, availablePlugins } from './translate.js';
 import { loadConfig } from './config.js';
@@ -14,6 +14,7 @@ import {
 } from './render/card.js';
 import { formatJson, formatPlainResult } from './render/plain.js';
 import { clearCache, normalizeQuery } from './utils/cache.js';
+import { exportCache, type ExportFormat } from './utils/export.js';
 import { checkForUpdate, runUpdate, type UpdateNotice } from './utils/update.js';
 import { version } from './version.js';
 import type { Config, ProxyConfig, TranslationResult } from './types.js';
@@ -32,6 +33,9 @@ interface CommandOptions {
   card?: boolean;
   cache?: boolean;
   clearCache?: boolean;
+  export?: boolean | string;
+  format?: ExportFormat;
+  all?: boolean;
   listPlugins?: boolean;
   update?: boolean;
   updateCheck?: boolean;
@@ -136,6 +140,29 @@ function applyOptions(config: Config, options: CommandOptions): Config {
 }
 
 async function main(textArray: string[], options: CommandOptions, program: Command) {
+  if ((options.format !== undefined || options.all) && options.export === undefined) {
+    throw new Error('--format 和 --all 需要与 --export 一起使用');
+  }
+  // 导出在读取标准输入之前处理，且不启动网络查询。
+  if (options.export !== undefined) {
+    if (textArray.length > 0) throw new Error('--export 不能与查询内容一起使用');
+    if (typeof options.export === 'string' && !options.export.trim()) {
+      throw new Error('导出文件路径不能为空');
+    }
+    const config = await loadConfig(options.config);
+    const format = options.format ?? 'csv';
+    const exported = await exportCache({
+      filePath:
+        typeof options.export === 'string' ? options.export : `vocabulary-${Date.now()}.${format}`,
+      format,
+      ttlMs: config.cache.ttl,
+      includeExpired: options.all
+    });
+    console.log(chalk.green(`已导出 ${exported.wordCount} 条查询到 ${exported.filePath}`));
+    if (!options.all)
+      console.log('本次仅导出有效期内的缓存；如需包含仍保留的过期条目，请加 --all。');
+    return 0;
+  }
   if (options.clearCache) {
     await clearCache();
     console.log(chalk.green('已清空缓存'));
@@ -240,6 +267,18 @@ export async function run(argv: string[] = process.argv): Promise<void> {
     .option('--card', '以卡片输出（终端下的默认形式）')
     .option('--no-cache', '本次查询不使用缓存')
     .option('--clear-cache', '清空查询缓存后退出')
+    .addOption(
+      new Option('--export [path]', '导出查询缓存（省略路径时自动生成文件名）').conflicts([
+        'clearCache',
+        'update',
+        'listPlugins',
+        'json',
+        'plain',
+        'card'
+      ])
+    )
+    .addOption(new Option('--format <format>', '导出格式（默认 csv）').choices(['csv', 'md']))
+    .option('--all', '导出时包含仍保留的过期缓存条目')
     .option('--list-plugins', '列出可用的词典来源后退出')
     .option('-u, --update', '检查并升级到最新版本后退出')
     .option('--no-update-check', '本次查询不检查新版本')
